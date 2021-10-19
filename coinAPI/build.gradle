@@ -22,4 +22,7 @@ dependencies {
     def coroutine = "1.5.2-native-mt"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine"
+
+    //unit testing
+    testImplementation 'junit:junit:4.13.2'
 }
