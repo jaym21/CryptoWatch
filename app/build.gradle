@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -35,9 +36,21 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation project(path: ':coinAPI')
+
+    //ui
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
-    testImplementation 'junit:junit:4.+'
+
+    // coroutine
+    def coroutine = "1.5.2-native-mt"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine"
+
+    //unit testing
+    testImplementation 'junit:junit:4.13.2'
+
+    //integration testing
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
