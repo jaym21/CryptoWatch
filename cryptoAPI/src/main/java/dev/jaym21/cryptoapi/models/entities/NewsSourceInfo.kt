@@ -1,4 +1,4 @@
-package dev.jaym21.coinapi.models
+package dev.jaym21.cryptoapi.models.entities
 
 
 import com.squareup.moshi.Json

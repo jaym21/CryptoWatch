@@ -1,11 +1,10 @@
-package dev.jaym21.coinapi.models
-
+package dev.jaym21.cryptoapi.models.entities
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class CurrencyResponse(
+data class Currency(
     @Json(name = "circulating_supply")
     val circulatingSupply: String?,
     @Json(name = "currency")

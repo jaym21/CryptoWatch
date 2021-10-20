@@ -1,8 +1,9 @@
-package dev.jaym21.coinapi.models
+package dev.jaym21.cryptoapi.models
 
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import dev.jaym21.cryptoapi.models.entities.Data
 
 @JsonClass(generateAdapter = true)
 data class HistoricalResponse(
