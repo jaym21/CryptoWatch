@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/black">
 
     <fragment
         android:id="@+id/nav_host_fragment"
@@ -23,7 +24,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_nav_menu"
-        android:elevation="5dp"
+        android:background="@color/black"
+        app:itemIconTint="@drawable/bottom_nav_foreground"
+        app:itemTextColor="@drawable/bottom_nav_foreground"
+        app:itemIconSize="20dp"
+        app:itemTextAppearanceActive="@style/BottomNavigationView.ActiveItemTextAppearance"
+        app:itemTextAppearanceInactive="@style/BottomNavigationView.ActiveItemTextAppearance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>

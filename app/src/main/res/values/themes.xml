@@ -13,4 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="BottomNavigationView.ActiveItemTextAppearance" parent="TextAppearance.AppCompat">
+<!--        <item name="android:fontFamily">@font/inter_light</item>-->
+        <item name="android:textSize">10sp</item>
+    </style>
+
 </resources>
