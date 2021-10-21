@@ -47,6 +47,12 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation"
 
+    // lifecycle components
+    def lifecycle = "2.3.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle"
+
     // coroutine
     def coroutine = "1.5.2-native-mt"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine"
