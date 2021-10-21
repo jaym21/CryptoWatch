@@ -1,6 +1,7 @@
 package dev.jaym21.cryptoapi.services
 
-import dev.jaym21.cryptoapi.models.responses.CurrencyResponse
+import dev.jaym21.cryptoapi.models.responses.HistoricalResponse
+import dev.jaym21.cryptoapi.models.responses.NewsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,5 +16,8 @@ interface CryptoCompareAPI {
         convertTo: String,
         @Query("limit")
         requiredTime: String
-    ):Response<CurrencyResponse>
+    ):Response<HistoricalResponse>
+
+    @GET("news/")
+    suspend fun getLatestNews(): Response<NewsResponse>
 }

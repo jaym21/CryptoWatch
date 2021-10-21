@@ -7,12 +7,14 @@ import dev.jaym21.cryptoapi.models.entities.Data
 
 @JsonClass(generateAdapter = true)
 data class HistoricalResponse(
-    @Json(name = "Aggregated")
-    val aggregated: Boolean?,
     @Json(name = "Data")
-    val `data`: List<Data>?,
-    @Json(name = "TimeFrom")
-    val timeFrom: Int?,
-    @Json(name = "TimeTo")
-    val timeTo: Int?
+    val `data`: Data?,
+    @Json(name = "HasWarning")
+    val hasWarning: Boolean?,
+    @Json(name = "Message")
+    val message: String?,
+    @Json(name = "Response")
+    val response: String?,
+    @Json(name = "Type")
+    val type: Int?
 )
