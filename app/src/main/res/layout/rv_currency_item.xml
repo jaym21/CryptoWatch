@@ -15,10 +15,12 @@
         android:id="@+id/tvCurrencyName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Bitcoin"
-        android:textSize="15sp"
+        android:layout_toEndOf="@id/ivCurrencyIcon"
         android:textColor="@color/white"
-        android:layout_toEndOf="@id/ivCurrencyIcon" />
+        android:textSize="15sp"
+        android:fontFamily="@font/poppins_semibold"
+        tools:text="Bitcoin"
+        android:layout_marginStart="10dp"/>
 
     <TextView
         android:id="@+id/tvCurrencySymbol"
@@ -26,9 +28,11 @@
         android:layout_height="wrap_content"
         tools:text="BTC"
         android:textSize="13sp"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white_alpha_60"
         android:layout_toEndOf="@id/ivCurrencyIcon"
-        android:layout_below="@id/tvCurrencyName" />
+        android:layout_below="@id/tvCurrencyName"
+        android:layout_marginStart="10dp" />
 
     <TextView
         android:id="@+id/tvCurrentValue"
@@ -36,6 +40,7 @@
         android:layout_height="wrap_content"
         tools:text="$32,789"
         android:textSize="15sp"
+        android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/white"
         android:layout_alignParentEnd="true" />
 
@@ -45,6 +50,7 @@
         android:layout_height="wrap_content"
         tools:text="16.2%"
         android:textSize="13sp"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/green"
         android:layout_below="@id/tvCurrentValue"
         android:layout_alignParentEnd="true" />
