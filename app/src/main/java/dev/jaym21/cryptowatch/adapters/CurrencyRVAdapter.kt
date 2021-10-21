@@ -32,6 +32,6 @@ class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHol
         val currentItem = getItem(position)
         holder.binding.tvCurrencyName.text = currentItem.name
         holder.binding.tvCurrencySymbol.text = currentItem.symbol
-        holder.binding.
+        holder.binding.tvCurrentValue.text = currentItem.price
     }
 }

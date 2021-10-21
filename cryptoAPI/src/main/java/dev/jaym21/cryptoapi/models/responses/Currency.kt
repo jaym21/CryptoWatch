@@ -11,13 +11,13 @@ data class Currency(
     @Json(name = "currency")
     val currency: String?,
     @Json(name = "1d")
-    val `1d`: CurrencyChange?,
+    val oneDay: CurrencyChange?,
     @Json(name = "7d")
-    val `7d`: CurrencyChange?,
+    val sevenDay: CurrencyChange?,
     @Json(name = "30d")
-    val `30d`: CurrencyChange,
+    val oneMonth: CurrencyChange,
     @Json(name = "365d")
-    val `365d`: CurrencyChange?,
+    val oneYear: CurrencyChange?,
     @Json(name = "first_candle")
     val firstCandle: String?,
     @Json(name = "first_order_book")
