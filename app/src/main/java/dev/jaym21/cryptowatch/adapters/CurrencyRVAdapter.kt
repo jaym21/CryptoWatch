@@ -1,12 +1,11 @@
 package dev.jaym21.cryptowatch.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import dev.jaym21.cryptoapi.models.entities.Currency
+import dev.jaym21.cryptoapi.models.responses.Currency
 import dev.jaym21.cryptowatch.databinding.RvCurrencyItemBinding
 
 class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHolder>(CurrencyDiffCallback()) {
@@ -32,5 +31,7 @@ class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHol
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.binding.tvCurrencyName.text = currentItem.name
+        holder.binding.tvCurrencySymbol.text = currentItem.symbol
+        holder.binding.
     }
 }

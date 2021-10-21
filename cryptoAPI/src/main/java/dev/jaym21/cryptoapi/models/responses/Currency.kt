@@ -1,7 +1,8 @@
-package dev.jaym21.cryptoapi.models.entities
+package dev.jaym21.cryptoapi.models.responses
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import dev.jaym21.cryptoapi.models.entities.CurrencyChange
 
 @JsonClass(generateAdapter = true)
 data class Currency(
@@ -9,6 +10,14 @@ data class Currency(
     val circulatingSupply: String?,
     @Json(name = "currency")
     val currency: String?,
+    @Json(name = "1d")
+    val `1d`: CurrencyChange?,
+    @Json(name = "7d")
+    val `7d`: CurrencyChange?,
+    @Json(name = "30d")
+    val `30d`: CurrencyChange,
+    @Json(name = "365d")
+    val `365d`: CurrencyChange?,
     @Json(name = "first_candle")
     val firstCandle: String?,
     @Json(name = "first_order_book")
@@ -50,5 +59,7 @@ data class Currency(
     @Json(name = "status")
     val status: String?,
     @Json(name = "symbol")
-    val symbol: String?
+    val symbol: String?,
+    @Json(name = "ytd")
+    val ytd: CurrencyChange?
 )
