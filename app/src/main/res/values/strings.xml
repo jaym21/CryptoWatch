@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CryptoWatch</string>
+    <string name="home">Home</string>
+    <string name="news">News</string>
 </resources>
