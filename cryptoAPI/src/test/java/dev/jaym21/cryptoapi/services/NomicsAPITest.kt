@@ -1,13 +1,13 @@
 package dev.jaym21.cryptoapi.services
 
-import dev.jaym21.cryptoapi.CryptoClient
+import dev.jaym21.cryptoapi.clients.CryptoCompareClient
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertNotNull
 import org.junit.Test
 
 class NomicsAPITest {
 
-    val api = CryptoClient.api
+    val api = CryptoCompareClient.api
 
     @Test
     fun `Get all cryptocurrencies`() = runBlocking {

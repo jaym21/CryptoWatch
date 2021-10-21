@@ -1,4 +1,4 @@
-package dev.jaym21.cryptoapi.models
+package dev.jaym21.cryptoapi.models.responses
 
 
 import com.squareup.moshi.Json

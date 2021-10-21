@@ -1,6 +1,5 @@
 package dev.jaym21.cryptoapi.services
 
-import dev.jaym21.cryptoapi.models.CurrencyResponse
 import dev.jaym21.cryptoapi.models.entities.Currency
 import retrofit2.Response
 import retrofit2.http.GET

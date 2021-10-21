@@ -1,11 +1,11 @@
-package dev.jaym21.cryptoapi
+package dev.jaym21.cryptoapi.clients
 
-import dev.jaym21.cryptoapi.services.NomicsAPI
+import dev.jaym21.cryptoapi.services.CryptoCompareAPI
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-object CryptoClient {
-    private const val BASE_URL = "https://api.nomics.com/v1/"
+object CryptoCompareClient {
+    private const val BASE_URL = "https://min-api.cryptocompare.com/data/v2/"
 
     private val retrofit by lazy {
         Retrofit.Builder()
@@ -15,6 +15,6 @@ object CryptoClient {
     }
 
     val api by lazy {
-        retrofit.create(NomicsAPI::class.java)
+        retrofit.create(CryptoCompareAPI::class.java)
     }
 }
