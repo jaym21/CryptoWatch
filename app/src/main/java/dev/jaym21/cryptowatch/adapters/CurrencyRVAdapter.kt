@@ -1,11 +1,14 @@
 package dev.jaym21.cryptowatch.adapters
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dev.jaym21.cryptoapi.models.responses.Currency
+import dev.jaym21.cryptowatch.R
 import dev.jaym21.cryptowatch.databinding.RvCurrencyItemBinding
 
 class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHolder>(CurrencyDiffCallback()) {
@@ -30,8 +33,56 @@ class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHol
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
         val currentItem = getItem(position)
+
         holder.binding.tvCurrencyName.text = currentItem.name
         holder.binding.tvCurrencySymbol.text = currentItem.symbol
         holder.binding.tvCurrentValue.text = currentItem.price
+
+        if (currentItem.oneDay != null) {
+            holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct
+
+            if (currentItem.oneDay!!.priceChangePct!!.toDouble() >= 0) {
+                holder.binding.ivCurrencyIcon.setBackgroundResource(R.drawable.ic_trending_up)
+                holder.binding.ivCurrencyIcon.setColorFilter(R.color.green)
+                holder.binding.tvPercentChange.setTextColor(
+                    ContextCompat.getColor(
+                        holder.binding.root.context,
+                        R.color.green
+                    )
+                )
+            } else {
+                holder.binding.ivCurrencyIcon.setBackgroundResource(R.drawable.ic_trending_down)
+                holder.binding.ivCurrencyIcon.setColorFilter(R.color.red)
+                holder.binding.tvPercentChange.setTextColor(
+                    ContextCompat.getColor(
+                        holder.binding.root.context,
+                        R.color.red
+                    )
+                )
+            }
+
+        } else if (currentItem.sevenDay != null) {
+            holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct
+
+            if (currentItem.oneDay!!.priceChangePct!!.toDouble() >= 0) {
+                holder.binding.ivCurrencyIcon.setBackgroundResource(R.drawable.ic_trending_up)
+                holder.binding.ivCurrencyIcon.setColorFilter(R.color.green)
+                holder.binding.tvPercentChange.setTextColor(
+                    ContextCompat.getColor(
+                        holder.binding.root.context,
+                        R.color.green
+                    )
+                )
+            } else {
+                holder.binding.ivCurrencyIcon.setBackgroundResource(R.drawable.ic_trending_down)
+                holder.binding.ivCurrencyIcon.setColorFilter(R.color.red)
+                holder.binding.tvPercentChange.setTextColor(
+                    ContextCompat.getColor(
+                        holder.binding.root.context,
+                        R.color.red
+                    )
+                )
+            }
+        }
     }
 }
