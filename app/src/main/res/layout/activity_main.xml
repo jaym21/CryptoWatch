@@ -27,7 +27,7 @@
         android:background="@color/black"
         app:itemIconTint="@drawable/bottom_nav_foreground"
         app:itemTextColor="@drawable/bottom_nav_foreground"
-        app:itemIconSize="20dp"
+        app:itemIconSize="25dp"
         app:itemTextAppearanceActive="@style/BottomNavigationView.ActiveItemTextAppearance"
         app:itemTextAppearanceInactive="@style/BottomNavigationView.ActiveItemTextAppearance"
         app:layout_constraintBottom_toBottomOf="parent"

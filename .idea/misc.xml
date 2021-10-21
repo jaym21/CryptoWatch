@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Programming/AndroidAppDevelopment/CryptoWatch/app/src/main/res/drawable/bottom_nav_foreground.xml" value="0.3828125" />
+        <entry key="..\:/Programming/AndroidAppDevelopment/CryptoWatch/app/src/main/res/drawable/ic_home.xml" value="0.3828125" />
+        <entry key="..\:/Programming/AndroidAppDevelopment/CryptoWatch/app/src/main/res/drawable/ic_newspaper.xml" value="0.3828125" />
         <entry key="..\:/Programming/AndroidAppDevelopment/CryptoWatch/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Programming/AndroidAppDevelopment/CryptoWatch/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Programming/AndroidAppDevelopment/CryptoWatch/app/src/main/res/layout/fragment_news.xml" value="0.36666666666666664" />
