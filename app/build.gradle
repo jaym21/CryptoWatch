@@ -42,6 +42,11 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
 
+    // navigation
+    def navigation = "2.3.5"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation"
+
     // coroutine
     def coroutine = "1.5.2-native-mt"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine"
