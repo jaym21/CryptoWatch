@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     tools:background="@color/black"
-    android:padding="10dp">
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:paddingTop="14dp">
 
     <ImageView
         android:id="@+id/ivCurrencyIcon"
@@ -46,6 +48,7 @@
         tools:text="$32,789" />
 
     <LinearLayout
+        android:id="@+id/llPercentChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -72,5 +75,12 @@
             android:layout_gravity="center"/>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#19FFFFFF"
+        android:layout_below="@id/llPercentChange"
+        android:layout_marginTop="14dp"/>
 
 </RelativeLayout>
