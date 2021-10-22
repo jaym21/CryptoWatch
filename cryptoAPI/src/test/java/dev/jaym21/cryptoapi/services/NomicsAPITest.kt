@@ -1,5 +1,6 @@
 package dev.jaym21.cryptoapi.services
 
+import dev.jaym21.cryptoapi.clients.KEY
 import dev.jaym21.cryptoapi.clients.NomicsClient
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertNotNull
@@ -11,7 +12,7 @@ class NomicsAPITest {
 
     @Test
     fun `Get all cryptocurrencies`() = runBlocking {
-        val response = api.getCurrencies()
+        val response = api.getCurrencies(KEY, "INR")
         assertNotNull(response.body())
     }
 }

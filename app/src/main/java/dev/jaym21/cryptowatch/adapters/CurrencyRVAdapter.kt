@@ -1,12 +1,13 @@
 package dev.jaym21.cryptowatch.adapters
 
-import android.graphics.drawable.Drawable
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import dev.jaym21.cryptoapi.models.responses.Currency
 import dev.jaym21.cryptowatch.R
 import dev.jaym21.cryptowatch.databinding.RvCurrencyItemBinding
@@ -37,12 +38,14 @@ class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHol
         holder.binding.tvCurrencyName.text = currentItem.name
         holder.binding.tvCurrencySymbol.text = currentItem.symbol
         holder.binding.tvCurrentValue.text = currentItem.price
+        holder.binding.ivCurrencyIcon.load(currentItem.logoUrl)
 
         if (currentItem.oneDay != null) {
-            holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct
 
             if (currentItem.oneDay!!.priceChangePct!!.toDouble() >= 0) {
-                holder.binding.ivCurrencyIcon.setBackgroundResource(R.drawable.ic_trending_up)
+                holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct!! + " %"
+
+                holder.binding.ivChangeIcon.setImageResource(R.drawable.ic_trending_up)
                 holder.binding.ivCurrencyIcon.setColorFilter(R.color.green)
                 holder.binding.tvPercentChange.setTextColor(
                     ContextCompat.getColor(
@@ -51,7 +54,9 @@ class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHol
                     )
                 )
             } else {
-                holder.binding.ivCurrencyIcon.setBackgroundResource(R.drawable.ic_trending_down)
+                holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct!!.substring(1) + " %"
+
+                holder.binding.ivChangeIcon.load(R.drawable.ic_trending_down)
                 holder.binding.ivCurrencyIcon.setColorFilter(R.color.red)
                 holder.binding.tvPercentChange.setTextColor(
                     ContextCompat.getColor(
@@ -65,7 +70,9 @@ class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHol
             holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct
 
             if (currentItem.oneDay!!.priceChangePct!!.toDouble() >= 0) {
-                holder.binding.ivCurrencyIcon.setBackgroundResource(R.drawable.ic_trending_up)
+                holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct!! + " %"
+
+                holder.binding.ivChangeIcon.load(R.drawable.ic_trending_up)
                 holder.binding.ivCurrencyIcon.setColorFilter(R.color.green)
                 holder.binding.tvPercentChange.setTextColor(
                     ContextCompat.getColor(
@@ -74,7 +81,9 @@ class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHol
                     )
                 )
             } else {
-                holder.binding.ivCurrencyIcon.setBackgroundResource(R.drawable.ic_trending_down)
+                holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct!!.substring(1) + " %"
+
+                holder.binding.ivChangeIcon.load(R.drawable.ic_trending_down)
                 holder.binding.ivCurrencyIcon.setColorFilter(R.color.red)
                 holder.binding.tvPercentChange.setTextColor(
                     ContextCompat.getColor(

@@ -15,11 +15,12 @@
         android:id="@+id/tvCurrencyName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/ivCurrencyIcon"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:fontFamily="@font/poppins_semibold"
         tools:text="Bitcoin"
+        android:layout_toEndOf="@id/ivCurrencyIcon"
+        android:layout_toStartOf="@id/tvCurrentValue"
         android:layout_marginStart="10dp"/>
 
     <TextView
@@ -38,11 +39,11 @@
         android:id="@+id/tvCurrentValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="$32,789"
-        android:textSize="15sp"
+        android:layout_alignParentEnd="true"
         android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/white"
-        android:layout_alignParentEnd="true" />
+        android:textSize="15sp"
+        tools:text="$32,789" />
 
     <TextView
         android:id="@+id/tvPercentChange"
@@ -59,11 +60,11 @@
         android:id="@+id/ivChangeIcon"
         android:layout_width="15dp"
         android:layout_height="15dp"
-        tools:src="@drawable/ic_trending_up"
-        tools:tint="@color/green"
-        android:layout_toStartOf="@id/tvPercentChange"
         android:layout_below="@id/tvCurrentValue"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginTop="1dp"/>
+        android:layout_toStartOf="@id/tvPercentChange"
+        tools:src="@drawable/ic_trending_up"
+        tools:tint="@color/green" />
 
 </RelativeLayout>
