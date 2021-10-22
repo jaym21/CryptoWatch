@@ -2,7 +2,6 @@ package dev.jaym21.cryptowatch.utils
 
 import android.content.Context
 import android.widget.ImageView
-import com.bumptech.glide.Glide
 import com.pixplicity.sharp.Sharp
 import dev.jaym21.cryptowatch.R
 import okhttp3.*
