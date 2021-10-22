@@ -15,7 +15,7 @@ data class Currency(
     @Json(name = "7d")
     val sevenDay: CurrencyChange?,
     @Json(name = "30d")
-    val oneMonth: CurrencyChange,
+    val oneMonth: CurrencyChange?,
     @Json(name = "365d")
     val oneYear: CurrencyChange?,
     @Json(name = "first_candle")
