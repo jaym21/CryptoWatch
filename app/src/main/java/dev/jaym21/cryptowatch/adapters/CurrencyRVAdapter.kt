@@ -45,7 +45,7 @@ class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHol
         if (currentItem.logoUrl!!.substring(length - 3) == "svg"){
             SVGLoader.fetchSvg(holder.binding.root.context, currentItem.logoUrl!!, holder.binding.ivCurrencyIcon)
         }else {
-            Glide.with(holder.binding.root.context).load(currentItem.logoUrl).transform(RoundedCorners(60)) .into(holder.binding.ivCurrencyIcon)
+            Glide.with(holder.binding.root.context).load(currentItem.logoUrl).transform(RoundedCorners(100)) .into(holder.binding.ivCurrencyIcon)
         }
 
         if (currentItem.oneDay != null) {
@@ -54,7 +54,7 @@ class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHol
                 holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct!! + " %"
 
                 Glide.with(holder.binding.root.context).load(R.drawable.ic_trending_up).into(holder.binding.ivChangeIcon)
-                holder.binding.ivCurrencyIcon.setColorFilter(R.color.green)
+                holder.binding.ivChangeIcon.setColorFilter(ContextCompat.getColor(holder.binding.root.context, R.color.green))
                 holder.binding.tvPercentChange.setTextColor(
                     ContextCompat.getColor(
                         holder.binding.root.context,
@@ -65,7 +65,7 @@ class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHol
                 holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct!!.substring(1) + " %"
 
                 Glide.with(holder.binding.root.context).load(R.drawable.ic_trending_down).into(holder.binding.ivChangeIcon)
-                holder.binding.ivCurrencyIcon.setColorFilter(R.color.red)
+                holder.binding.ivChangeIcon.setColorFilter(ContextCompat.getColor(holder.binding.root.context, R.color.red))
                 holder.binding.tvPercentChange.setTextColor(
                     ContextCompat.getColor(
                         holder.binding.root.context,
@@ -81,7 +81,7 @@ class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHol
                 holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct!! + " %"
 
                 Glide.with(holder.binding.root.context).load(R.drawable.ic_trending_up).into(holder.binding.ivChangeIcon)
-                holder.binding.ivCurrencyIcon.setColorFilter(R.color.green)
+                holder.binding.ivChangeIcon.setColorFilter(ContextCompat.getColor(holder.binding.root.context, R.color.green))
                 holder.binding.tvPercentChange.setTextColor(
                     ContextCompat.getColor(
                         holder.binding.root.context,
@@ -92,7 +92,7 @@ class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHol
                 holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct!!.substring(1) + " %"
 
                 Glide.with(holder.binding.root.context).load(R.drawable.ic_trending_down).into(holder.binding.ivChangeIcon)
-                holder.binding.ivCurrencyIcon.setColorFilter(R.color.red)
+                holder.binding.ivChangeIcon.setColorFilter(ContextCompat.getColor(holder.binding.root.context, R.color.red))
                 holder.binding.tvPercentChange.setTextColor(
                     ContextCompat.getColor(
                         holder.binding.root.context,
