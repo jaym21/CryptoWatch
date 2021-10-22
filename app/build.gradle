@@ -62,10 +62,13 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine"
 
-    //coil
-    def coil = "1.4.0"
-    implementation "io.coil-kt:coil:$coil"
-    implementation "io.coil-kt:coil-svg:$coil"
+    //glide
+    def glide = "4.12.0"
+    implementation "com.github.bumptech.glide:glide:$glide"
+    kapt "com.github.bumptech.glide:compiler:$glide"
+
+    //loading svg in imageView
+    implementation "com.pixplicity.sharp:library:1.1.0"
 
     //unit testing
     testImplementation 'junit:junit:4.13.2'

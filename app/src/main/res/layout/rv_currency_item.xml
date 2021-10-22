@@ -6,7 +6,7 @@
     tools:background="@color/black"
     android:padding="10dp">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivCurrencyIcon"
         android:layout_width="45dp"
         android:layout_height="45dp" />
@@ -56,7 +56,7 @@
         android:layout_below="@id/tvCurrentValue"
         android:layout_alignParentEnd="true" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivChangeIcon"
         android:layout_width="15dp"
         android:layout_height="15dp"
