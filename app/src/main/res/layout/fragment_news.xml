@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.NewsFragment">
+    tools:context=".ui.NewsFragment"
+    android:background="@color/black">
 
     <TextView
+        android:id="@+id/tvNews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/news"
+        android:textSize="28sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="14dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvNews"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:overScrollMode="never"
+        android:layout_below="@id/tvNews"/>
 
-</FrameLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:background="@color/black"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:paddingTop="14dp"
+    android:paddingBottom="14dp">
+    
+    <ImageView
+        android:id="@+id/ivNewsImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+    
+    <TextView
+        android:id="@+id/tvNewsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Bitcoin Price Might Slips Below $60k! Traders Can Expect Buying Opportunity Soon!"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_toEndOf="@id/ivNewsImage"
+        android:layout_marginStart="8dp"/>
+
+</RelativeLayout>

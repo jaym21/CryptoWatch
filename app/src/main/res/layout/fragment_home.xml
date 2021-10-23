@@ -15,7 +15,7 @@
         android:textColor="@color/white"
         android:fontFamily="@font/poppins_bold"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"/>
+        android:layout_marginStart="14dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCurrencies"
