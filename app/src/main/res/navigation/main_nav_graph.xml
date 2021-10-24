@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="dev.jaym21.cryptowatch.ui.HomeFragment"
+        android:name="dev.jaym21.cryptowatch.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/navigation_news"
-        android:name="dev.jaym21.cryptowatch.ui.NewsFragment"
+        android:name="dev.jaym21.cryptowatch.ui.news.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
 </navigation>

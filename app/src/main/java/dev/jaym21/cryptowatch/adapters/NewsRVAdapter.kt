@@ -19,7 +19,6 @@ class NewsRVAdapter: ListAdapter<NewsData, NewsRVAdapter.NewsViewHolder>(NewsDif
         override fun areContentsTheSame(oldItem: NewsData, newItem: NewsData): Boolean {
             return oldItem.toString() == newItem.toString()
         }
-
     }
 
     inner class NewsViewHolder(val binding: RvNewsItemBinding): RecyclerView.ViewHolder(binding.root)

@@ -1,6 +1,5 @@
-package dev.jaym21.cryptowatch.ui
+package dev.jaym21.cryptowatch.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,8 +16,7 @@ class HomeViewModel: ViewModel() {
     //live data for currency response
     val currencies: MutableLiveData<ApiResponse<List<Currency>>> = MutableLiveData()
 
-    fun getCurrencies() {
-        viewModelScope.launch(Dispatchers.IO) {
+    fun getCurrencies() = viewModelScope.launch(Dispatchers.IO) {
             //as we are going to make network call so showing loading progress bar
             currencies.postValue(ApiResponse.Loading())
 
@@ -33,5 +31,4 @@ class HomeViewModel: ViewModel() {
                 currencies.postValue(ApiResponse.Error("Could not retrieve currencies, try again!"))
             }
         }
-    }
 }
