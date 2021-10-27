@@ -13,7 +13,19 @@ class DateConverterTest {
 
     @Test
     fun `Get the date and month from unix timestamp`() {
-        val date = DateConverter.getDateAndMonth(1635342482)
-        assertNotNull(date)
+        val dateMonth = DateConverter.getDateAndMonth(1635342482)
+        assertNotNull(dateMonth)
+    }
+
+    @Test
+    fun `Get the time from unix timestamp`() {
+        val time = DateConverter.getTime(1635342482)
+        assertNotNull(time)
+    }
+
+    @Test
+    fun `Get day of the week from unix timestamp`() {
+        val dayOfTheWeek = DateConverter.getDayOfWeek(1635342482)
+        assertNotNull(dayOfTheWeek)
     }
 }

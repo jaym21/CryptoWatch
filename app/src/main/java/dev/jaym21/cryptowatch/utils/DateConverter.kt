@@ -18,9 +18,10 @@ class DateConverter {
             return sdf.format(timestamp * 1000)
         }
 
-//        fun getTime(timestamp: Long): String {
-//
-//        }
+        fun getTime(timestamp: Long): String {
+            val sdf = SimpleDateFormat("hh:mm a", Locale.ENGLISH)
+            return sdf.format(timestamp * 1000)
+        }
 
         fun getDayOfWeek(timestamp: Long): String {
             val sdf = SimpleDateFormat("EEEE", Locale.ENGLISH)
