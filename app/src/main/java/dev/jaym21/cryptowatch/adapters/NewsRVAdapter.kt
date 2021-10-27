@@ -33,6 +33,5 @@ class NewsRVAdapter: ListAdapter<NewsData, NewsRVAdapter.NewsViewHolder>(NewsDif
         val currentItem = getItem(position)
 
         holder.binding.tvNewsTitle.text = currentItem.title
-        Glide.with(holder.binding.root.context).load(currentItem.imageurl).into(holder.binding.ivNewsImage)
     }
 }

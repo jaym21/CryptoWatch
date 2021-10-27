@@ -5,21 +5,26 @@ import java.util.*
 
 class DateConverter {
     companion object{
-        fun convertUnixToDate(unix: String): String {
-            val unixSeconds = unix.toLong()
-            //convert seconds to milliseconds
-            val date = Date(unixSeconds * 1000L)
+        fun convertUnixToDate(timestamp: Long): String {
             //format of the date
-            val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm a")
+            val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH)
             //setting time zone to GMT + 5:30(IST)
             sdf.timeZone = TimeZone.getTimeZone("IST")
-            return sdf.format(date)
+            return sdf.format(timestamp * 1000)
         }
+
+        fun getDateAndMonth(timestamp: Long): String {
+            val sdf = SimpleDateFormat("dd/MM", Locale.ENGLISH)
+            return sdf.format(timestamp * 1000)
+        }
+
+//        fun getTime(timestamp: Long): String {
+//
+//        }
 
         fun getDayOfWeek(timestamp: Long): String {
             val sdf = SimpleDateFormat("EEEE", Locale.ENGLISH)
             return sdf.format(timestamp * 1000)
         }
-
     }
 }
