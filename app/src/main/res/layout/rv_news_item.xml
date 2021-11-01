@@ -8,21 +8,61 @@
     android:paddingEnd="10dp"
     android:paddingTop="14dp"
     android:paddingBottom="14dp">
+
+    <LinearLayout
+        android:id="@+id/llSource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/tvNewsTime">
+
+        <ImageView
+            android:id="@+id/ivSourceImage"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:src="@drawable/ic_launcher_foreground" />
+
+        <TextView
+            android:id="@+id/tvSourceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Bitcoin Magazine"
+            android:textSize="16sp"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvNewsTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="1 hour ago"
+        android:textSize="12sp"
+        android:textColor="@color/white_alpha_85"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_alignParentEnd="true" />
     
     <TextView
         android:id="@+id/tvNewsTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Bitcoin Price Might Slips Below $60k! Traders Can Expect Buying Opportunity Soon!"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:textColor="@color/white"
-        android:fontFamily="@font/poppins_semibold" />
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_below="@id/llSource"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/tvNewsBody"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Mike Green Alex Gladstein debate Bitcoin's role in the U.S. and beyond by looking at several topics, from government response to taxation.The post Podcast: Bitcoins Role in the War on Cash | Mike Green Alex Gladstein appeared first on Blockworks."
+        android:textSize="12sp"
         android:textColor="@color/white_alpha_85"
         android:layout_below="@id/tvNewsTitle" />
 
