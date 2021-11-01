@@ -2,6 +2,7 @@ package dev.jaym21.cryptowatch.utils
 
 import org.junit.Assert.assertNotNull
 import org.junit.Test
+import java.util.*
 
 class DateConverterTest {
 
@@ -27,5 +28,17 @@ class DateConverterTest {
     fun `Get day of the week from unix timestamp`() {
         val dayOfTheWeek = DateConverter.getDayOfWeek(1635342482)
         assertNotNull(dayOfTheWeek)
+    }
+
+    @Test
+    fun `Get current date`() {
+        val currentDate = DateConverter.getCurrentDate()
+        assertNotNull(currentDate)
+    }
+
+    @Test
+    fun `Get time ago for Date`() {
+        val timeAgo = DateConverter.getTimeAgo(1635342482)
+        assertNotNull(timeAgo)
     }
 }
