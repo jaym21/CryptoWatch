@@ -10,15 +10,23 @@
         android:name="dev.jaym21.cryptowatch.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+
     <fragment
         android:id="@+id/navigation_news"
         android:name="dev.jaym21.cryptowatch.ui.news.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" >
+
         <action
             android:id="@+id/action_navigation_news_to_articleOpenFragment"
-            app:destination="@id/articleOpenFragment" />
+            app:destination="@id/articleOpenFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+
     </fragment>
+
     <fragment
         android:id="@+id/articleOpenFragment"
         android:name="dev.jaym21.cryptowatch.ui.news.ArticleOpenFragment"
@@ -28,4 +36,5 @@
         <argument android:name="articleUrl" />
 
     </fragment>
+
 </navigation>
