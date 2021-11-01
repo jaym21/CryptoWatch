@@ -10,7 +10,7 @@ import dev.jaym21.cryptoapi.models.entities.NewsData
 import dev.jaym21.cryptowatch.databinding.RvNewsItemBinding
 import dev.jaym21.cryptowatch.utils.DateConverter
 
-class NewsRVAdapter: ListAdapter<NewsData, NewsRVAdapter.NewsViewHolder>(NewsDiffCallback()) {
+class NewsRVAdapter(private val listener: INewsRVAdapter): ListAdapter<NewsData, NewsRVAdapter.NewsViewHolder>(NewsDiffCallback()) {
 
     class NewsDiffCallback: DiffUtil.ItemCallback<NewsData>() {
         override fun areItemsTheSame(oldItem: NewsData, newItem: NewsData): Boolean {
@@ -38,5 +38,13 @@ class NewsRVAdapter: ListAdapter<NewsData, NewsRVAdapter.NewsViewHolder>(NewsDif
         holder.binding.tvSourceName.text = currentItem.sourceInfo?.name
         Glide.with(holder.binding.root.context).load(currentItem.sourceInfo?.img).into(holder.binding.ivSourceImage)
         holder.binding.tvNewsTime.text = DateConverter.getTimeAgo(currentItem.publishedOn!!.toLong())
+
+        holder.binding.rlRootNewsItem.setOnClickListener {
+            currentItem.url?.let { it1 -> listener.onNewsArticleClicked(it1) }
+        }
     }
+}
+
+interface INewsRVAdapter {
+    fun onNewsArticleClicked(url: String)
 }

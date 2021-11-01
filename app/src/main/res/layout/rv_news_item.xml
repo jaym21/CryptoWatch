@@ -7,7 +7,8 @@
     android:paddingStart="14dp"
     android:paddingEnd="16dp"
     android:paddingTop="16dp"
-    android:paddingBottom="20dp">
+    android:paddingBottom="20dp"
+    android:id="@+id/rlRootNewsItem">
 
     <ImageView
         android:id="@+id/ivSourceImage"
