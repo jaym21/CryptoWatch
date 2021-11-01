@@ -52,13 +52,13 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navigation"
 
     // lifecycle components
-    def lifecycle = "2.3.1"
+    def lifecycle = "2.4.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle"
 
     // coroutine
-    def coroutine = "1.5.2-native-mt"
+    def coroutine = "1.5.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine"
 
@@ -69,6 +69,9 @@ dependencies {
 
     //loading svg in imageView
     implementation "com.pixplicity.sharp:library:1.1.0"
+
+    //chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     //unit testing
     testImplementation 'junit:junit:4.13.2'
