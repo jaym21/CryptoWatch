@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import dev.jaym21.cryptoapi.models.entities.NewsData
 import dev.jaym21.cryptowatch.databinding.RvNewsItemBinding
+import dev.jaym21.cryptowatch.utils.DateConverter
 
 class NewsRVAdapter: ListAdapter<NewsData, NewsRVAdapter.NewsViewHolder>(NewsDiffCallback()) {
 
@@ -36,6 +37,6 @@ class NewsRVAdapter: ListAdapter<NewsData, NewsRVAdapter.NewsViewHolder>(NewsDif
         holder.binding.tvNewsBody.text = currentItem.body
         holder.binding.tvSourceName.text = currentItem.sourceInfo?.name
         Glide.with(holder.binding.root.context).load(currentItem.sourceInfo?.img).into(holder.binding.ivSourceImage)
-
+        holder.binding.tvNewsTime.text = DateConverter.getTimeAgo(currentItem.publishedOn!!.toLong())
     }
 }
