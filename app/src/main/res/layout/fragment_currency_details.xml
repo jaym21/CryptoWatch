@@ -1,9 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.detail.CurrencyDetailsFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.detail.CurrencyDetailsFragment"
+    android:background="@color/black"
+    android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/ivBackButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_back_arrow"
+        app:tint="@color/white"/>
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/ivBackButton">
+
+        <ImageView
+            android:id="@+id/ivCurrencyIcon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            tools:src="@drawable/ic_launcher_foreground"/>
+
+        <TextView
+            android:id="@+id/tvCurrencyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:fontFamily="@font/poppins_semibold"
+            tools:text="Bitcoin"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

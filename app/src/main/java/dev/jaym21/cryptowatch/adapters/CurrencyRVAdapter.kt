@@ -9,19 +9,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import dev.jaym21.cryptoapi.models.responses.Currency
+import dev.jaym21.cryptoapi.models.responses.CurrencyResponse
 import dev.jaym21.cryptowatch.R
 import dev.jaym21.cryptowatch.databinding.RvCurrencyItemBinding
 import dev.jaym21.cryptowatch.utils.SVGLoader
 
-class CurrencyRVAdapter: ListAdapter<Currency, CurrencyRVAdapter.CurrencyViewHolder>(CurrencyDiffCallback()) {
+class CurrencyRVAdapter: ListAdapter<CurrencyResponse, CurrencyRVAdapter.CurrencyViewHolder>(CurrencyDiffCallback()) {
 
-    class CurrencyDiffCallback: DiffUtil.ItemCallback<Currency>() {
-        override fun areItemsTheSame(oldItem: Currency, newItem: Currency): Boolean {
+    class CurrencyDiffCallback: DiffUtil.ItemCallback<CurrencyResponse>() {
+        override fun areItemsTheSame(oldItem: CurrencyResponse, newItem: CurrencyResponse): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Currency, newItem: Currency): Boolean {
+        override fun areContentsTheSame(oldItem: CurrencyResponse, newItem: CurrencyResponse): Boolean {
             return oldItem.toString() == newItem.toString()
         }
     }

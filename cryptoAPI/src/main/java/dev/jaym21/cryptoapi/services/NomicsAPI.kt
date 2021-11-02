@@ -1,7 +1,7 @@
 package dev.jaym21.cryptoapi.services
 
 import dev.jaym21.cryptoapi.clients.KEY
-import dev.jaym21.cryptoapi.models.responses.Currency
+import dev.jaym21.cryptoapi.models.responses.CurrencyResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -22,5 +22,13 @@ interface NomicsAPI {
         per_page: String = "100",
         @Query("page")
         page: String = "1"
-    ): Response<List<Currency>>
+    ): Response<List<CurrencyResponse>>
+
+    @GET("currencies/ticker")
+    suspend fun getCurrencyDetails(
+        @Query("key")
+        key: String = KEY,
+        @Query("ids")
+        currencyId: String
+    ): Response<List<CurrencyResponse>>
 }
