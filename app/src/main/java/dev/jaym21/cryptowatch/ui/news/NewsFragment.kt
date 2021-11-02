@@ -5,20 +5,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import dev.jaym21.cryptowatch.R
+import dev.jaym21.cryptowatch.adapters.INewsRVAdapter
 import dev.jaym21.cryptowatch.adapters.NewsRVAdapter
 import dev.jaym21.cryptowatch.databinding.FragmentNewsBinding
 import dev.jaym21.cryptowatch.utils.ApiResponse
 
-class NewsFragment : Fragment() {
+class NewsFragment : Fragment(), INewsRVAdapter {
 
     private var binding: FragmentNewsBinding? = null
-    private val newsAdapter = NewsRVAdapter()
+    private val newsAdapter = NewsRVAdapter(this)
     private lateinit var viewModel: NewsViewModel
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +36,9 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //initializing navController
+        navController = Navigation.findNavController(view)
 
         //initializing recyclerView
         setUpRecyclerView()
@@ -67,5 +75,10 @@ class NewsFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    override fun onNewsArticleClicked(url: String) {
+        val bundle = bundleOf("articleUrl" to url)
+        navController.navigate(R.id.action_navigation_news_to_articleOpenFragment, bundle)
     }
 }
