@@ -1,5 +1,6 @@
 package dev.jaym21.cryptowatch.ui.home.detail
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.google.android.material.snackbar.Snackbar
@@ -27,7 +29,9 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
     private var binding: FragmentCurrencyDetailsBinding? = null
     private var TAG = "CurrencyDetailsFragment"
     private lateinit var viewModel: CurrencyDetailsViewModel
+    private var currencyId: String? = null
     private lateinit var navController: NavController
+    private var entries = arrayListOf<Entry>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,13 +48,20 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
         //initializing navController
         navController = Navigation.findNavController(view)
 
+        //getting clicked currency id
+        currencyId = arguments?.getString("currencyId")
+
+        if (currencyId == null) {
+            Snackbar.make(view, "Could not find currency, try again!", Snackbar.LENGTH_SHORT).show()
+        }
+
         binding?.ivBackButton?.setOnClickListener {
             navController.popBackStack()
         }
 
         viewModel = ViewModelProvider(this).get(CurrencyDetailsViewModel::class.java)
 
-        viewModel.getCurrencyDetails("BTC")
+        viewModel.getCurrencyDetails(currencyId!!)
 
         viewModel.currencyDetails.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
@@ -103,8 +114,32 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
                     // enable touch gestures
                     binding?.chart?.setTouchEnabled(true)
 
-                    binding?.chart?.setOnChartValueSelectedListener(this);
-                    binding?.chart?.setDrawGridBackground(false);
+                    binding?.chart?.setOnChartValueSelectedListener(this)
+                    binding?.chart?.setDrawGridBackground(false)
+
+                    viewModel.getCurrencyHistory(currencyId!!, "USD", "30")
+
+                    viewModel.currencyHistory.observe(viewLifecycleOwner, Observer { response ->
+                        when(response) {
+                            is ApiResponse.Success -> {
+                                response.data?.data?.forEach {
+                                    entries.add(Entry(it.time!!.toFloat(), it.high!!.toFloat()))
+                                    val dataSet = LineDataSet(entries, "1 month")
+                                    dataSet.setDrawIcons(false)
+                                    dataSet.enableDashedLine(10f ,5f, 0f)
+                                    // black lines and points
+                                    dataSet.color = Color.BLACK
+                                    dataSet.setCircleColor(Color.BLACK)
+                                    // line thickness and point size
+                                    dataSet.lineWidth = 1f
+                                    dataSet.circleRadius = 3f
+
+                                    // draw points as solid circles
+                                    dataSet.setDrawCircleHole(false)
+                                }
+                            }
+                        }
+                    })
                 }
 
                 is ApiResponse.Loading -> {
