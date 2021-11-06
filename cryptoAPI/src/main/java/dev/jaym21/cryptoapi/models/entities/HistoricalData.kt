@@ -21,7 +21,7 @@ data class HistoricalData(
     @Json(name = "time")
     val time: Int?,
     @Json(name = "volumefrom")
-    val volumefrom: Double?,
+    val volumeFrom: Double?,
     @Json(name = "volumeto")
-    val volumeto: Double?
+    val volumeTo: Double?
 )
