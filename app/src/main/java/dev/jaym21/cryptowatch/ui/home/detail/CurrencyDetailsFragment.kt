@@ -14,7 +14,9 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
@@ -30,6 +32,7 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
     private var TAG = "CurrencyDetailsFragment"
     private lateinit var viewModel: CurrencyDetailsViewModel
     private var currencyId: String? = null
+    private var convertTo: String? = null
     private lateinit var navController: NavController
     private var entries = arrayListOf<Entry>()
 
@@ -50,6 +53,8 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
 
         //getting clicked currency id
         currencyId = arguments?.getString("currencyId")
+        //currency to be converted to
+        convertTo = arguments?.getString("convertTo")
 
         if (currencyId == null) {
             Snackbar.make(view, "Could not find currency, try again!", Snackbar.LENGTH_SHORT).show()
@@ -61,7 +66,9 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
 
         viewModel = ViewModelProvider(this).get(CurrencyDetailsViewModel::class.java)
 
-        viewModel.getCurrencyDetails(currencyId!!, "USD")
+        viewModel.getCurrencyDetails(currencyId!!, convertTo!!)
+
+        binding?.tvConvertedToCurrency?.text = convertTo
 
         viewModel.currencyDetails.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
@@ -131,14 +138,17 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
                                     dataSet.setDrawIcons(false)
                                     dataSet.enableDashedLine(10f ,5f, 0f)
                                     // black lines and points
-                                    dataSet.color = Color.BLACK
-                                    dataSet.setCircleColor(Color.BLACK)
+                                    dataSet.color = Color.WHITE
+                                    dataSet.setCircleColor(Color.WHITE)
                                     // line thickness and point size
                                     dataSet.lineWidth = 1f
                                     dataSet.circleRadius = 3f
 
                                     // draw points as solid circles
                                     dataSet.setDrawCircleHole(false)
+                                    binding?.chart?.data = LineData(dataSet)
+                                    binding?.chart?.animateY(1000, Easing.Linear)
+                                    binding?.chart?.invalidate()
                                 }
                             }
                         }

@@ -82,7 +82,7 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
     }
 
     override fun onCurrencyClicked(currencyId: String) {
-        val bundle = bundleOf("currencyId" to currencyId)
+        val bundle = bundleOf("currencyId" to currencyId, "convertTo" to "INR")
         navController.navigate(R.id.action_navigation_home_to_currencyDetailsFragment, bundle)
     }
 }

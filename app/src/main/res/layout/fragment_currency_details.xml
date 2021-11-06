@@ -56,10 +56,12 @@
             android:id="@+id/tvCurrentPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="300000"
+            tools:text="300000000000"
             android:textSize="30sp"
             android:textColor="@color/white"
-            android:fontFamily="@font/poppins_bold"/>
+            android:fontFamily="@font/poppins_bold"
+            android:maxLines="1"
+            android:maxLength="12"/>
 
         <TextView
             android:id="@+id/tvConvertedToCurrency"
