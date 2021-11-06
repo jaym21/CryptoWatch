@@ -48,7 +48,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@id/llCurrency"
-        android:layout_marginStart="60dp">
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/cvPriceChange"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:id="@+id/tvCurrentPrice"
@@ -72,12 +74,11 @@
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvPriceChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
         android:layout_alignParentEnd="true"
         android:layout_above="@id/llPeriodButtons"
-        android:backgroundTint="#332ECC71"
         android:layout_marginBottom="16dp">
 
         <LinearLayout

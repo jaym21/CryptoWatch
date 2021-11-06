@@ -29,6 +29,8 @@ interface NomicsAPI {
         @Query("key")
         key: String = KEY,
         @Query("ids")
-        currencyId: String
+        currencyId: String,
+        @Query("convert")
+        convert: String =  "USD",
     ): Response<List<CurrencyResponse>>
 }

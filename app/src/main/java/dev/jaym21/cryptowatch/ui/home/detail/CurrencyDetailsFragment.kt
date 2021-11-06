@@ -61,7 +61,7 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
 
         viewModel = ViewModelProvider(this).get(CurrencyDetailsViewModel::class.java)
 
-        viewModel.getCurrencyDetails(currencyId!!)
+        viewModel.getCurrencyDetails(currencyId!!, "USD")
 
         viewModel.currencyDetails.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
@@ -92,6 +92,8 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
                                     R.color.green
                                 )
                             )
+
+                            binding!!.cvPriceChange.background =ContextCompat.getDrawable(binding!!.root.context, R.drawable.positive_change_card_bg)
                         } else {
                             binding!!.tvPercentChange.text = response.data[0].oneDay!!.priceChangePct!!.substring(1) + " %"
 
@@ -103,6 +105,7 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
                                     R.color.red
                                 )
                             )
+                            binding!!.cvPriceChange.background =ContextCompat.getDrawable(binding!!.root.context, R.drawable.negative_change_card_bg)
                         }
 
                     }

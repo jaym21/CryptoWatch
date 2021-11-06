@@ -13,8 +13,8 @@ class NomicsRepository {
         return response.body()
     }
 
-    suspend fun getCurrencyDetails(currencyId: String): List<CurrencyResponse>? {
-        val response = api.getCurrencyDetails(KEY, currencyId)
+    suspend fun getCurrencyDetails(currencyId: String, convertTo: String): List<CurrencyResponse>? {
+        val response = api.getCurrencyDetails(KEY, currencyId, convertTo)
         return response.body()
     }
 }

@@ -21,12 +21,12 @@ class CurrencyDetailsViewModel: ViewModel() {
     //live data for currency history response
     val currencyHistory: MutableLiveData<ApiResponse<Data>> = MutableLiveData()
 
-    fun getCurrencyDetails(id: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun getCurrencyDetails(id: String, convertTo: String) = viewModelScope.launch(Dispatchers.IO) {
         //as we are going to make network call so showing loading progress bar
         currencyDetails.postValue(ApiResponse.Loading())
 
         //getting response from repo
-        val response = nomicsRepository.getCurrencyDetails(id)
+        val response = nomicsRepository.getCurrencyDetails(id, convertTo)
         //checking if we got a successful response
         if (response!!.isNotEmpty()) {
             response.let {
