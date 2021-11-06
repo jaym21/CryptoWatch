@@ -1,6 +1,7 @@
 package dev.jaym21.cryptowatch.ui.home.detail
 
 import android.graphics.Color
+import android.graphics.DashPathEffect
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,9 +15,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
@@ -35,6 +34,7 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
     private var convertTo: String? = null
     private lateinit var navController: NavController
     private var entries = arrayListOf<Entry>()
+    private var isChangePositive: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -99,8 +99,8 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
                                     R.color.green
                                 )
                             )
-
                             binding!!.cvPriceChange.background =ContextCompat.getDrawable(binding!!.root.context, R.drawable.positive_change_card_bg)
+                            isChangePositive = true
                         } else {
                             binding!!.tvPercentChange.text = response.data[0].oneDay!!.priceChangePct!!.substring(1) + " %"
 
@@ -113,6 +113,7 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
                                 )
                             )
                             binding!!.cvPriceChange.background =ContextCompat.getDrawable(binding!!.root.context, R.drawable.negative_change_card_bg)
+                            isChangePositive = false
                         }
 
                     }
@@ -134,22 +135,9 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
                             is ApiResponse.Success -> {
                                 response.data?.data?.forEach {
                                     entries.add(Entry(it.time!!.toFloat(), it.high!!.toFloat()))
-                                    val dataSet = LineDataSet(entries, "1 month")
-                                    dataSet.setDrawIcons(false)
-                                    dataSet.enableDashedLine(10f ,5f, 0f)
-                                    // black lines and points
-                                    dataSet.color = Color.WHITE
-                                    dataSet.setCircleColor(Color.WHITE)
-                                    // line thickness and point size
-                                    dataSet.lineWidth = 1f
-                                    dataSet.circleRadius = 3f
-
-                                    // draw points as solid circles
-                                    dataSet.setDrawCircleHole(false)
-                                    binding?.chart?.data = LineData(dataSet)
-                                    binding?.chart?.animateY(1000, Easing.Linear)
-                                    binding?.chart?.invalidate()
                                 }
+                                val dataSet = LineDataSet(entries, "1 month")
+                                updateChart(dataSet)
                             }
                         }
                     })
@@ -166,6 +154,34 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
                 }
             }
         })
+    }
+
+    private fun updateChart(lineDataSet: LineDataSet) {
+        if (binding?.chart?.data != null && binding?.chart?.data?.dataSetCount!! > 0) {
+            val set = binding?.chart?.data!!.getDataSetByIndex(0) as LineDataSet
+            set.values = lineDataSet.values
+            binding?.chart?.data!!.notifyDataChanged()
+            binding?.chart?.notifyDataSetChanged()
+        } else {
+            val dataSet = LineDataSet(entries, "1 month")
+            dataSet.setDrawIcons(false)
+            dataSet.enableDashedLine(10f, 5f, 0f)
+            dataSet.enableDashedHighlightLine(10f, 5f, 0f)
+            dataSet.color = Color.WHITE
+            dataSet.setCircleColor(Color.WHITE)
+            dataSet.lineWidth = 1f
+            dataSet.circleRadius = 3f
+            dataSet.setDrawCircleHole(false)
+            dataSet.valueTextSize = 9f
+            dataSet.setDrawFilled(true)
+            dataSet.formLineWidth = 1f
+            dataSet.formLineDashEffect = DashPathEffect(floatArrayOf(10f, 5f), 0f)
+            dataSet.formSize = 15f
+            if (isChangePositive)
+                dataSet.fillColor = R.drawable.chart_fade_green
+            else
+                dataSet.fillColor = R.drawable.chart_fade_red
+        }
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight?) {
