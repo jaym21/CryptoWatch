@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="dev.jaym21.cryptowatch.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_currencyDetailsFragment"
+            app:destination="@id/currencyDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_news"
@@ -34,6 +38,16 @@
         tools:layout="@layout/fragment_article_open" >
 
         <argument android:name="articleUrl" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/currencyDetailsFragment"
+        android:name="dev.jaym21.cryptowatch.ui.home.detail.CurrencyDetailsFragment"
+        android:label="fragment_currency_details"
+        tools:layout="@layout/fragment_currency_details" >
+
+        <argument android:name="currencyId" />
 
     </fragment>
 

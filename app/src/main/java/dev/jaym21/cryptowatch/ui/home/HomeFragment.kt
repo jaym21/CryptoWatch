@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import dev.jaym21.cryptowatch.R
 import dev.jaym21.cryptowatch.adapters.CurrencyRVAdapter
 import dev.jaym21.cryptowatch.adapters.ICurrencyRVAdapter
 import dev.jaym21.cryptowatch.databinding.FragmentHomeBinding
@@ -18,6 +21,7 @@ import dev.jaym21.cryptowatch.utils.ApiResponse
 class HomeFragment : Fragment(), ICurrencyRVAdapter {
 
     private var binding: FragmentHomeBinding? = null
+    private lateinit var navController: NavController
     private val currencyAdapter = CurrencyRVAdapter(this)
     private lateinit var viewModel: HomeViewModel
     private val TAG ="HomeFragment"
@@ -33,6 +37,9 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //initializing navController
+        navController = Navigation.findNavController(view)
 
         //initializing recyclerView
         setUpRecyclerView()
@@ -76,6 +83,6 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
 
     override fun onCurrencyClicked(currencyId: String) {
         val bundle = bundleOf("currencyId" to currencyId)
-
+        navController.navigate(R.id.action_navigation_home_to_currencyDetailsFragment, bundle)
     }
 }
