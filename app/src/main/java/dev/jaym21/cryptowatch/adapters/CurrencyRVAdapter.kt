@@ -14,7 +14,7 @@ import dev.jaym21.cryptowatch.R
 import dev.jaym21.cryptowatch.databinding.RvCurrencyItemBinding
 import dev.jaym21.cryptowatch.utils.SVGLoader
 
-class CurrencyRVAdapter: ListAdapter<CurrencyResponse, CurrencyRVAdapter.CurrencyViewHolder>(CurrencyDiffCallback()) {
+class CurrencyRVAdapter(private val listener: ICurrencyRVAdapter): ListAdapter<CurrencyResponse, CurrencyRVAdapter.CurrencyViewHolder>(CurrencyDiffCallback()) {
 
     class CurrencyDiffCallback: DiffUtil.ItemCallback<CurrencyResponse>() {
         override fun areItemsTheSame(oldItem: CurrencyResponse, newItem: CurrencyResponse): Boolean {
@@ -101,5 +101,13 @@ class CurrencyRVAdapter: ListAdapter<CurrencyResponse, CurrencyRVAdapter.Currenc
                 )
             }
         }
+
+        holder.binding.rlCurrencyRoot.setOnClickListener {
+            listener.onCurrencyClicked(currentItem.id!!)
+        }
     }
+}
+
+interface ICurrencyRVAdapter {
+    fun onCurrencyClicked(currencyId: String)
 }

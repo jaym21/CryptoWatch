@@ -6,7 +6,8 @@
     tools:background="@color/black"
     android:paddingStart="12dp"
     android:paddingEnd="12dp"
-    android:paddingTop="14dp">
+    android:paddingTop="14dp"
+    android:id="@+id/rlCurrencyRoot">
 
     <ImageView
         android:id="@+id/ivCurrencyIcon"
