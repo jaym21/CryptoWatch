@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +27,12 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
     private val currencyAdapter = CurrencyRVAdapter(this)
     private lateinit var viewModel: HomeViewModel
     private val TAG ="HomeFragment"
+    private val PAGE_SIZE_QUERY = 20
+    private var currentOffset = 0
+    //pagination
+    private var isScrolling: Boolean = false
+    private var isLastPage: Boolean = false
+    private var isLoading: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,7 +79,17 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
 
     //implementing pagination
     private val paginationScrollListener = object :RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            //checking if the user is scrolling
+            if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+             isScrolling = true
+            }
+        }
 
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+        }
     }
 
     private fun setUpRecyclerView() {
