@@ -19,7 +19,7 @@ interface NomicsAPI {
         @Query("sort")
         sort: String = "rank",
         @Query("per-page")
-        per_page: String = "100",
+        per_page: String = "30",
         @Query("page")
         page: String = "1"
     ): Response<List<CurrencyResponse>>

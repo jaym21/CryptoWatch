@@ -115,7 +115,6 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
                             binding!!.cvPriceChange.background =ContextCompat.getDrawable(binding!!.root.context, R.drawable.negative_change_card_bg)
                             isChangePositive = false
                         }
-
                     }
 
                     //line chart

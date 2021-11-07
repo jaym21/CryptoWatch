@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import dev.jaym21.cryptowatch.R
 import dev.jaym21.cryptowatch.adapters.CurrencyRVAdapter
@@ -67,6 +68,11 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
                 }
             }
         })
+    }
+
+    //implementing pagination
+    private val paginationScrollListener = object :RecyclerView.OnScrollListener() {
+
     }
 
     private fun setUpRecyclerView() {
