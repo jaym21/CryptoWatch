@@ -13,15 +13,27 @@ interface NomicsAPI {
         @Query("key")
         key: String = KEY,
         @Query("convert")
-        convert: String =  "USD",
+        convert: String = "USD",
+        @Query("page")
+        page: String = "1",
         @Query("status")
         status: String = "active",
         @Query("sort")
         sort: String = "rank",
         @Query("per-page")
-        per_page: String = "20",
-        @Query("page")
-        page: String = "1"
+        per_page: String = "20"
+    ): Response<List<CurrencyResponse>>
+
+    @GET("currencies/ticker")
+    suspend fun getTotalCurrencies(
+        @Query("key")
+        key: String = KEY,
+        @Query("convert")
+        convert: String = "USD",
+        @Query("status")
+        status: String = "active",
+        @Query("sort")
+        sort: String = "rank"
     ): Response<List<CurrencyResponse>>
 
     @GET("currencies/ticker")

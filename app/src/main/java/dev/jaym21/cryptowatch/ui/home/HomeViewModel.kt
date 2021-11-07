@@ -1,5 +1,6 @@
 package dev.jaym21.cryptowatch.ui.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,20 +16,35 @@ class HomeViewModel: ViewModel() {
 
     //live data for currency response
     val currencies: MutableLiveData<ApiResponse<List<CurrencyResponse>>> = MutableLiveData()
+    var allCurrenciesDisplayed: MutableList<CurrencyResponse>? = null
 
-    fun getCurrencies(pageNo: String, convertTo: String) = viewModelScope.launch(Dispatchers.IO) {
-            //as we are going to make network call so showing loading progress bar
-            currencies.postValue(ApiResponse.Loading())
+    fun getCurrencies(convertTo: String, pageNo: String, isNew: Boolean) = viewModelScope.launch(Dispatchers.IO) {
+        //as we are going to make network call so showing loading progress bar
+        currencies.postValue(ApiResponse.Loading())
 
-            //getting response from repo
-            val response = repo.getCurrencies(pageNo, convertTo)
-            //checking if we got a successful response
-            if (response!!.isNotEmpty()){
-                response.let {
-                    currencies.postValue(ApiResponse.Success(it))
-                }
-            }else {
-                currencies.postValue(ApiResponse.Error("Could not retrieve currencies, try again!"))
-            }
+        //checking if it is a new call for currencies or a paginated call
+        if (isNew) {
+            //if new call then clearing the previous currencies displayed list
+            allCurrenciesDisplayed = null
         }
+        Log.d("TAGYOYO", "getCurrencies: $allCurrenciesDisplayed")
+        Log.d("TAGYOYO", "getCurrencies: $pageNo")
+        //getting response from repo
+        val response = repo.getCurrencies(convertTo, pageNo)
+        //checking if we got a successful response
+        if (response!!.isNotEmpty()){
+            //storing the response received from api
+            if (allCurrenciesDisplayed == null) {
+                allCurrenciesDisplayed = response as MutableList<CurrencyResponse>?
+                Log.d("TAGYOYO", "FIRST CALL $allCurrenciesDisplayed")
+            } else {
+                //if this is not the first 20 currencies response received then we will add the new received currencies to the previous currencies saved
+                allCurrenciesDisplayed!!.addAll(response)
+                Log.d("TAGYOYO", "PAGINATION CALL $allCurrenciesDisplayed")
+            }
+            currencies.postValue(ApiResponse.Success(allCurrenciesDisplayed))
+        }else {
+            currencies.postValue(ApiResponse.Error("Could not retrieve currencies, try again!"))
+        }
+    }
 }

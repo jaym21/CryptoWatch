@@ -25,11 +25,11 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
 
     private var binding: FragmentHomeBinding? = null
     private lateinit var navController: NavController
-    private val currencyAdapter = CurrencyRVAdapter(this)
+    private lateinit var currencyAdapter: CurrencyRVAdapter
     private lateinit var viewModel: HomeViewModel
     private val TAG ="HomeFragment"
     private val PAGE_SIZE_QUERY = 20
-    private var currentPage = 0
+    private var currentPage = 1
     private var itemsDisplayed = 0
     //pagination
     private var isScrolling: Boolean = false
@@ -51,15 +51,18 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
         //initializing navController
         navController = Navigation.findNavController(view)
 
-        //initializing recyclerView
-        setUpRecyclerView()
-
         //initializing viewModel
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
+        //initializing adapter
+        currencyAdapter = CurrencyRVAdapter(this)
+
+        //initializing recyclerView
+        setUpRecyclerView()
+
         //calling function to get currencies
-        currentPage = 0
-        viewModel.getCurrencies(currentPage.toString(), "USD")
+        currentPage = 1
+        viewModel.getCurrencies("INR", currentPage.toString() ,true)
 
 
         //observing the currencies LiveData to get currencies data for recycler view
@@ -67,11 +70,14 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
             when(response) {
                 is ApiResponse.Success -> {
                     binding?.progressBar?.visibility = View.GONE
+                    isLoading = false
                     currencyAdapter.submitList(response.data)
                     Log.d("TAGYOYO", "CURRENT PAGE $currentPage")
-                    Log.d("TAGYOYO", "ITEMS DISPLAYED $itemsDisplayed")
+                    Log.d("TAGYOYO", "ITEMS DISPLAYED ${itemsDisplayed + 20}")
                     //setting boolean isLastPage according to the current page no
                     isLastPage = itemsDisplayed + 20 >= response.data!!.size
+                    Log.d(TAG, "onViewCreated: ${response.data.size}")
+                    Log.d("TAGYOYO", "ISLASTPAGE $isLastPage")
                 }
                 is ApiResponse.Loading -> {
                     binding?.progressBar?.visibility = View.VISIBLE
@@ -85,12 +91,12 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
     }
 
     //implementing pagination
-    private val paginationScrollListener = object :RecyclerView.OnScrollListener() {
+    private val paginationScrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
             //checking if the user is scrolling
             if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-             isScrolling = true
+                isScrolling = true
             }
         }
 
@@ -122,14 +128,14 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
 
             //creating a boolean to know if to paginate or not
             val shouldPaginate = isNotAtLastPageAndNotLoading && isAtLastPage && isTotalMoreThanVisible && notAtBeginning && isScrolling
-
+            Log.d(TAG, "onScrolled: $shouldPaginate")
             if (shouldPaginate) {
                 currentPage += 1
-                itemsDisplayed += 20
+                //makes another request to the api and gets next 20 products
+                viewModel.getCurrencies("INR", currentPage.toString(),false)
                 Log.d("TAGYOYO", "onScrolled: CURRENT PAGE $currentPage")
                 Log.d("TAGYOYO", "onScrolled: ITEMS DISPLAYED $itemsDisplayed")
-                //makes another request to the api and gets next 20 products
-                viewModel.getCurrencies(currentPage.toString(), "USD")
+                isScrolling = false
             }
         }
     }
@@ -138,6 +144,7 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
         binding?.rvCurrencies?.apply {
             adapter = currencyAdapter
             layoutManager = LinearLayoutManager(requireContext())
+            addOnScrollListener(paginationScrollListener)
         }
     }
 

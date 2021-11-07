@@ -8,8 +8,8 @@ class NomicsRepository {
 
     val api = NomicsClient.api
 
-    suspend fun getCurrencies(pageNo: String, convertTo: String): List<CurrencyResponse>? {
-        val response = api.getCurrencies(pageNo, convertTo)
+    suspend fun getCurrencies(convertTo: String, pageNo: String): List<CurrencyResponse>? {
+        val response = api.getCurrencies(KEY, convertTo, pageNo)
         return response.body()
     }
 
