@@ -17,12 +17,6 @@ class NomicsAPITest {
     }
 
     @Test
-    fun `Get total currencies`() = runBlocking {
-        val response = api.getTotalCurrencies()
-        assertNotNull(response.body())
-    }
-
-    @Test
     fun `Get currency details`() = runBlocking {
         val response = api.getCurrencyDetails(KEY, "BTC", "USD")
         assertNotNull(response.body())
