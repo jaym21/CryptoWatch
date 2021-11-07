@@ -122,6 +122,7 @@
         android:layout_marginTop="16dp">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOneDay"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:fontFamily="@font/poppins_semibold"
@@ -129,10 +130,12 @@
             android:text="1d"
             android:textAllCaps="false"
             android:textSize="12sp"
+            android:textColor="@color/white"
             app:cornerRadius="20dp"
             android:layout_marginStart="20dp"/>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSevenDays"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:fontFamily="@font/poppins_semibold"
@@ -140,10 +143,12 @@
             android:text="7d"
             android:textAllCaps="false"
             android:textSize="12sp"
+            android:textColor="@color/white"
             app:cornerRadius="20dp"
             android:layout_marginStart="20dp" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOneMonth"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:fontFamily="@font/poppins_semibold"
@@ -151,10 +156,25 @@
             android:text="1m"
             android:textAllCaps="false"
             android:textSize="12sp"
+            android:textColor="@color/white"
             app:cornerRadius="20dp"
             android:layout_marginStart="20dp" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSixMonths"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:padding="0dp"
+            android:text="6m"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            app:cornerRadius="20dp"
+            android:layout_marginStart="20dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOneYear"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:fontFamily="@font/poppins_semibold"
@@ -162,6 +182,7 @@
             android:text="1y"
             android:textAllCaps="false"
             android:textSize="12sp"
+            android:textColor="@color/white"
             app:cornerRadius="20dp"
             android:layout_marginStart="20dp" />
 
@@ -171,64 +192,13 @@
         android:id="@+id/rlChart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/llPeriodButtons">
+        android:layout_below="@id/llPeriodButtons"
+        android:layout_marginTop="16dp">
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/seekBar1" />
-
-        <SeekBar
-            android:id="@+id/seekBar2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_toStartOf="@+id/tvYMax"
-            android:max="150"
-            android:paddingBottom="12dp" />
-
-        <SeekBar
-            android:id="@+id/seekBar1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/seekBar2"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_toStartOf="@+id/tvXMax"
-            android:max="500"
-            android:paddingBottom="12dp" />
-
-        <TextView
-            android:id="@+id/tvXMax"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/seekBar1"
-            android:layout_alignParentEnd="true"
-            android:text="-"
-            android:layout_marginBottom="15dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="end"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/tvYMax"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/seekBar2"
-            android:layout_alignParentEnd="true"
-            android:text="-"
-            android:layout_marginBottom="15dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="end"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 

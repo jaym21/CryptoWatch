@@ -8,8 +8,13 @@ class CryptoCompareRepository {
 
     val api = CryptoCompareClient.api
 
-    suspend fun getHistoricalData(requiredCurrency: String, convertTo: String, requiredTime: String): Data? {
-        val response = api.getHistoricalData(requiredCurrency, convertTo, requiredTime)
+    suspend fun getHistoricalDailyData(requiredCurrency: String, convertTo: String, requiredTime: String): Data? {
+        val response = api.getHistoricalDailyData(requiredCurrency, convertTo, requiredTime)
+        return response.body()?.data
+    }
+
+    suspend fun getHistoricalHourlyData(requiredCurrency: String, convertTo: String): Data? {
+        val response = api.getHistoricalHourlyData(requiredCurrency, convertTo)
         return response.body()?.data
     }
 

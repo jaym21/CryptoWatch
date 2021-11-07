@@ -65,36 +65,33 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
         currentPage = 1
         viewModel.getCurrencies("INR", currentPage.toString(), true)
 
-        if (totalItems != null) {
-
-            //observing the currencies LiveData to get currencies data for recycler view
-            viewModel.currencies.observe(viewLifecycleOwner, Observer { response ->
-                when (response) {
-                    is ApiResponse.Success -> {
-                        binding?.progressBar?.visibility = View.GONE
-                        isLoading = false
-                        currencyAdapter.submitList(response.data)
-                        Log.d("TAGYOYO", "CURRENT PAGE $currentPage")
-                        Log.d("TAGYOYO", "ITEMS DISPLAYED ${itemsDisplayed + 20}")
-                        //setting boolean isLastPage according to the current page no
-                        isLastPage = itemsDisplayed + 20 >= 1000
-                        Log.d(TAG, "onViewCreated: $totalItems")
-                        Log.d("TAGYOYO", "ISLASTPAGE $isLastPage")
-                    }
-                    is ApiResponse.Loading -> {
-                        binding?.progressBar?.visibility = View.VISIBLE
-                    }
-                    is ApiResponse.Error -> {
-                        binding?.progressBar?.visibility = View.GONE
-                        Snackbar.make(
-                            view,
-                            "Could retrieve currencies, restart app!",
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                    }
+        //observing the currencies LiveData to get currencies data for recycler view
+        viewModel.currencies.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+                is ApiResponse.Success -> {
+                    binding?.progressBar?.visibility = View.GONE
+                    isLoading = false
+                    currencyAdapter.submitList(response.data)
+                    Log.d("TAGYOYO", "CURRENT PAGE $currentPage")
+                    Log.d("TAGYOYO", "ITEMS DISPLAYED ${itemsDisplayed + 20}")
+                    //setting boolean isLastPage according to the current page no
+                    isLastPage = itemsDisplayed + 20 >= 1000
+                    Log.d(TAG, "onViewCreated: $totalItems")
+                    Log.d("TAGYOYO", "ISLASTPAGE $isLastPage")
                 }
-            })
-        }
+                is ApiResponse.Loading -> {
+                    binding?.progressBar?.visibility = View.VISIBLE
+                }
+                is ApiResponse.Error -> {
+                    binding?.progressBar?.visibility = View.GONE
+                    Snackbar.make(
+                        view,
+                        "Could retrieve currencies, restart app!",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        })
     }
 
     //implementing pagination

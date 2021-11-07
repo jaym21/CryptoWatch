@@ -16,8 +16,10 @@ import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.google.android.material.snackbar.Snackbar
 import dev.jaym21.cryptowatch.R
@@ -25,7 +27,7 @@ import dev.jaym21.cryptowatch.databinding.FragmentCurrencyDetailsBinding
 import dev.jaym21.cryptowatch.utils.ApiResponse
 import dev.jaym21.cryptowatch.utils.SVGLoader
 
-class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
+class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.OnClickListener {
 
     private var binding: FragmentCurrencyDetailsBinding? = null
     private var TAG = "CurrencyDetailsFragment"
@@ -63,6 +65,14 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
         binding?.ivBackButton?.setOnClickListener {
             navController.popBackStack()
         }
+
+        binding?.btnOneDay?.setOnClickListener(this)
+        binding?.btnSevenDays?.setOnClickListener(this)
+        binding?.btnOneMonth?.setOnClickListener(this)
+        binding?.btnSixMonths?.setOnClickListener(this)
+        binding?.btnOneYear?.setOnClickListener(this)
+
+        binding?.btnOneDay?.performClick()
 
         viewModel = ViewModelProvider(this).get(CurrencyDetailsViewModel::class.java)
 
@@ -112,7 +122,7 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
                                     R.color.red
                                 )
                             )
-                            binding!!.cvPriceChange.background =ContextCompat.getDrawable(binding!!.root.context, R.drawable.negative_change_card_bg)
+                            binding!!.cvPriceChange.background = ContextCompat.getDrawable(binding!!.root.context, R.drawable.negative_change_card_bg)
                             isChangePositive = false
                         }
                     }
@@ -127,9 +137,9 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
                     binding?.chart?.setOnChartValueSelectedListener(this)
                     binding?.chart?.setDrawGridBackground(false)
 
-                    viewModel.getCurrencyHistory(currencyId!!, "USD", "30")
+                    viewModel.getCurrencyDailyHistory(currencyId!!, "INR", "30")
 
-                    viewModel.currencyHistory.observe(viewLifecycleOwner, Observer { response ->
+                    viewModel.currencyDailyHistory.observe(viewLifecycleOwner, Observer { response ->
                         when(response) {
                             is ApiResponse.Success -> {
                                 response.data?.data?.forEach {
@@ -162,24 +172,31 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
             binding?.chart?.data!!.notifyDataChanged()
             binding?.chart?.notifyDataSetChanged()
         } else {
-            val dataSet = LineDataSet(entries, "1 month")
-            dataSet.setDrawIcons(false)
-            dataSet.enableDashedLine(10f, 5f, 0f)
-            dataSet.enableDashedHighlightLine(10f, 5f, 0f)
-            dataSet.color = Color.WHITE
-            dataSet.setCircleColor(Color.WHITE)
-            dataSet.lineWidth = 1f
-            dataSet.circleRadius = 3f
-            dataSet.setDrawCircleHole(false)
-            dataSet.valueTextSize = 9f
-            dataSet.setDrawFilled(true)
-            dataSet.formLineWidth = 1f
-            dataSet.formLineDashEffect = DashPathEffect(floatArrayOf(10f, 5f), 0f)
-            dataSet.formSize = 15f
+            val set = LineDataSet(entries, "1 month")
+            set.setDrawIcons(false)
+            set.enableDashedLine(10f, 5f, 0f)
+            set.enableDashedHighlightLine(10f, 5f, 0f)
+            set.color = Color.WHITE
+            set.setCircleColor(Color.WHITE)
+            set.lineWidth = 1f
+            set.circleRadius = 3f
+            set.setDrawCircleHole(false)
+            set.valueTextSize = 9f
+            set.setDrawFilled(true)
+            set.formLineWidth = 1f
+            set.formLineDashEffect = DashPathEffect(floatArrayOf(10f, 5f), 0f)
+            set.formSize = 15f
+
             if (isChangePositive)
-                dataSet.fillColor = R.drawable.chart_fade_green
+                set.fillColor = R.drawable.chart_fade_green
             else
-                dataSet.fillColor = R.drawable.chart_fade_red
+                set.fillColor = R.drawable.chart_fade_red
+
+            val dataSets = arrayListOf<ILineDataSet>()
+            dataSets.add(set)
+
+            binding?.chart?.data = LineData(dataSets)
+            binding?.chart?.invalidate()
         }
     }
 
@@ -194,5 +211,84 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener {
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    override fun onClick(view: View?) {
+        when(view?.id) {
+            R.id.btnOneDay -> {
+                //selected
+                binding?.btnOneDay?.setTextColor(resources.getColor(R.color.white, requireActivity().theme))
+                binding?.btnOneDay?.setBackgroundColor(resources.getColor(R.color.blue_700, requireActivity().theme))
+                //not selected
+                binding?.btnSevenDays?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnSevenDays?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnOneMonth?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnOneMonth?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnSixMonths?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnSixMonths?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnOneYear?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnOneYear?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+            }
+
+            R.id.btnSevenDays -> {
+                //selected
+                binding?.btnSevenDays?.setTextColor(resources.getColor(R.color.white, requireActivity().theme))
+                binding?.btnSevenDays?.setBackgroundColor(resources.getColor(R.color.blue_700, requireActivity().theme))
+                //not selected
+                binding?.btnOneDay?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnOneDay?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnOneMonth?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnOneMonth?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnSixMonths?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnSixMonths?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnOneYear?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnOneYear?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+            }
+
+            R.id.btnOneMonth -> {
+                //selected
+                binding?.btnOneMonth?.setTextColor(resources.getColor(R.color.white, requireActivity().theme))
+                binding?.btnOneMonth?.setBackgroundColor(resources.getColor(R.color.blue_700, requireActivity().theme))
+                //not selected
+                binding?.btnOneDay?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnOneDay?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnSevenDays?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnSevenDays?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnSixMonths?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnSixMonths?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnOneYear?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnOneYear?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+            }
+
+            R.id.btnSixMonths -> {
+                //selected
+                binding?.btnSixMonths?.setTextColor(resources.getColor(R.color.white, requireActivity().theme))
+                binding?.btnSixMonths?.setBackgroundColor(resources.getColor(R.color.blue_700, requireActivity().theme))
+                //not selected
+                binding?.btnOneDay?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnOneDay?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnSevenDays?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnSevenDays?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnOneMonth?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnOneMonth?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnOneYear?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnOneYear?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+            }
+
+            R.id.btnOneYear -> {
+                //selected
+                binding?.btnOneYear?.setTextColor(resources.getColor(R.color.white, requireActivity().theme))
+                binding?.btnOneYear?.setBackgroundColor(resources.getColor(R.color.blue_700, requireActivity().theme))
+                //not selected
+                binding?.btnOneDay?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnOneDay?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnSevenDays?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnSevenDays?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnOneMonth?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnOneMonth?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+                binding?.btnSixMonths?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
+                binding?.btnSixMonths?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+            }
+        }
     }
 }

@@ -18,8 +18,10 @@ class CurrencyDetailsViewModel: ViewModel() {
 
     //live data for currency details response
     val currencyDetails: MutableLiveData<ApiResponse<List<CurrencyResponse>>> = MutableLiveData()
-    //live data for currency history response
-    val currencyHistory: MutableLiveData<ApiResponse<Data>> = MutableLiveData()
+    //live data for currency daily history response
+    val currencyDailyHistory: MutableLiveData<ApiResponse<Data>> = MutableLiveData()
+    //live data for currency hourly history response
+    val currencyHourlyHistory: MutableLiveData<ApiResponse<Data>> = MutableLiveData()
 
     fun getCurrencyDetails(id: String, convertTo: String) = viewModelScope.launch(Dispatchers.IO) {
         //as we are going to make network call so showing loading progress bar
@@ -37,18 +39,25 @@ class CurrencyDetailsViewModel: ViewModel() {
         }
     }
 
-    fun getCurrencyHistory(requiredCurrency: String, convertTo: String, requiredTime: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun getCurrencyDailyHistory(requiredCurrency: String, convertTo: String, requiredTime: String) = viewModelScope.launch(Dispatchers.IO) {
         //as we are going to make network call so showing loading progress bar
-        currencyHistory.postValue(ApiResponse.Loading())
+        currencyDailyHistory.postValue(ApiResponse.Loading())
 
-        val response = cryptoCompareRepository.getHistoricalData(requiredCurrency, convertTo, requiredTime)
+        val response = cryptoCompareRepository.getHistoricalDailyData(requiredCurrency, convertTo, requiredTime)
         //checking if we got a successful response
         if (response?.data!!.isNotEmpty()) {
             response.let {
-                currencyHistory.postValue(ApiResponse.Success(it))
+                currencyDailyHistory.postValue(ApiResponse.Success(it))
             }
         } else {
-            currencyHistory.postValue(ApiResponse.Error("Could retrieve historical data, try again!"))
+            currencyDailyHistory.postValue(ApiResponse.Error("Could retrieve historical data, try again!"))
         }
+    }
+
+    fun getCurrencyHourlyHistory(requiredCurrency: String, convertTo: String) = viewModelScope.launch(Dispatchers.IO) {
+        //as we are going to make network call so showing loading progress bar
+        currencyHourlyHistory.postValue(ApiResponse.Loading())
+
+        val response = cryptoCompareRepository.getHistoricalHourlyData(requiredCurrency, convertTo)
     }
 }
