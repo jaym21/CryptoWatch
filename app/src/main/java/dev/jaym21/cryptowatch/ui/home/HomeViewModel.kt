@@ -16,12 +16,12 @@ class HomeViewModel: ViewModel() {
     //live data for currency response
     val currencies: MutableLiveData<ApiResponse<List<CurrencyResponse>>> = MutableLiveData()
 
-    fun getCurrencies() = viewModelScope.launch(Dispatchers.IO) {
+    fun getCurrencies(pageNo: String, convertTo: String) = viewModelScope.launch(Dispatchers.IO) {
             //as we are going to make network call so showing loading progress bar
             currencies.postValue(ApiResponse.Loading())
 
             //getting response from repo
-            val response = repo.getCurrencies()
+            val response = repo.getCurrencies(pageNo, convertTo)
             //checking if we got a successful response
             if (response!!.isNotEmpty()){
                 response.let {
