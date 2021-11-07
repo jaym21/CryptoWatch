@@ -137,7 +137,7 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
                     binding?.chart?.setOnChartValueSelectedListener(this)
                     binding?.chart?.setDrawGridBackground(false)
 
-                    viewModel.getCurrencyDailyHistory(currencyId!!, "INR", "30")
+                    viewModel.getCurrencyHourlyHistory(currencyId!!, convertTo!!)
 
                     viewModel.currencyDailyHistory.observe(viewLifecycleOwner, Observer { response ->
                         when(response) {
@@ -228,6 +228,9 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
                 binding?.btnSixMonths?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
                 binding?.btnOneYear?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
                 binding?.btnOneYear?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+
+                //making api call for hourly historical data
+                viewModel.getCurrencyHourlyHistory(currencyId!!, convertTo!!)
             }
 
             R.id.btnSevenDays -> {
@@ -243,6 +246,9 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
                 binding?.btnSixMonths?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
                 binding?.btnOneYear?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
                 binding?.btnOneYear?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+
+                //making api call for daily historical data for seven days
+                viewModel.getCurrencyDailyHistory(currencyId!!, convertTo!!, "7")
             }
 
             R.id.btnOneMonth -> {
@@ -258,6 +264,9 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
                 binding?.btnSixMonths?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
                 binding?.btnOneYear?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
                 binding?.btnOneYear?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+
+                //making api call for daily historical data for one month
+                viewModel.getCurrencyDailyHistory(currencyId!!, convertTo!!, "30")
             }
 
             R.id.btnSixMonths -> {
@@ -273,6 +282,9 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
                 binding?.btnOneMonth?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
                 binding?.btnOneYear?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
                 binding?.btnOneYear?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+
+                //making api call for daily historical data for six days
+                viewModel.getCurrencyDailyHistory(currencyId!!, convertTo!!, "183")
             }
 
             R.id.btnOneYear -> {
@@ -288,6 +300,9 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
                 binding?.btnOneMonth?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
                 binding?.btnSixMonths?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
                 binding?.btnSixMonths?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
+
+                //making api call for daily historical data for one year
+                viewModel.getCurrencyDailyHistory(currencyId!!, convertTo!!, "365")
             }
         }
     }
