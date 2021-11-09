@@ -188,7 +188,7 @@ class CurrencyDetailsFragment : Fragment() {
 
 
         //initializing viewPagerAdapter
-        viewPagerAdapter = ViewPagerAdapter(parentFragmentManager, lifecycle)
+        viewPagerAdapter = ViewPagerAdapter(parentFragmentManager, lifecycle, currencyId!!, convertTo!!)
 
         binding?.viewPager?.adapter = viewPagerAdapter
 
