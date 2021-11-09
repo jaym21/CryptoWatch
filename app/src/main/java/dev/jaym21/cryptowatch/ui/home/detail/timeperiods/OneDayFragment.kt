@@ -5,9 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.google.android.material.snackbar.Snackbar
 import dev.jaym21.cryptowatch.R
 import dev.jaym21.cryptowatch.databinding.FragmentOneDayBinding
@@ -15,7 +19,7 @@ import dev.jaym21.cryptowatch.ui.home.detail.CurrencyDetailsViewModel
 import dev.jaym21.cryptowatch.utils.ApiResponse
 import dev.jaym21.cryptowatch.utils.CustomMarkerView
 
-class OneDayFragment(val currencyId: String, val convertTo: String) : Fragment() {
+class OneDayFragment(val currencyId: String, val convertTo: String, val isChangePositive: Boolean) : Fragment() {
 
     private var binding: FragmentOneDayBinding? = null
     private lateinit var viewModel: CurrencyDetailsViewModel
@@ -63,6 +67,8 @@ class OneDayFragment(val currencyId: String, val convertTo: String) : Fragment()
                     response.data?.data?.forEach{
                         entriesOneDay.add(Entry(it.time!!.toFloat(), it.close!!.toFloat()))
                     }
+                    val dataSet = LineDataSet(entriesOneDay, "line chart")
+                    updateChart(dataSet)
                 }
                 is ApiResponse.Loading -> {
                     binding?.progressBar?.visibility = View.VISIBLE
@@ -73,5 +79,38 @@ class OneDayFragment(val currencyId: String, val convertTo: String) : Fragment()
                 }
             }
         })
+    }
+
+    private fun updateChart(lineDataSet: LineDataSet) {
+        lineDataSet.lineWidth = 2f
+        lineDataSet.setDrawFilled(true)
+        lineDataSet.setDrawHighlightIndicators(false)
+        lineDataSet.setDrawCircleHole(false)
+        lineDataSet.setDrawCircles(false)
+        lineDataSet.setDrawValues(false)
+        lineDataSet.setDrawIcons(false)
+        lineDataSet.disableDashedLine()
+
+        if (isChangePositive) {
+            lineDataSet.fillDrawable = ContextCompat.getDrawable(binding!!.root.context, R.drawable.chart_fade_green)
+            lineDataSet.color = ContextCompat.getColor(
+                binding!!.root.context,
+                R.color.green
+            )
+        } else {
+            lineDataSet.fillDrawable = ContextCompat.getDrawable(binding!!.root.context, R.drawable.chart_fade_red)
+            lineDataSet.color = ContextCompat.getColor(
+                binding!!.root.context,
+                R.color.red
+            )
+        }
+
+        val data = LineData(lineDataSet)
+
+        data.setDrawValues(false)
+
+        binding?.chart?.data = data
+        binding?.chart?.animateXY(3000, 3000, Easing.EaseInCubic)
+        binding?.chart?.invalidate()
     }
 }
