@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.data.Entry
 import dev.jaym21.cryptowatch.R
 import dev.jaym21.cryptowatch.databinding.FragmentSixMonthsBinding
@@ -31,7 +32,26 @@ class SixMonthsFragment(val currencyId: String, val convertTo: String, val isCha
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //initializing viewModel
+        viewModel = ViewModelProvider(this).get(CurrencyDetailsViewModel::class.java)
 
+        //initializing markerView
+        customMarkerView = CustomMarkerView(requireContext(), R.layout.chart_marker_view)
+
+        //calling for hourly data of currency
+        viewModel.getCurrencyDailyHistory(currencyId ,convertTo, "183")
+
+        //styling chart
+        binding?.chart?.axisLeft?.isEnabled = false
+        binding?.chart?.axisRight?.isEnabled = false
+        binding?.chart?.xAxis?.isEnabled = false
+        binding?.chart?.legend?.isEnabled = false
+        binding?.chart?.description?.isEnabled = false
+        binding?.chart?.setTouchEnabled(true)
+        binding?.chart?.isDragEnabled = true
+        binding?.chart?.setScaleEnabled(false)
+        binding?.chart?.setPinchZoom(false)
+        binding?.chart?.marker = customMarkerView
     }
 
     override fun onDestroy() {
