@@ -20,7 +20,7 @@ class NewsViewModel: ViewModel() {
         news.postValue(ApiResponse.Loading())
 
         val response = repo.getLatestNews()
-        if (response!!.isNotEmpty()) {
+        if (response != null) {
             news.postValue(ApiResponse.Success(response))
         }else {
             news.postValue(ApiResponse.Error("Could not retrieve news, try again!"))
