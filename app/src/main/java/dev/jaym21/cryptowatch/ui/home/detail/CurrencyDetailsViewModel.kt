@@ -30,7 +30,7 @@ class CurrencyDetailsViewModel: ViewModel() {
         //getting response from repo
         val response = nomicsRepository.getCurrencyDetails(id, convertTo)
         //checking if we got a successful response
-        if (response!!.isNotEmpty()) {
+        if (response != null) {
             response.let {
                 currencyDetails.postValue(ApiResponse.Success(it))
             }
@@ -45,7 +45,7 @@ class CurrencyDetailsViewModel: ViewModel() {
 
         val response = cryptoCompareRepository.getHistoricalDailyData(requiredCurrency, convertTo, requiredTime)
         //checking if we got a successful response
-        if (response?.data!!.isNotEmpty()) {
+        if (response?.data != null) {
             response.let {
                 currencyDailyHistory.postValue(ApiResponse.Success(it))
             }
@@ -59,5 +59,13 @@ class CurrencyDetailsViewModel: ViewModel() {
         currencyHourlyHistory.postValue(ApiResponse.Loading())
 
         val response = cryptoCompareRepository.getHistoricalHourlyData(requiredCurrency, convertTo)
+        //checking if we got a successful response
+        if (response?.data != null) {
+            response.let {
+                currencyHourlyHistory.postValue(ApiResponse.Success(it))
+            }
+        } else {
+            currencyHourlyHistory.postValue(ApiResponse.Error("Could retrieve historical data, try again!"))
+        }
     }
 }

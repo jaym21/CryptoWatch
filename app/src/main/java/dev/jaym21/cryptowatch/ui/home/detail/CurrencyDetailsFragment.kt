@@ -32,10 +32,8 @@ class CurrencyDetailsFragment : Fragment() {
     private lateinit var viewModel: CurrencyDetailsViewModel
     private var currencyId: String? = null
     private var convertTo: String? = null
+    private var isChangePositive: Boolean? = null
     private lateinit var navController: NavController
-    private var entries = arrayListOf<Entry>()
-    private var isChangePositive: Boolean = false
-    private lateinit var customMarkerView: CustomMarkerView
     private lateinit var viewPagerAdapter: ViewPagerAdapter
     val timePeriods = arrayOf("1d", "7d", "30d", "6m", "1y")
 
@@ -61,6 +59,8 @@ class CurrencyDetailsFragment : Fragment() {
         currencyId = arguments?.getString("currencyId")
         //currency to be converted to
         convertTo = arguments?.getString("convertTo")
+        //getting isChangePositive
+        isChangePositive = arguments?.getBoolean("isChangePositive")
 
         if (currencyId == null) {
             Snackbar.make(view, "Could not find currency, try again!", Snackbar.LENGTH_SHORT).show()
@@ -69,17 +69,6 @@ class CurrencyDetailsFragment : Fragment() {
         binding?.ivBackButton?.setOnClickListener {
             navController.popBackStack()
         }
-
-        //initializing markerView
-        customMarkerView = CustomMarkerView(requireContext(), R.layout.chart_marker_view)
-//
-//        binding?.btnOneDay?.setOnClickListener(this)
-//        binding?.btnSevenDays?.setOnClickListener(this)
-//        binding?.btnOneMonth?.setOnClickListener(this)
-//        binding?.btnSixMonths?.setOnClickListener(this)
-//        binding?.btnOneYear?.setOnClickListener(this)
-//
-//        binding?.btnOneDay?.performClick()
 
         viewModel.getCurrencyDetails(currencyId!!, convertTo!!)
 
@@ -129,7 +118,6 @@ class CurrencyDetailsFragment : Fragment() {
                                 binding!!.root.context,
                                 R.drawable.positive_change_card_bg
                             )
-                            isChangePositive = true
                         } else {
                             binding!!.tvPercentChange.text =
                                 response.data[0].oneDay!!.priceChangePct!!.substring(1) + " %"
@@ -152,28 +140,11 @@ class CurrencyDetailsFragment : Fragment() {
                                 binding!!.root.context,
                                 R.drawable.negative_change_card_bg
                             )
-                            isChangePositive = false
                         }
                     }
 
                 }
-                    //hourly historical data for line chart
-//                    viewModel.getCurrencyHourlyHistory(currencyId!!, convertTo!!)
-//
-//                    viewModel.currencyDailyHistory.observe(viewLifecycleOwner, Observer { response ->
-//                        when(response) {
-//                            is ApiResponse.Success -> {
-//                                entries.clear()
-//                                response.data?.data?.forEach {
-//                                    entries.add(Entry(it.time!!.toFloat(), it.high!!.toFloat()))
-//                                }
-//                                val dataSet = LineDataSet(entries, "line chart")
-//                                updateChart(dataSet)
-//                            }
-//                        }
-//                    })
-//                }
-//
+
                 is ApiResponse.Loading -> {
                     binding?.progressBar?.visibility = View.VISIBLE
                 }
@@ -186,9 +157,11 @@ class CurrencyDetailsFragment : Fragment() {
             }
         })
 
-
         //initializing viewPagerAdapter
-        viewPagerAdapter = ViewPagerAdapter(parentFragmentManager, lifecycle, currencyId!!, convertTo!!, isChangePositive)
+        if (isChangePositive != null)
+            viewPagerAdapter = ViewPagerAdapter(parentFragmentManager, lifecycle, currencyId!!, convertTo!!, isChangePositive!!)
+        else
+            navController.popBackStack()
 
         binding?.viewPager?.adapter = viewPagerAdapter
 
@@ -203,156 +176,6 @@ class CurrencyDetailsFragment : Fragment() {
             tab.requestLayout()
         }
     }
-
-//    private fun updateChart(lineDataSet: LineDataSet) {
-//        binding?.chart?.axisLeft?.isEnabled = false
-//        binding?.chart?.axisRight?.isEnabled = false
-//        binding?.chart?.xAxis?.isEnabled = false
-//        binding?.chart?.legend?.isEnabled = false
-//        binding?.chart?.description?.isEnabled = false
-//        binding?.chart?.setTouchEnabled(true)
-//        binding?.chart?.isDragEnabled = true
-//        binding?.chart?.setScaleEnabled(false)
-//        binding?.chart?.setPinchZoom(false)
-//        binding?.chart?.marker = customMarkerView
-//
-//        lineDataSet.lineWidth = 2f
-//        lineDataSet.setDrawFilled(true)
-//        lineDataSet.setDrawHighlightIndicators(false)
-//        lineDataSet.setDrawCircleHole(false)
-//        lineDataSet.setDrawCircles(false)
-//        lineDataSet.setDrawValues(false)
-//        lineDataSet.setDrawIcons(false)
-//        lineDataSet.disableDashedLine()
-//
-//        if (isChangePositive) {
-//            lineDataSet.fillDrawable = ContextCompat.getDrawable(binding!!.root.context, R.drawable.chart_fade_green)
-//            lineDataSet.color = ContextCompat.getColor(
-//                binding!!.root.context,
-//                R.color.green
-//            )
-//        } else {
-//            lineDataSet.fillDrawable = ContextCompat.getDrawable(binding!!.root.context, R.drawable.chart_fade_red)
-//            lineDataSet.color = ContextCompat.getColor(
-//                binding!!.root.context,
-//                R.color.red
-//            )
-//        }
-//
-//        val data = LineData(lineDataSet)
-//
-//        data.setDrawValues(false)
-//
-//        binding?.chart?.data = data
-//        binding?.chart?.animateXY(3000, 3000, Easing.EaseInCubic)
-//        binding?.chart?.invalidate()
-//    }
-
-//    override fun onResume() {
-//        super.onResume()
-//        binding?.chart?.invalidate()
-//        binding?.chart?.notifyDataSetChanged()
-//    }
-
-//    override fun onClick(view: View?) {
-//        when(view?.id) {
-//            R.id.btnOneDay -> {
-//                //selected
-//                binding?.btnOneDay?.setTextColor(resources.getColor(R.color.white, requireActivity().theme))
-//                binding?.btnOneDay?.setBackgroundColor(resources.getColor(R.color.blue_700, requireActivity().theme))
-//                //not selected
-//                binding?.btnSevenDays?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnSevenDays?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnOneMonth?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnOneMonth?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnSixMonths?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnSixMonths?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnOneYear?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnOneYear?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//
-//                //making api call for hourly historical data
-//                viewModel.getCurrencyHourlyHistory(currencyId!!, convertTo!!)
-//                binding?.chart?.invalidate()
-//            }
-//
-//            R.id.btnSevenDays -> {
-//                //selected
-//                binding?.btnSevenDays?.setTextColor(resources.getColor(R.color.white, requireActivity().theme))
-//                binding?.btnSevenDays?.setBackgroundColor(resources.getColor(R.color.blue_700, requireActivity().theme))
-//                //not selected
-//                binding?.btnOneDay?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnOneDay?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnOneMonth?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnOneMonth?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnSixMonths?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnSixMonths?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnOneYear?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnOneYear?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//
-//                //making api call for daily historical data for seven days
-//                viewModel.getCurrencyDailyHistory(currencyId!!, convertTo!!, "7")
-//                binding?.chart?.invalidate()
-//            }
-//
-//            R.id.btnOneMonth -> {
-//                //selected
-//                binding?.btnOneMonth?.setTextColor(resources.getColor(R.color.white, requireActivity().theme))
-//                binding?.btnOneMonth?.setBackgroundColor(resources.getColor(R.color.blue_700, requireActivity().theme))
-//                //not selected
-//                binding?.btnOneDay?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnOneDay?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnSevenDays?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnSevenDays?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnSixMonths?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnSixMonths?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnOneYear?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnOneYear?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//
-//                //making api call for daily historical data for one month
-//                viewModel.getCurrencyDailyHistory(currencyId!!, convertTo!!, "30")
-//                binding?.chart?.invalidate()
-//            }
-//
-//            R.id.btnSixMonths -> {
-//                //selected
-//                binding?.btnSixMonths?.setTextColor(resources.getColor(R.color.white, requireActivity().theme))
-//                binding?.btnSixMonths?.setBackgroundColor(resources.getColor(R.color.blue_700, requireActivity().theme))
-//                //not selected
-//                binding?.btnOneDay?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnOneDay?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnSevenDays?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnSevenDays?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnOneMonth?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnOneMonth?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnOneYear?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnOneYear?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//
-//                //making api call for daily historical data for six days
-//                viewModel.getCurrencyDailyHistory(currencyId!!, convertTo!!, "183")
-//                binding?.chart?.invalidate()
-//            }
-//
-//            R.id.btnOneYear -> {
-//                //selected
-//                binding?.btnOneYear?.setTextColor(resources.getColor(R.color.white, requireActivity().theme))
-//                binding?.btnOneYear?.setBackgroundColor(resources.getColor(R.color.blue_700, requireActivity().theme))
-//                //not selected
-//                binding?.btnOneDay?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnOneDay?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnSevenDays?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnSevenDays?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnOneMonth?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnOneMonth?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//                binding?.btnSixMonths?.setTextColor(resources.getColor(R.color.white_alpha_20, requireActivity().theme))
-//                binding?.btnSixMonths?.setBackgroundColor(resources.getColor(R.color.black_alpha_20, requireActivity().theme))
-//
-//                //making api call for daily historical data for one year
-//                viewModel.getCurrencyDailyHistory(currencyId!!, convertTo!!, "365")
-//                binding?.chart?.invalidate()
-//            }
-//        }
-//    }
-
 
     override fun onDestroy() {
         super.onDestroy()

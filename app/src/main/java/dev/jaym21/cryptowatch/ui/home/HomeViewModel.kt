@@ -32,7 +32,7 @@ class HomeViewModel: ViewModel() {
         //getting response from repo
         val response = repo.getCurrencies(convertTo, pageNo)
         //checking if we got a successful response
-        if (response!!.isNotEmpty()){
+        if (response != null){
             //storing the response received from api
             if (allCurrenciesDisplayed == null) {
                 allCurrenciesDisplayed = response as MutableList<CurrencyResponse>?

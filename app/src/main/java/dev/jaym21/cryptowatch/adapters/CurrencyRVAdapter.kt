@@ -101,13 +101,20 @@ class CurrencyRVAdapter(private val listener: ICurrencyRVAdapter): ListAdapter<C
                 )
             }
         }
+        var isChangePositive: Boolean = true
+
+        if (currentItem.oneDay != null) {
+            isChangePositive = currentItem.oneDay!!.priceChangePct!!.toDouble() >= 0
+        }else if (currentItem.sevenDay != null) {
+            isChangePositive = currentItem.sevenDay!!.priceChangePct!!.toDouble() >= 0
+        }
 
         holder.binding.rlCurrencyRoot.setOnClickListener {
-            listener.onCurrencyClicked(currentItem.id!!)
+            listener.onCurrencyClicked(currentItem.id!!, isChangePositive)
         }
     }
 }
 
 interface ICurrencyRVAdapter {
-    fun onCurrencyClicked(currencyId: String)
+    fun onCurrencyClicked(currencyId: String, isChangePositive: Boolean)
 }
