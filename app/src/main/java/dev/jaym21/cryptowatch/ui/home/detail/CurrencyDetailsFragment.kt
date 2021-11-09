@@ -164,6 +164,8 @@ class CurrencyDetailsFragment : Fragment() {
             navController.popBackStack()
 
         binding?.viewPager?.adapter = viewPagerAdapter
+        //disabling swiping of viewPager
+        binding?.viewPager?.isUserInputEnabled = false
 
         TabLayoutMediator(binding?.tabLayout!!, binding?.viewPager!!) { tab, position ->
             tab.text = timePeriods[position].lowercase()
