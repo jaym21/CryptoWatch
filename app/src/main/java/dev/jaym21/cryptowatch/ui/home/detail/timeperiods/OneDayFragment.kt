@@ -113,4 +113,9 @@ class OneDayFragment(val currencyId: String, val convertTo: String, val isChange
         binding?.chart?.animateXY(3000, 3000, Easing.EaseInCubic)
         binding?.chart?.invalidate()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
 }
