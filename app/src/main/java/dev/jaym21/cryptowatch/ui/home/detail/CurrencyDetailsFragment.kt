@@ -1,9 +1,6 @@
 package dev.jaym21.cryptowatch.ui.home.detail
 
-import android.graphics.Color
-import android.graphics.DashPathEffect
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,19 +12,18 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.highlight.Highlight
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.google.android.material.snackbar.Snackbar
 import dev.jaym21.cryptowatch.R
 import dev.jaym21.cryptowatch.databinding.FragmentCurrencyDetailsBinding
 import dev.jaym21.cryptowatch.utils.ApiResponse
+import dev.jaym21.cryptowatch.utils.CustomMarkerView
 import dev.jaym21.cryptowatch.utils.SVGLoader
 
-class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.OnClickListener {
+class CurrencyDetailsFragment : Fragment(), View.OnClickListener {
 
     private var binding: FragmentCurrencyDetailsBinding? = null
     private var TAG = "CurrencyDetailsFragment"
@@ -37,6 +33,7 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
     private lateinit var navController: NavController
     private var entries = arrayListOf<Entry>()
     private var isChangePositive: Boolean = false
+    private lateinit var customMarkerView: CustomMarkerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +50,9 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
         //initializing navController
         navController = Navigation.findNavController(view)
 
+        //initializing viewModel
+        viewModel = ViewModelProvider(this).get(CurrencyDetailsViewModel::class.java)
+
         //getting clicked currency id
         currencyId = arguments?.getString("currencyId")
         //currency to be converted to
@@ -66,6 +66,9 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
             navController.popBackStack()
         }
 
+        //initializing markerView
+        customMarkerView = CustomMarkerView(requireContext(), R.layout.chart_marker_view)
+
         binding?.btnOneDay?.setOnClickListener(this)
         binding?.btnSevenDays?.setOnClickListener(this)
         binding?.btnOneMonth?.setOnClickListener(this)
@@ -73,8 +76,6 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
         binding?.btnOneYear?.setOnClickListener(this)
 
         binding?.btnOneDay?.performClick()
-
-        viewModel = ViewModelProvider(this).get(CurrencyDetailsViewModel::class.java)
 
         viewModel.getCurrencyDetails(currencyId!!, convertTo!!)
 
@@ -109,7 +110,7 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
                                     R.color.green
                                 )
                             )
-                            binding!!.cvPriceChange.background =ContextCompat.getDrawable(binding!!.root.context, R.drawable.positive_change_card_bg)
+                            binding!!.cvPriceChange.background = ContextCompat.getDrawable(binding!!.root.context, R.drawable.positive_change_card_bg)
                             isChangePositive = true
                         } else {
                             binding!!.tvPercentChange.text = response.data[0].oneDay!!.priceChangePct!!.substring(1) + " %"
@@ -127,25 +128,18 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
                         }
                     }
 
-                    //line chart
-                    // disable description text
-                    binding?.chart?.description?.isEnabled = false
 
-                    // enable touch gestures
-                    binding?.chart?.setTouchEnabled(true)
-
-                    binding?.chart?.setOnChartValueSelectedListener(this)
-                    binding?.chart?.setDrawGridBackground(false)
-
+                    //hourly historical data for line chart
                     viewModel.getCurrencyHourlyHistory(currencyId!!, convertTo!!)
 
                     viewModel.currencyDailyHistory.observe(viewLifecycleOwner, Observer { response ->
                         when(response) {
                             is ApiResponse.Success -> {
+                                entries.clear()
                                 response.data?.data?.forEach {
                                     entries.add(Entry(it.time!!.toFloat(), it.high!!.toFloat()))
                                 }
-                                val dataSet = LineDataSet(entries, "1 month")
+                                val dataSet = LineDataSet(entries, "line chart")
                                 updateChart(dataSet)
                             }
                         }
@@ -166,51 +160,53 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
     }
 
     private fun updateChart(lineDataSet: LineDataSet) {
-        if (binding?.chart?.data != null && binding?.chart?.data?.dataSetCount!! > 0) {
-            val set = binding?.chart?.data!!.getDataSetByIndex(0) as LineDataSet
-            set.values = lineDataSet.values
-            binding?.chart?.data!!.notifyDataChanged()
-            binding?.chart?.notifyDataSetChanged()
+        binding?.chart?.axisLeft?.isEnabled = false
+        binding?.chart?.axisRight?.isEnabled = false
+        binding?.chart?.xAxis?.isEnabled = false
+        binding?.chart?.legend?.isEnabled = false
+        binding?.chart?.description?.isEnabled = false
+        binding?.chart?.setTouchEnabled(true)
+        binding?.chart?.isDragEnabled = true
+        binding?.chart?.setScaleEnabled(false)
+        binding?.chart?.setPinchZoom(false)
+        binding?.chart?.marker = customMarkerView
+
+        lineDataSet.lineWidth = 2f
+        lineDataSet.setDrawFilled(true)
+        lineDataSet.setDrawHighlightIndicators(false)
+        lineDataSet.setDrawCircleHole(false)
+        lineDataSet.setDrawCircles(false)
+        lineDataSet.setDrawValues(false)
+        lineDataSet.setDrawIcons(false)
+        lineDataSet.disableDashedLine()
+
+        if (isChangePositive) {
+            lineDataSet.fillDrawable = ContextCompat.getDrawable(binding!!.root.context, R.drawable.chart_fade_green)
+            lineDataSet.color = ContextCompat.getColor(
+                binding!!.root.context,
+                R.color.green
+            )
         } else {
-            val set = LineDataSet(entries, "1 month")
-            set.setDrawIcons(false)
-            set.enableDashedLine(10f, 5f, 0f)
-            set.enableDashedHighlightLine(10f, 5f, 0f)
-            set.color = Color.WHITE
-            set.setCircleColor(Color.WHITE)
-            set.lineWidth = 1f
-            set.circleRadius = 3f
-            set.setDrawCircleHole(false)
-            set.valueTextSize = 9f
-            set.setDrawFilled(true)
-            set.formLineWidth = 1f
-            set.formLineDashEffect = DashPathEffect(floatArrayOf(10f, 5f), 0f)
-            set.formSize = 15f
-
-            if (isChangePositive)
-                set.fillColor = R.drawable.chart_fade_green
-            else
-                set.fillColor = R.drawable.chart_fade_red
-
-            val dataSets = arrayListOf<ILineDataSet>()
-            dataSets.add(set)
-
-            binding?.chart?.data = LineData(dataSets)
-            binding?.chart?.invalidate()
+            lineDataSet.fillDrawable = ContextCompat.getDrawable(binding!!.root.context, R.drawable.chart_fade_red)
+            lineDataSet.color = ContextCompat.getColor(
+                binding!!.root.context,
+                R.color.red
+            )
         }
+
+        val data = LineData(lineDataSet)
+
+        data.setDrawValues(false)
+
+        binding?.chart?.data = data
+        binding?.chart?.animateXY(3000, 3000, Easing.EaseInCubic)
+        binding?.chart?.invalidate()
     }
 
-    override fun onValueSelected(e: Entry?, h: Highlight?) {
-        Log.d(TAG, "onValueSelected: ENTRY SELECTED ${e.toString()}")
-    }
-
-    override fun onNothingSelected() {
-        Log.d(TAG, "NOTHING SELECTED")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
+    override fun onResume() {
+        super.onResume()
+        binding?.chart?.invalidate()
+        binding?.chart?.notifyDataSetChanged()
     }
 
     override fun onClick(view: View?) {
@@ -231,6 +227,7 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
 
                 //making api call for hourly historical data
                 viewModel.getCurrencyHourlyHistory(currencyId!!, convertTo!!)
+                binding?.chart?.invalidate()
             }
 
             R.id.btnSevenDays -> {
@@ -249,6 +246,7 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
 
                 //making api call for daily historical data for seven days
                 viewModel.getCurrencyDailyHistory(currencyId!!, convertTo!!, "7")
+                binding?.chart?.invalidate()
             }
 
             R.id.btnOneMonth -> {
@@ -267,6 +265,7 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
 
                 //making api call for daily historical data for one month
                 viewModel.getCurrencyDailyHistory(currencyId!!, convertTo!!, "30")
+                binding?.chart?.invalidate()
             }
 
             R.id.btnSixMonths -> {
@@ -285,6 +284,7 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
 
                 //making api call for daily historical data for six days
                 viewModel.getCurrencyDailyHistory(currencyId!!, convertTo!!, "183")
+                binding?.chart?.invalidate()
             }
 
             R.id.btnOneYear -> {
@@ -303,7 +303,14 @@ class CurrencyDetailsFragment : Fragment(), OnChartValueSelectedListener, View.O
 
                 //making api call for daily historical data for one year
                 viewModel.getCurrencyDailyHistory(currencyId!!, convertTo!!, "365")
+                binding?.chart?.invalidate()
             }
         }
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }

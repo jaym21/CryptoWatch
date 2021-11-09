@@ -73,6 +73,9 @@ dependencies {
     //chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+    //viewPager
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
     //unit testing
     testImplementation 'junit:junit:4.13.2'
 

@@ -80,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_above="@id/llPeriodButtons"
+        android:layout_above="@id/tabLayout"
         android:layout_marginBottom="16dp">
 
         <LinearLayout
@@ -113,95 +113,109 @@
 
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:id="@+id/llPeriodButtons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/llCurrencyPrice"
-        android:layout_marginTop="16dp">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/llPeriodButtons"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_below="@id/llCurrencyPrice"-->
+<!--        android:layout_marginTop="16dp">-->
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnOneDay"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:padding="0dp"
-            android:text="1d"
-            android:textAllCaps="false"
-            android:textSize="12sp"
-            android:textColor="@color/white"
-            app:cornerRadius="20dp"
-            android:layout_marginStart="20dp"/>
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnOneDay"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:fontFamily="@font/poppins_semibold"-->
+<!--            android:padding="0dp"-->
+<!--            android:text="1d"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textColor="@color/white"-->
+<!--            app:cornerRadius="20dp"-->
+<!--            android:layout_marginStart="20dp"/>-->
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSevenDays"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:padding="0dp"
-            android:text="7d"
-            android:textAllCaps="false"
-            android:textSize="12sp"
-            android:textColor="@color/white"
-            app:cornerRadius="20dp"
-            android:layout_marginStart="20dp" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnSevenDays"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:fontFamily="@font/poppins_semibold"-->
+<!--            android:padding="0dp"-->
+<!--            android:text="7d"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textColor="@color/white"-->
+<!--            app:cornerRadius="20dp"-->
+<!--            android:layout_marginStart="20dp" />-->
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnOneMonth"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:padding="0dp"
-            android:text="1m"
-            android:textAllCaps="false"
-            android:textSize="12sp"
-            android:textColor="@color/white"
-            app:cornerRadius="20dp"
-            android:layout_marginStart="20dp" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnOneMonth"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:fontFamily="@font/poppins_semibold"-->
+<!--            android:padding="0dp"-->
+<!--            android:text="1m"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textColor="@color/white"-->
+<!--            app:cornerRadius="20dp"-->
+<!--            android:layout_marginStart="20dp" />-->
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSixMonths"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:padding="0dp"
-            android:text="6m"
-            android:textAllCaps="false"
-            android:textSize="12sp"
-            android:textColor="@color/white"
-            app:cornerRadius="20dp"
-            android:layout_marginStart="20dp" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnSixMonths"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:fontFamily="@font/poppins_semibold"-->
+<!--            android:padding="0dp"-->
+<!--            android:text="6m"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textColor="@color/white"-->
+<!--            app:cornerRadius="20dp"-->
+<!--            android:layout_marginStart="20dp" />-->
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnOneYear"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:padding="0dp"
-            android:text="1y"
-            android:textAllCaps="false"
-            android:textSize="12sp"
-            android:textColor="@color/white"
-            app:cornerRadius="20dp"
-            android:layout_marginStart="20dp" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnOneYear"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:fontFamily="@font/poppins_semibold"-->
+<!--            android:padding="0dp"-->
+<!--            android:text="1y"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textColor="@color/white"-->
+<!--            app:cornerRadius="20dp"-->
+<!--            android:layout_marginStart="20dp" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
-    <RelativeLayout
-        android:id="@+id/rlChart"
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/llPeriodButtons"
-        android:layout_marginTop="16dp">
+        android:backgroundTint="@color/black"
+        app:tabBackground="@drawable/tab_selector"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextAppearance="@style/TabTextAppearance"
+        app:tabRippleColor="@null"
+        app:tabMode="fixed"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp"
+        android:layout_below="@id/llCurrencyPrice"
+        android:layout_marginTop="16dp"/>
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/chart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_below="@id/tabLayout" />
 
-    </RelativeLayout>
-
+<!--    <com.github.mikephil.charting.charts.LineChart-->
+<!--        android:id="@+id/chart"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="300dp"-->
+<!--        android:layout_below="@id/llPeriodButtons"-->
+<!--        android:layout_marginTop="16dp" />-->
 
     <ImageView
         android:id="@+id/progressBar"
