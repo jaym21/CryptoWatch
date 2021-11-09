@@ -110,7 +110,7 @@ class OneYearFragment(val currencyId: String, val convertTo: String, val isChang
         data.setDrawValues(false)
 
         binding?.chart?.data = data
-        binding?.chart?.animateXY(3000, 3000, Easing.EaseInCubic)
+        binding?.chart?.animateXY(2000, 2000, Easing.EaseInCubic)
         binding?.chart?.invalidate()
     }
 
