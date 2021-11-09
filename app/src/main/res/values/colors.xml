@@ -12,6 +12,7 @@
     <color name="green">#2ECC71</color>
     <color name="green_alpha_20">#332ECC71</color>
     <color name="red_alpha_20">#41E74C3C</color>
+    <color name="white_alpha_90">#E6FFFFFF</color>
     <color name="white_alpha_85">#DAFFFFFF</color>
     <color name="white_alpha_70">#B3FFFFFF</color>
     <color name="white_alpha_50">#80FFFFFF</color>

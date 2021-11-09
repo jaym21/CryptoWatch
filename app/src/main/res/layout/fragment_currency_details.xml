@@ -133,7 +133,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="250dp"
         android:layout_below="@id/tabLayout"
         android:overScrollMode="never" />
 
@@ -142,6 +142,149 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Market Stats"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_below="@id/viewPager"
+        android:layout_marginTop="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvMarketStats"
+        android:orientation="vertical">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:text="Market Cap"
+                android:textColor="@color/white_alpha_60"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="start"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:text="1259073172790"
+                android:textColor="@color/white_alpha_85"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="end"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:text="Circulating Supply"
+                android:textColor="@color/white_alpha_60"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="start"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:text="18868475"
+                android:textColor="@color/white_alpha_85"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="end"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:text="Maximum Supply"
+                android:textColor="@color/white_alpha_60"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="start"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:text="18868475"
+                android:textColor="@color/white_alpha_85"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="end"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:text="Circulating Supply"
+                android:textColor="@color/white_alpha_60"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="start"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:text="18868475"
+                android:textColor="@color/white_alpha_85"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="end"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:text="Price Change (24h)"
+                android:textColor="@color/white_alpha_60"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="start"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:text="1226.26992027"
+                android:textColor="@color/white_alpha_85"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="end"/>
+
+        </LinearLayout>
+        
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/progressBar"
