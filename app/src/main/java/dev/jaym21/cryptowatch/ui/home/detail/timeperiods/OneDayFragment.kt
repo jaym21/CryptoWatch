@@ -18,12 +18,13 @@ import dev.jaym21.cryptowatch.databinding.FragmentOneDayBinding
 import dev.jaym21.cryptowatch.ui.home.detail.CurrencyDetailsViewModel
 import dev.jaym21.cryptowatch.utils.ApiResponse
 import dev.jaym21.cryptowatch.utils.CustomMarkerView
+import dev.jaym21.cryptowatch.utils.CustomMarkerViewHourly
 
 class OneDayFragment(val currencyId: String, val isChangePositive: Boolean) : Fragment() {
 
     private var binding: FragmentOneDayBinding? = null
     private lateinit var viewModel: CurrencyDetailsViewModel
-    private lateinit var customMarkerView: CustomMarkerView
+    private lateinit var customMarkerView: CustomMarkerViewHourly
     private var entriesOneDay = arrayListOf<Entry>()
 
     override fun onCreateView(
@@ -42,7 +43,7 @@ class OneDayFragment(val currencyId: String, val isChangePositive: Boolean) : Fr
         viewModel = ViewModelProvider(this).get(CurrencyDetailsViewModel::class.java)
 
         //initializing markerView
-        customMarkerView = CustomMarkerView(requireContext(), R.layout.chart_marker_view)
+        customMarkerView = CustomMarkerViewHourly(requireContext(), R.layout.chart_hourly_marker_view)
 
         //calling for hourly data of currency
         viewModel.getCurrencyHourlyHistory(currencyId)
