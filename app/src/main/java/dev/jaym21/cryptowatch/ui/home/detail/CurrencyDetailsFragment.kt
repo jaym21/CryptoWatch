@@ -144,11 +144,31 @@ class CurrencyDetailsFragment : Fragment() {
                         }
                     }
                     //market stats
-                    binding?.tvMarketCap?.text = "₹ ${response.data[0].marketCap}"
-                    binding?.tvCirculatingSupply?.text = response.data[0].circulatingSupply
-                    binding?.tvMaxSupply?.text = response.data[0].maxSupply
-                    binding?.tvPriceChange?.text = "₹ ${response.data[0].oneDay?.priceChange}"
-                    binding?.tvVolumeChange?.text = "₹ ${response.data[0].oneDay?.volumeChange}"
+                    if (response.data[0].marketCap == null){
+                        binding?.llMarketCap?.visibility = View.GONE
+                    } else {
+                        binding?.tvMarketCap?.text = "₹ ${response.data[0].marketCap}"
+                    }
+                    if (response.data[0].circulatingSupply == null){
+                        binding?.llCirculatingSupply?.visibility = View.GONE
+                    } else {
+                         binding?.tvCirculatingSupply?.text = response.data[0].circulatingSupply
+                    }
+                    if (response.data[0].maxSupply == null){
+                        binding?.llMaxSupply?.visibility = View.GONE
+                    } else {
+                        binding?.tvMaxSupply?.text = response.data[0].maxSupply
+                    }
+                    if (response.data[0].oneDay?.priceChange == null){
+                        binding?.llPriceChange?.visibility = View.GONE
+                    } else {
+                        binding?.tvPriceChange?.text = "₹ ${response.data[0].oneDay?.priceChange}"
+                    }
+                    if (response.data[0].oneDay?.volumeChange == null){
+                        binding?.llVolumeChange?.visibility = View.GONE
+                    } else {
+                        binding?.tvVolumeChange?.text = "₹ ${response.data[0].oneDay?.volumeChange}"
+                    }
                 }
 
                 is ApiResponse.Loading -> {
