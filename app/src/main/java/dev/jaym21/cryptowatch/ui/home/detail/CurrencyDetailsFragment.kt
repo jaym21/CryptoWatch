@@ -146,21 +146,25 @@ class CurrencyDetailsFragment : Fragment() {
                     //market stats
                     if (response.data[0].marketCap == null){
                         binding?.llMarketCap?.visibility = View.GONE
+                        binding?.viewBelowMarketCap?.visibility = View.GONE
                     } else {
                         binding?.tvMarketCap?.text = "₹ ${response.data[0].marketCap}"
                     }
                     if (response.data[0].circulatingSupply == null){
                         binding?.llCirculatingSupply?.visibility = View.GONE
+                        binding?.viewBelowCirculatingSupply?.visibility = View.GONE
                     } else {
                          binding?.tvCirculatingSupply?.text = response.data[0].circulatingSupply
                     }
                     if (response.data[0].maxSupply == null){
                         binding?.llMaxSupply?.visibility = View.GONE
+                        binding?.viewBelowMaxSupply?.visibility = View.GONE
                     } else {
                         binding?.tvMaxSupply?.text = response.data[0].maxSupply
                     }
                     if (response.data[0].oneDay?.priceChange == null){
                         binding?.llPriceChange?.visibility = View.GONE
+                        binding?.viewBelowPriceChange?.visibility = View.GONE
                     } else {
                         binding?.tvPriceChange?.text = "₹ ${response.data[0].oneDay?.priceChange}"
                     }

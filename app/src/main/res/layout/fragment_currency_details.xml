@@ -182,6 +182,12 @@
 
         </LinearLayout>
 
+        <View
+            android:id="@+id/viewBelowMarketCap"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#19FFFFFF"/>
+
         <LinearLayout
             android:id="@+id/llCirculatingSupply"
             android:layout_width="match_parent"
@@ -209,6 +215,12 @@
                 android:gravity="end"/>
 
         </LinearLayout>
+
+        <View
+            android:id="@+id/viewBelowCirculatingSupply"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#19FFFFFF"/>
 
         <LinearLayout
             android:id="@+id/llMaxSupply"
@@ -238,6 +250,12 @@
 
         </LinearLayout>
 
+        <View
+            android:id="@+id/viewBelowMaxSupply"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#19FFFFFF"/>
+
         <LinearLayout
             android:id="@+id/llPriceChange"
             android:layout_width="match_parent"
@@ -265,6 +283,12 @@
                 android:gravity="end"/>
 
         </LinearLayout>
+
+        <View
+            android:id="@+id/viewBelowPriceChange"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#19FFFFFF"/>
 
         <LinearLayout
             android:id="@+id/llVolumeChange"
