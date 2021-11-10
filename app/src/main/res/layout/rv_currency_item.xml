@@ -46,7 +46,7 @@
         android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/white"
         android:textSize="15sp"
-        tools:text="$32,789" />
+        tools:text="\u20B9 32,789" />
 
     <LinearLayout
         android:id="@+id/llPercentChange"

@@ -20,7 +20,7 @@ import dev.jaym21.cryptowatch.utils.ApiResponse
 import dev.jaym21.cryptowatch.utils.CustomMarkerView
 
 
-class SixMonthsFragment(val currencyId: String, val convertTo: String, val isChangePositive: Boolean) : Fragment() {
+class SixMonthsFragment(val currencyId: String, val isChangePositive: Boolean) : Fragment() {
 
     private var binding: FragmentSixMonthsBinding? = null
     private lateinit var viewModel: CurrencyDetailsViewModel
@@ -46,7 +46,7 @@ class SixMonthsFragment(val currencyId: String, val convertTo: String, val isCha
         customMarkerView = CustomMarkerView(requireContext(), R.layout.chart_marker_view)
 
         //calling for hourly data of currency
-        viewModel.getCurrencyDailyHistory(currencyId ,convertTo, "183")
+        viewModel.getCurrencyDailyHistory(currencyId,"183")
 
         //styling chart
         binding?.chart?.axisLeft?.isEnabled = false

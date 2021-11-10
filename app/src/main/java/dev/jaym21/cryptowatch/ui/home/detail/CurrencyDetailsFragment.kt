@@ -144,11 +144,11 @@ class CurrencyDetailsFragment : Fragment() {
                         }
                     }
                     //market stats
-                    binding?.tvMarketCap?.text = response.data[0].marketCap
+                    binding?.tvMarketCap?.text = "₹ ${response.data[0].marketCap}"
                     binding?.tvCirculatingSupply?.text = response.data[0].circulatingSupply
                     binding?.tvMaxSupply?.text = response.data[0].maxSupply
-                    binding?.tvPriceChange?.text = response.data[0].oneDay?.priceChange
-                    binding?.tvVolumeChange?.text = response.data[0].oneDay?.volumeChange
+                    binding?.tvPriceChange?.text = "₹ ${response.data[0].oneDay?.priceChange}"
+                    binding?.tvVolumeChange?.text = "₹ ${response.data[0].oneDay?.volumeChange}"
                 }
 
                 is ApiResponse.Loading -> {
@@ -165,7 +165,7 @@ class CurrencyDetailsFragment : Fragment() {
 
         //initializing viewPagerAdapter
         if (isChangePositive != null)
-            viewPagerAdapter = ViewPagerAdapter(parentFragmentManager, lifecycle, currencyId!!, convertTo!!, isChangePositive!!)
+            viewPagerAdapter = ViewPagerAdapter(parentFragmentManager, lifecycle, currencyId!!, isChangePositive!!)
         else
             navController.popBackStack()
 

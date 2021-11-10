@@ -39,7 +39,7 @@ class CurrencyRVAdapter(private val listener: ICurrencyRVAdapter): ListAdapter<C
 
         holder.binding.tvCurrencyName.text = currentItem.name
         holder.binding.tvCurrencySymbol.text = currentItem.symbol
-        holder.binding.tvCurrentValue.text = currentItem.price
+        holder.binding.tvCurrentValue.text = "₹ ${currentItem.price}"
 
         val length = currentItem.logoUrl!!.length
         if (currentItem.logoUrl!!.substring(length - 3) == "svg"){

@@ -28,7 +28,7 @@ class CurrencyDetailsViewModel: ViewModel() {
         currencyDetails.postValue(ApiResponse.Loading())
 
         //getting response from repo
-        val response = nomicsRepository.getCurrencyDetails(id, convertTo)
+        val response = nomicsRepository.getCurrencyDetails(id)
         //checking if we got a successful response
         if (response != null) {
             response.let {
