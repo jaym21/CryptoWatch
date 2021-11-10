@@ -12,14 +12,14 @@ interface NomicsAPI {
     suspend fun getCurrencies(
         @Query("key")
         key: String = KEY,
-        @Query("convert")
-        convert: String = "INR",
         @Query("page")
         page: String = "1",
         @Query("status")
         status: String = "active",
         @Query("sort")
         sort: String = "rank",
+        @Query("convert")
+        convert: String = "INR",
         @Query("per-page")
         per_page: String = "20"
     ): Response<List<CurrencyResponse>>

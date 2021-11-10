@@ -63,7 +63,7 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
 
         //calling function to get currencies
         currentPage = 1
-        viewModel.getCurrencies("INR", currentPage.toString(), true)
+        viewModel.getCurrencies(currentPage.toString(), true)
 
         //observing the currencies LiveData to get currencies data for recycler view
         viewModel.currencies.observe(viewLifecycleOwner, Observer { response ->
@@ -136,7 +136,7 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
             if (shouldPaginate) {
                 currentPage += 1
                 //makes another request to the api and gets next 20 products
-                viewModel.getCurrencies("INR", currentPage.toString(),false)
+                viewModel.getCurrencies(currentPage.toString(),false)
                 Log.d("TAGYOYO", "onScrolled: CURRENT PAGE $currentPage")
                 Log.d("TAGYOYO", "onScrolled: ITEMS DISPLAYED $itemsDisplayed")
                 isScrolling = false
