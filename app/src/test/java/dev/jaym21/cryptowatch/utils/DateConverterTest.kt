@@ -19,6 +19,12 @@ class DateConverterTest {
     }
 
     @Test
+    fun `Get the date with month and year from unix timestamp`() {
+        val dateMonthYear = DateConverter.getDateWithMonthAndYear(1635342482)
+        assertNotNull(dateMonthYear)
+    }
+
+    @Test
     fun `Get the time from unix timestamp`() {
         val time = DateConverter.getTime(1635342482)
         assertNotNull(time)

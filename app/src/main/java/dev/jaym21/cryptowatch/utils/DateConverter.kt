@@ -23,6 +23,11 @@ class DateConverter {
             return sdf.format(timestamp * 1000)
         }
 
+        fun getDateWithMonthAndYear(timestamp: Long): String {
+            val sdf = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+            return sdf.format(timestamp * 1000)
+        }
+
         fun getTime(timestamp: Long): String {
             val sdf = SimpleDateFormat("hh:mm a", Locale.ENGLISH)
             return sdf.format(timestamp * 1000)
