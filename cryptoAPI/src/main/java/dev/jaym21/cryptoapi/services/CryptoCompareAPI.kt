@@ -12,20 +12,20 @@ interface CryptoCompareAPI {
     suspend fun getHistoricalDailyData(
         @Query("fsym")
         requiredCurrency: String,
-        @Query("tsym")
-        convertTo: String,
         @Query("limit")
-        requiredTime: String
+        requiredTime: String,
+        @Query("tsym")
+        convertTo: String = "INR"
     ): Response<HistoricalResponse>
 
     @GET("histohour")
     suspend fun getHistoricalHourlyData(
         @Query("fsym")
         requiredCurrency: String,
-        @Query("tsym")
-        convertTo: String,
         @Query("limit")
-        requiredTime: String = "24"
+        requiredTime: String = "24",
+        @Query("tsym")
+        convertTo: String = "INR"
     ): Response<HistoricalResponse>
 
     @GET("news/")

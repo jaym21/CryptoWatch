@@ -13,7 +13,7 @@ interface NomicsAPI {
         @Query("key")
         key: String = KEY,
         @Query("convert")
-        convert: String = "USD",
+        convert: String = "INR",
         @Query("page")
         page: String = "1",
         @Query("status")
@@ -31,6 +31,6 @@ interface NomicsAPI {
         @Query("ids")
         currencyId: String,
         @Query("convert")
-        convert: String =  "USD",
+        convert: String = "INR",
     ): Response<List<CurrencyResponse>>
 }

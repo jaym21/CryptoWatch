@@ -11,13 +11,13 @@ class CryptoCompareAPITest {
 
     @Test
     fun `Get historical daily data for cryptocurrency`() = runBlocking{
-        val response = api.getHistoricalDailyData("BTC", "INR", "30")
+        val response = api.getHistoricalDailyData("BTC", "30")
         assertNotNull(response.body())
     }
 
     @Test
     fun `Get historical hourly data for cryptocurrency`() = runBlocking {
-        val response = api.getHistoricalHourlyData("BTC", "INR")
+        val response = api.getHistoricalHourlyData("BTC", "24")
         assertNotNull(response.body())
     }
 

@@ -39,11 +39,11 @@ class CurrencyDetailsViewModel: ViewModel() {
         }
     }
 
-    fun getCurrencyDailyHistory(requiredCurrency: String, convertTo: String, requiredTime: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun getCurrencyDailyHistory(requiredCurrency: String, requiredTime: String) = viewModelScope.launch(Dispatchers.IO) {
         //as we are going to make network call so showing loading progress bar
         currencyDailyHistory.postValue(ApiResponse.Loading())
 
-        val response = cryptoCompareRepository.getHistoricalDailyData(requiredCurrency, convertTo, requiredTime)
+        val response = cryptoCompareRepository.getHistoricalDailyData(requiredCurrency, requiredTime)
         //checking if we got a successful response
         if (response?.data != null) {
             response.let {
@@ -54,11 +54,11 @@ class CurrencyDetailsViewModel: ViewModel() {
         }
     }
 
-    fun getCurrencyHourlyHistory(requiredCurrency: String, convertTo: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun getCurrencyHourlyHistory(requiredCurrency: String) = viewModelScope.launch(Dispatchers.IO) {
         //as we are going to make network call so showing loading progress bar
         currencyHourlyHistory.postValue(ApiResponse.Loading())
 
-        val response = cryptoCompareRepository.getHistoricalHourlyData(requiredCurrency, convertTo)
+        val response = cryptoCompareRepository.getHistoricalHourlyData(requiredCurrency)
         //checking if we got a successful response
         if (response?.data != null) {
             response.let {
