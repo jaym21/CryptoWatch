@@ -94,6 +94,7 @@ class CurrencyDetailsFragment : Fragment() {
                         ).into(binding!!.ivCurrencyIcon)
                     }
 
+                    //price change
                     if (response.data[0].oneDay != null) {
 
                         if (response.data[0].oneDay!!.priceChangePct!!.toDouble() >= 0) {
@@ -142,7 +143,12 @@ class CurrencyDetailsFragment : Fragment() {
                             )
                         }
                     }
-
+                    //market stats
+                    binding?.tvMarketCap?.text = response.data[0].marketCap
+                    binding?.tvCirculatingSupply?.text = response.data[0].circulatingSupply
+                    binding?.tvMaxSupply?.text = response.data[0].maxSupply
+                    binding?.tvPriceChange?.text = response.data[0].oneDay?.priceChange
+                    binding?.tvVolumeChange?.text = response.data[0].oneDay?.volumeChange
                 }
 
                 is ApiResponse.Loading -> {

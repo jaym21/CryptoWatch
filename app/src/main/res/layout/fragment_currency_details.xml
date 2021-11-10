@@ -170,6 +170,7 @@
                 android:gravity="start"/>
 
             <TextView
+                android:id="@+id/tvMarketCap"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -196,6 +197,7 @@
                 android:gravity="start"/>
 
             <TextView
+                android:id="@+id/tvCirculatingSupply"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -222,36 +224,11 @@
                 android:gravity="start"/>
 
             <TextView
+                android:id="@+id/tvMaxSupply"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:text="18868475"
-                android:textColor="@color/white_alpha_85"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="end"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:text="Circulating Supply"
-                android:textColor="@color/white_alpha_60"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="start"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text="18868475"
+                tools:text="21000000"
                 android:textColor="@color/white_alpha_85"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="end"/>
@@ -274,10 +251,38 @@
                 android:gravity="start"/>
 
             <TextView
+                android:id="@+id/tvPriceChange"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 tools:text="1226.26992027"
+                android:textColor="@color/white_alpha_85"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="end"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:text="Volume Change (24h)"
+                android:textColor="@color/white_alpha_60"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="start"/>
+
+            <TextView
+                android:id="@+id/tvVolumeChange"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:text="-5686345977.35"
                 android:textColor="@color/white_alpha_85"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="end"/>
