@@ -1,5 +1,6 @@
 package dev.jaym21.cryptowatch.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.TextView
 import com.github.mikephil.charting.components.MarkerView
@@ -8,6 +9,7 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.utils.MPPointF
 import dev.jaym21.cryptowatch.R
 
+@SuppressLint("ViewConstructor")
 class CustomMarkerViewHourly(context: Context, layoutResource: Int) : MarkerView(context, layoutResource) {
 
     private var mOffset: MPPointF? = null
@@ -20,6 +22,7 @@ class CustomMarkerViewHourly(context: Context, layoutResource: Int) : MarkerView
 
         value.text = e!!.y.toString()
         date.text = DateConverter.getDateWithMonthAndYear(e.x.toLong())
+        time.text = DateConverter.getTime(e.x.toLong())
     }
 
     override fun getOffset(): MPPointF {
