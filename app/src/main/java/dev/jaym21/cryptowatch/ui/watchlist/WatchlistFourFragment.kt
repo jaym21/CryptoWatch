@@ -6,23 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import dev.jaym21.cryptowatch.R
-import dev.jaym21.cryptowatch.databinding.FragmentWatchlistBinding
 
-class WatchlistFragment: Fragment() {
-
-    private var binding: FragmentWatchlistBinding? = null
+class WatchlistFourFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentWatchlistBinding.inflate(inflater, container, false)
-        return binding?.root
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
+        return inflater.inflate(R.layout.fragment_watchlist_four, container, false)
     }
 }

@@ -12,17 +12,12 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import dev.jaym21.cryptowatch.R
-import dev.jaym21.cryptowatch.adapters.ViewPagerAdapter
+import dev.jaym21.cryptowatch.adapters.ChartViewPagerAdapter
 import dev.jaym21.cryptowatch.databinding.FragmentCurrencyDetailsBinding
 import dev.jaym21.cryptowatch.utils.ApiResponse
-import dev.jaym21.cryptowatch.utils.CustomMarkerView
 import dev.jaym21.cryptowatch.utils.SVGLoader
 
 class CurrencyDetailsFragment : Fragment() {
@@ -34,7 +29,7 @@ class CurrencyDetailsFragment : Fragment() {
     private var convertTo: String? = null
     private var isChangePositive: Boolean? = null
     private lateinit var navController: NavController
-    private lateinit var viewPagerAdapter: ViewPagerAdapter
+    private lateinit var chartViewPagerAdapter: ChartViewPagerAdapter
     val timePeriods = arrayOf("1d", "7d", "30d", "6m", "1y")
 
     override fun onCreateView(
@@ -189,11 +184,11 @@ class CurrencyDetailsFragment : Fragment() {
 
         //initializing viewPagerAdapter
         if (isChangePositive != null)
-            viewPagerAdapter = ViewPagerAdapter(parentFragmentManager, lifecycle, currencyId!!, isChangePositive!!)
+            chartViewPagerAdapter = ChartViewPagerAdapter(parentFragmentManager, lifecycle, currencyId!!, isChangePositive!!)
         else
             navController.popBackStack()
 
-        binding?.viewPager?.adapter = viewPagerAdapter
+        binding?.viewPager?.adapter = chartViewPagerAdapter
         //disabling swiping of viewPager
         binding?.viewPager?.isUserInputEnabled = false
 

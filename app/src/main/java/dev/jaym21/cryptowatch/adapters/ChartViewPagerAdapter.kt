@@ -8,7 +8,7 @@ import dev.jaym21.cryptowatch.ui.home.detail.timeperiods.*
 
 private const val NUM_TABS = 5
 
-class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, val currencyId: String, val isChangePositive: Boolean): FragmentStateAdapter(fragmentManager, lifecycle) {
+class ChartViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, val currencyId: String, val isChangePositive: Boolean): FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {
         return NUM_TABS

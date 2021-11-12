@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.watchlist.WatchlistFragment"
     android:background="@color/black">
 
@@ -17,4 +18,21 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="14dp"/>
 
-</FrameLayout>
+    <TableLayout
+        android:id="@+id/tlWatchlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        app:tabTextColor="@color/white_alpha_50"
+        app:tabTextAppearance="@style/TabTextAppearance"
+        app:tabSelectedTextColor="@color/blue_200"
+        app:tabIndicatorHeight="2dp"
+        android:layout_below="@id/tvMarketWatch" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tlWatchlist"
+        android:overScrollMode="never" />
+
+</RelativeLayout>
