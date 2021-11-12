@@ -7,7 +7,7 @@
         android:title="@string/home" />
 
     <item
-        android:id="navigation_watchlist"
+        android:id="@+id/navigation_watchlist"
         android:icon="@drawable/ic_bookmark"
         android:title="@string/watchlist" />
 
