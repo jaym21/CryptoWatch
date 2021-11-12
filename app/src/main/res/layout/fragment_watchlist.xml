@@ -18,18 +18,19 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="14dp"/>
 
-    <TableLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/tlWatchlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
         app:tabTextColor="@color/white_alpha_50"
-        app:tabTextAppearance="@style/TabTextAppearance"
+        app:tabTextAppearance="@style/WatchlistTabTextAppearance"
         app:tabSelectedTextColor="@color/blue_200"
         app:tabIndicatorHeight="2dp"
         android:layout_below="@id/tvMarketWatch" />
 
     <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpWatchlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tlWatchlist"
