@@ -14,6 +14,7 @@ class WatchlistFragment: Fragment() {
     private var binding: FragmentWatchlistBinding? = null
     private lateinit var watchlistViewPagerAdapter: WatchlistViewPagerAdapter
     var watchlists = arrayOf("Watchlist 1", "Watchlist 2", "Watchlist 3", "Watchlist 4")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,10 +31,10 @@ class WatchlistFragment: Fragment() {
         watchlistViewPagerAdapter = WatchlistViewPagerAdapter(parentFragmentManager, lifecycle)
         //setting adapter to viewPager
         binding?.vpWatchlist?.adapter = watchlistViewPagerAdapter
-        //integrating tablayout
+        //integrating tabLayout
         TabLayoutMediator(binding?.tlWatchlist!!, binding?.vpWatchlist!!) { tab, position ->
             tab.text = watchlists[position]
-        }
+        }.attach()
     }
 
     override fun onDestroy() {

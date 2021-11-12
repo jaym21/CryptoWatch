@@ -193,7 +193,7 @@ class CurrencyDetailsFragment : Fragment() {
         binding?.viewPager?.isUserInputEnabled = false
 
         TabLayoutMediator(binding?.tabLayout!!, binding?.viewPager!!) { tab, position ->
-            tab.text = timePeriods[position].lowercase()
+            tab.text = timePeriods[position]
         }.attach()
 
         for (i in 0 until binding?.tabLayout!!.tabCount) {
