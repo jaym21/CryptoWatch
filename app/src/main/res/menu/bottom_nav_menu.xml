@@ -7,6 +7,11 @@
         android:title="@string/home" />
 
     <item
+        android:id="navigation_watchlist"
+        android:icon="@drawable/ic_bookmark"
+        android:title="@string/watchlist" />
+
+    <item
         android:id="@+id/navigation_news"
         android:icon="@drawable/ic_newspaper"
         android:title="@string/news" />

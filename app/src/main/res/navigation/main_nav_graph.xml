@@ -55,5 +55,10 @@
         <argument android:name="currencyId" />
 
     </fragment>
+    <fragment
+        android:id="@+id/navigation_watchlist"
+        android:name="dev.jaym21.cryptowatch.ui.watchlist.WatchlistFragment"
+        android:label="fragment_watchlist"
+        tools:layout="@layout/fragment_watchlist" />
 
 </navigation>
