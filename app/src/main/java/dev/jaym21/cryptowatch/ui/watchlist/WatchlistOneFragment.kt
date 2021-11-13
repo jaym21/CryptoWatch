@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import dev.jaym21.cryptowatch.R
 import dev.jaym21.cryptowatch.adapters.CurrencyRVAdapter
@@ -41,8 +42,12 @@ class WatchlistOneFragment : Fragment(), ICurrencyRVAdapter {
 
         //initializing watchlist viewModel
         watchlistViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(requireActivity().application)).get(WatchlistViewModel::class.java)
+
         //initializing adapter
         currencyAdapter = CurrencyRVAdapter(this)
+
+        //initializing recyclerView
+        setUpRecyclerView()
 
         watchlistViewModel.allCurrenciesInWatchlist.observe(viewLifecycleOwner, Observer { allWatchlists ->
             var requiredCurrencies = ""
@@ -63,7 +68,7 @@ class WatchlistOneFragment : Fragment(), ICurrencyRVAdapter {
             when(response) {
                 is ApiResponse.Success -> {
                     binding?.progressBar?.visibility = View.GONE
-
+                    currencyAdapter.submitList(response.data)
                 }
                 is ApiResponse.Loading -> {
                     binding?.progressBar?.visibility = View.VISIBLE
@@ -78,6 +83,13 @@ class WatchlistOneFragment : Fragment(), ICurrencyRVAdapter {
                 }
             }
         })
+    }
+
+    private fun setUpRecyclerView() {
+        binding?.rvWatchlistOne?.apply {
+            adapter = currencyAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
     }
 
     override fun onDestroy() {
