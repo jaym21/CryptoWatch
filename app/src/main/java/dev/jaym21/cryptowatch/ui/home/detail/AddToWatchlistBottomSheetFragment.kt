@@ -1,6 +1,8 @@
 package dev.jaym21.cryptowatch.ui.home.detail
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +10,7 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import dev.jaym21.cryptowatch.databinding.FragmentAddToWatchlistBottomSheetBinding
 import dev.jaym21.cryptowatch.model.Watchlist
 import dev.jaym21.cryptowatch.ui.watchlist.WatchlistViewModel
@@ -31,6 +34,9 @@ class AddToWatchlistBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // TODO: handle already present currency getting added to watchlist
+        //TODO: Snackbar not working
+
         //initializing watchlist viewModel
         watchlistViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(requireActivity().application)).get(WatchlistViewModel::class.java)
 
@@ -47,6 +53,9 @@ class AddToWatchlistBottomSheetFragment : BottomSheetDialogFragment() {
             val selectedWatchlist = view.findViewById<RadioButton>(selectedId!!)
             //adding currency to selected watchlist in database
             watchlistViewModel.addCurrencyToWatchlist(Watchlist(1, currencyId, selectedWatchlist.text.toString()))
+//            Snackbar.make(it, "$currencyName added to ${selectedWatchlist.text}", Snackbar.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "$currencyName added to ${selectedWatchlist.text}", Toast.LENGTH_SHORT).show()
+            dismiss()
         }
     }
 
