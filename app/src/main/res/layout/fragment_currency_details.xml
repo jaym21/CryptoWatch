@@ -13,7 +13,7 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/ic_back_arrow"
-        app:tint="@color/white"/>
+        app:tint="@color/white" />
 
     <LinearLayout
         android:id="@+id/llCurrency"
@@ -41,6 +41,15 @@
             android:layout_gravity="center"/>
 
     </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/ivAddToWatchlist"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_bookmark"
+        app:tint="@color/white"
+        android:layout_alignParentEnd="true" />
 
     <LinearLayout
         android:id="@+id/llCurrencyPrice"
