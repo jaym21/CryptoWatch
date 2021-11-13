@@ -53,6 +53,15 @@
         android:layout_marginTop="20dp">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_bold"
+            android:layout_marginEnd="7dp"/>
+
+        <TextView
             android:id="@+id/tvCurrentPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,16 +71,6 @@
             android:fontFamily="@font/poppins_bold"
             android:maxLines="1"
             android:maxLength="12"/>
-
-        <TextView
-            android:id="@+id/tvConvertedToCurrency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="INR"
-            android:textSize="16sp"
-            android:textColor="@color/white_alpha_70"
-            android:fontFamily="@font/poppins_regular"
-            android:layout_marginStart="5dp"/>
 
     </LinearLayout>
 
