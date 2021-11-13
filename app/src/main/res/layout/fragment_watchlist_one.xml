@@ -5,6 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.watchlist.WatchlistOneFragment">
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvWatchlistOne"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>
