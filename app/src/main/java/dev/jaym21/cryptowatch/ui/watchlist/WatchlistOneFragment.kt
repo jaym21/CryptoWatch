@@ -5,16 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.google.android.material.snackbar.Snackbar
 import dev.jaym21.cryptowatch.R
+import dev.jaym21.cryptowatch.adapters.CurrencyRVAdapter
+import dev.jaym21.cryptowatch.adapters.ICurrencyRVAdapter
 import dev.jaym21.cryptowatch.databinding.FragmentWatchlistOneBinding
 import dev.jaym21.cryptowatch.utils.ApiResponse
 
-class WatchlistOneFragment : Fragment() {
+class WatchlistOneFragment : Fragment(), ICurrencyRVAdapter {
 
     private var binding: FragmentWatchlistOneBinding? = null
+    private lateinit var navController: NavController
     lateinit var watchlistViewModel: WatchlistViewModel
+    private lateinit var currencyAdapter: CurrencyRVAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,8 +36,13 @@ class WatchlistOneFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //initializing navController
+        navController = Navigation.findNavController(view)
+
         //initializing watchlist viewModel
         watchlistViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(requireActivity().application)).get(WatchlistViewModel::class.java)
+        //initializing adapter
+        currencyAdapter = CurrencyRVAdapter(this)
 
         watchlistViewModel.allCurrenciesInWatchlist.observe(viewLifecycleOwner, Observer { allWatchlists ->
             var requiredCurrencies = ""
@@ -48,7 +61,21 @@ class WatchlistOneFragment : Fragment() {
 
         watchlistViewModel.requiredCurrencies.observe(viewLifecycleOwner, Observer { response ->
             when(response) {
-                is ApiResponse.Success ->
+                is ApiResponse.Success -> {
+                    binding?.progressBar?.visibility = View.GONE
+
+                }
+                is ApiResponse.Loading -> {
+                    binding?.progressBar?.visibility = View.VISIBLE
+                }
+                is ApiResponse.Error -> {
+                    binding?.progressBar?.visibility = View.GONE
+                    Snackbar.make(
+                        view,
+                        "Could retrieve currencies, restart app!",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
             }
         })
     }
@@ -56,5 +83,10 @@ class WatchlistOneFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    override fun onCurrencyClicked(currencyId: String, isChangePositive: Boolean) {
+        val bundle = bundleOf("currencyId" to currencyId, "convertTo" to "INR", "isChangePositive" to isChangePositive)
+        navController.navigate(R.id.action_navigation_home_to_currencyDetailsFragment, bundle)
     }
 }
