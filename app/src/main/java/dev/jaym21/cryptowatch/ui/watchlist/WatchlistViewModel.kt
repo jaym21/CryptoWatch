@@ -19,7 +19,7 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
     private val watchlistRepository: WatchlistRepository
     private val nomicsRepository = NomicsRepository()
     val allCurrenciesInWatchlist: LiveData<List<Watchlist>>
-    val searchedCurrencies: MutableLiveData<ApiResponse<List<CurrencyResponse>>> = MutableLiveData()
+    val requiredCurrencies: MutableLiveData<ApiResponse<List<CurrencyResponse>>> = MutableLiveData()
 
     init {
         val dao = WatchlistDatabase.getDatabase(application).getWatchlistDAO()
@@ -35,17 +35,17 @@ class WatchlistViewModel(application: Application): AndroidViewModel(application
         watchlistRepository.removeCurrency(watchlist)
     }
 
-    fun getCurrencies(pageNo: String, isNew: Boolean) = viewModelScope.launch(Dispatchers.IO) {
+    fun fetchCurrencies(ids: String) = viewModelScope.launch(Dispatchers.IO) {
         //as we are going to make network call so showing loading progress bar
-        searchedCurrencies.postValue(ApiResponse.Loading())
+        requiredCurrencies.postValue(ApiResponse.Loading())
 
         //getting response from repo
-        val response = nomicsRepository.getCurrencies(pageNo)
+        val response = nomicsRepository.fetchCurrencies(ids)
         //checking if we got a successful response
         if (response != null){
-            searchedCurrencies.postValue(ApiResponse.Success(response))
+            requiredCurrencies.postValue(ApiResponse.Success(response))
         }else {
-            searchedCurrencies.postValue(ApiResponse.Error("Could not retrieve currencies, try again!"))
+            requiredCurrencies.postValue(ApiResponse.Error("Could not retrieve currencies, try again!"))
         }
     }
 }
