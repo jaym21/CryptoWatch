@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,12 +11,48 @@
         android:layout_height="match_parent"
         android:overScrollMode="never"/>
 
+    <TextView
+        android:id="@+id/tvNothingHere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nothing here"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_semibold"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/tvAddCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add currencies to watchlist"
+        android:textSize="14sp"
+        android:textColor="@color/white_alpha_60"
+        android:fontFamily="@font/poppins_regular"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tvNothingHere" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="to display here"
+        android:textSize="14sp"
+        android:textColor="@color/white_alpha_60"
+        android:fontFamily="@font/poppins_regular"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tvAddCurrency" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateTint="@color/blue_200"
-        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:visibility="gone" />
 
-</FrameLayout>
+</RelativeLayout>
