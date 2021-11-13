@@ -10,5 +10,5 @@ class WatchlistRepository(private val watchlistDAO: WatchlistDAO) {
 
     suspend fun removeCurrency(watchlist: Watchlist) = watchlistDAO.deleteCurrency(watchlist)
 
-    fun getAllCurrencies(): LiveData<List<Watchlist>> = watchlistDAO.getAllCurrencies()
+    val getAllCurrencies: LiveData<List<Watchlist>> = watchlistDAO.getAllCurrencies()
 }
