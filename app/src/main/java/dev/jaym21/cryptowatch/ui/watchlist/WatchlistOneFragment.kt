@@ -36,7 +36,7 @@ class WatchlistOneFragment(private val navController: NavController): Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //TODO: add text when no items are available in recyclerview
+        //TODO: crash on back press
 
         //initializing watchlist viewModel
         watchlistViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(requireActivity().application)).get(WatchlistViewModel::class.java)
@@ -108,6 +108,6 @@ class WatchlistOneFragment(private val navController: NavController): Fragment()
 
     override fun onCurrencyClicked(currencyId: String, isChangePositive: Boolean) {
         val bundle = bundleOf("currencyId" to currencyId, "isChangePositive" to isChangePositive)
-        navController.navigate(R.id.action_watchlistOneFragment_to_currencyDetailsFragment, bundle)
+        navController.navigate(R.id.action_navigation_watchlist_to_currencyDetailsFragment, bundle)
     }
 }
