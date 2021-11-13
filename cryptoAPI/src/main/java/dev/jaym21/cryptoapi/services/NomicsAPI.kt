@@ -24,6 +24,16 @@ interface NomicsAPI {
         per_page: String = "20"
     ): Response<List<CurrencyResponse>>
 
+    @GET
+    suspend fun fetchCurrencies(
+        @Query("key")
+        key: String = KEY,
+        @Query("ids")
+        ids: String,
+        @Query("convert")
+        convert: String = "INR"
+    ): Response<List<CurrencyResponse>>
+
     @GET("currencies/ticker")
     suspend fun getCurrencyDetails(
         @Query("key")
