@@ -12,7 +12,7 @@ import dev.jaym21.cryptowatch.databinding.FragmentWatchlistOneBinding
 class WatchlistOneFragment : Fragment() {
 
     private var binding: FragmentWatchlistOneBinding? = null
-    lateinit var viewModel: WatchlistViewModel
+    lateinit var watchlistViewModel: WatchlistViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,10 +26,10 @@ class WatchlistOneFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //initializing viewModel
-        viewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(requireActivity().application)).get(WatchlistViewModel::class.java)
+        //initializing watchlist viewModel
+        watchlistViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(requireActivity().application)).get(WatchlistViewModel::class.java)
 
-
+        //initializing
     }
 
     override fun onDestroy() {

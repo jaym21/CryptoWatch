@@ -27,8 +27,6 @@ class HomeViewModel: ViewModel() {
             //if new call then clearing the previous currencies displayed list
             allCurrenciesDisplayed = null
         }
-        Log.d("TAGYOYO", "getCurrencies: $allCurrenciesDisplayed")
-        Log.d("TAGYOYO", "getCurrencies: $pageNo")
         //getting response from repo
         val response = repo.getCurrencies(pageNo)
         //checking if we got a successful response
@@ -36,11 +34,9 @@ class HomeViewModel: ViewModel() {
             //storing the response received from api
             if (allCurrenciesDisplayed == null) {
                 allCurrenciesDisplayed = response as MutableList<CurrencyResponse>?
-                Log.d("TAGYOYO", "FIRST CALL $allCurrenciesDisplayed")
             } else {
                 //if this is not the first 20 currencies response received then we will add the new received currencies to the previous currencies saved
                 allCurrenciesDisplayed!!.addAll(response)
-                Log.d("TAGYOYO", "PAGINATION CALL $allCurrenciesDisplayed")
             }
             currencies.postValue(ApiResponse.Success(allCurrenciesDisplayed))
         }else {
