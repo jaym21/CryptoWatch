@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity"
-    android:background="@color/black">
+    android:background="@color/black_bg">
 
     <fragment
         android:id="@+id/nav_host_fragment"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="unlabeled"
-        android:background="@color/black"
+        android:background="@color/black_bg"
         app:itemIconTint="@drawable/bottom_nav_foreground"
         app:itemTextColor="@drawable/bottom_nav_foreground"
         app:itemIconSize="25dp"
