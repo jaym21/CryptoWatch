@@ -55,10 +55,67 @@
         <argument android:name="currencyId" />
 
     </fragment>
+
     <fragment
         android:id="@+id/navigation_watchlist"
         android:name="dev.jaym21.cryptowatch.ui.watchlist.WatchlistFragment"
         android:label="fragment_watchlist"
         tools:layout="@layout/fragment_watchlist" />
+
+    <fragment
+        android:id="@+id/watchlistOneFragment"
+        android:name="dev.jaym21.cryptowatch.ui.watchlist.WatchlistOneFragment"
+        android:label="fragment_watchlist_one"
+        tools:layout="@layout/fragment_watchlist_one" >
+        <action
+            android:id="@+id/action_watchlistOneFragment_to_currencyDetailsFragment"
+            app:destination="@id/currencyDetailsFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/watchlistTwoFragment"
+        android:name="dev.jaym21.cryptowatch.ui.watchlist.WatchlistTwoFragment"
+        android:label="fragment_watchlist_two"
+        tools:layout="@layout/fragment_watchlist_two" >
+        <action
+            android:id="@+id/action_watchlistTwoFragment_to_currencyDetailsFragment"
+            app:destination="@id/currencyDetailsFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/watchlistThreeFragment"
+        android:name="dev.jaym21.cryptowatch.ui.watchlist.WatchlistThreeFragment"
+        android:label="fragment_watchlist_three"
+        tools:layout="@layout/fragment_watchlist_three" >
+        <action
+            android:id="@+id/action_watchlistThreeFragment_to_currencyDetailsFragment"
+            app:destination="@id/currencyDetailsFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/watchlistFourFragment"
+        android:name="dev.jaym21.cryptowatch.ui.watchlist.WatchlistFourFragment"
+        android:label="fragment_watchlist_four"
+        tools:layout="@layout/fragment_watchlist_four" >
+        <action
+            android:id="@+id/action_watchlistFourFragment_to_currencyDetailsFragment"
+            app:destination="@id/currencyDetailsFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
 
 </navigation>

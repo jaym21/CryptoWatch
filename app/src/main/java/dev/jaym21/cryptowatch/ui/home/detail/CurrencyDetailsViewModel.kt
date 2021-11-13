@@ -23,7 +23,7 @@ class CurrencyDetailsViewModel: ViewModel() {
     //live data for currency hourly history response
     val currencyHourlyHistory: MutableLiveData<ApiResponse<Data>> = MutableLiveData()
 
-    fun getCurrencyDetails(id: String, convertTo: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun getCurrencyDetails(id: String) = viewModelScope.launch(Dispatchers.IO) {
         //as we are going to make network call so showing loading progress bar
         currencyDetails.postValue(ApiResponse.Loading())
 

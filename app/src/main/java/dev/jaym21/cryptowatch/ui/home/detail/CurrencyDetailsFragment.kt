@@ -26,7 +26,6 @@ class CurrencyDetailsFragment : Fragment() {
     private var TAG = "CurrencyDetailsFragment"
     private lateinit var viewModel: CurrencyDetailsViewModel
     private var currencyId: String? = null
-    private var convertTo: String? = null
     private var isChangePositive: Boolean? = null
     private lateinit var navController: NavController
     private lateinit var chartViewPagerAdapter: ChartViewPagerAdapter
@@ -52,8 +51,7 @@ class CurrencyDetailsFragment : Fragment() {
 
         //getting clicked currency id
         currencyId = arguments?.getString("currencyId")
-        //currency to be converted to
-        convertTo = arguments?.getString("convertTo")
+
         //getting isChangePositive
         isChangePositive = arguments?.getBoolean("isChangePositive")
 
@@ -65,9 +63,7 @@ class CurrencyDetailsFragment : Fragment() {
             navController.popBackStack()
         }
 
-        viewModel.getCurrencyDetails(currencyId!!, convertTo!!)
-
-        binding?.tvConvertedToCurrency?.text = convertTo
+        viewModel.getCurrencyDetails(currencyId!!)
 
         viewModel.currencyDetails.observe(viewLifecycleOwner, Observer { response ->
             when (response) {

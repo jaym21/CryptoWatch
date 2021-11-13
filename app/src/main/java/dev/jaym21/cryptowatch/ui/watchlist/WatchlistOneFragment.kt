@@ -86,7 +86,7 @@ class WatchlistOneFragment : Fragment(), ICurrencyRVAdapter {
     }
 
     override fun onCurrencyClicked(currencyId: String, isChangePositive: Boolean) {
-        val bundle = bundleOf("currencyId" to currencyId, "convertTo" to "INR", "isChangePositive" to isChangePositive)
-        navController.navigate(R.id.action_navigation_home_to_currencyDetailsFragment, bundle)
+        val bundle = bundleOf("currencyId" to currencyId, "isChangePositive" to isChangePositive)
+        navController.navigate(R.id.action_watchlistOneFragment_to_currencyDetailsFragment, bundle)
     }
 }
