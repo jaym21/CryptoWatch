@@ -3,9 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.detail.AddToWatchlistBottomSheetFragment"
     android:padding="16dp"
     android:background="@color/black">
+
+    <View
+        android:id="@+id/sheetController"
+        android:layout_width="61dp"
+        android:layout_height="3dp"
+        android:background="#991313EC"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:id="@+id/tvChooseWatchlist"
@@ -14,9 +23,12 @@
         tools:text="Choose watchlist to add bitcoin"
         android:textSize="14sp"
         android:textColor="@color/white_alpha_70"
-        android:fontFamily="@font/poppins_semibold" />
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_below="@id/sheetController"
+        android:layout_marginTop="20dp"/>
 
     <RadioGroup
+        android:id="@+id/rgWatchlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvChooseWatchlist"
@@ -71,5 +83,19 @@
             android:paddingStart="16dp"/>
         
     </RadioGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddToWatchlist"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:text="Add"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:fontFamily="@font/poppins_semibold"
+        app:cornerRadius="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/rgWatchlist"
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>
