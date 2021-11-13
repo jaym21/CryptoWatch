@@ -20,12 +20,12 @@
         android:id="@+id/tvChooseWatchlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Choose watchlist to add bitcoin"
-        android:textSize="14sp"
-        android:textColor="@color/white_alpha_70"
-        android:fontFamily="@font/poppins_semibold"
         android:layout_below="@id/sheetController"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@color/white_alpha_70"
+        android:textSize="14sp"
+        tools:text="Choose watchlist to add bitcoin" />
 
     <RadioGroup
         android:id="@+id/rgWatchlist"
@@ -88,14 +88,14 @@
         android:id="@+id/btnAddToWatchlist"
         android:layout_width="70dp"
         android:layout_height="50dp"
+        android:layout_below="@id/rgWatchlist"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_semibold"
         android:text="Add"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="13sp"
-        android:fontFamily="@font/poppins_semibold"
-        app:cornerRadius="10dp"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/rgWatchlist"
-        android:layout_marginTop="20dp" />
+        app:cornerRadius="10dp" />
 
 </RelativeLayout>

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -201,9 +202,12 @@ class CurrencyDetailsFragment : Fragment() {
 
         //implementing on add to watchlist button click
         binding?.ivAddToWatchlist?.setOnClickListener {
-            AddToWatchlistBottomSheetFragment().apply {
-                show(parentFragmentManager, AddToWatchlistBottomSheetFragment().TAG)
-            }
+            val addToWatchlistBottomSheetFragment = AddToWatchlistBottomSheetFragment()
+            val bundle = Bundle()
+            bundle.putString("currencyName", binding?.tvCurrencyName?.text.toString())
+            bundle.putString("currencySymbol", currencyId)
+            addToWatchlistBottomSheetFragment.arguments = bundle
+            addToWatchlistBottomSheetFragment.show((requireContext() as AppCompatActivity).supportFragmentManager, "addToWatchlistBottomSheetFragment")
         }
     }
 

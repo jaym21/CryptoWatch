@@ -10,7 +10,8 @@ import dev.jaym21.cryptowatch.databinding.FragmentAddToWatchlistBottomSheetBindi
 class AddToWatchlistBottomSheetFragment : BottomSheetDialogFragment() {
 
     private var binding: FragmentAddToWatchlistBottomSheetBinding? = null
-    val TAG = "AddToWatchlistBottomSheetFragment"
+    private lateinit var currencyName: String
+    private lateinit var currencyId: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,6 +20,17 @@ class AddToWatchlistBottomSheetFragment : BottomSheetDialogFragment() {
         // Inflate the layout for this fragment
         binding = FragmentAddToWatchlistBottomSheetBinding.inflate(inflater, container, false)
         return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        //getting currency name and id from passed arguments
+        currencyName = arguments?.getString("currencyName")!!
+        currencyId = arguments?.getString("currencySymbol")!!
+
+        //setting currency name in text
+        binding?.tvChooseWatchlist?.text = "Choose watchlist to add $currencyName"
     }
 
     override fun onDestroy() {
