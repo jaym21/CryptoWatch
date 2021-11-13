@@ -88,14 +88,15 @@
         android:id="@+id/btnAddToWatchlist"
         android:layout_width="70dp"
         android:layout_height="50dp"
-        android:layout_below="@id/rgWatchlist"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Add"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="13sp"
-        app:cornerRadius="10dp" />
+        app:cornerRadius="10dp"
+        android:backgroundTint="@color/blue_500"
+        android:layout_below="@id/rgWatchlist"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>
