@@ -8,5 +8,5 @@ data class Watchlist (
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val symbol: String,
-    val watchlistNumber: String
+    val watchlist: String
 )

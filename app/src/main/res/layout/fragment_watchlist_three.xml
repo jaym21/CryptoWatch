@@ -11,40 +11,43 @@
         android:layout_height="match_parent"
         android:overScrollMode="never" />
 
-    <TextView
-        android:id="@+id/tvNothingHere"
+    <LinearLayout
+        android:id="@+id/llNoCurrenciesFound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nothing here"
-        android:textSize="16sp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/poppins_semibold"
+        android:orientation="vertical"
         android:visibility="gone"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/tvAddCurrency"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add currencies to watchlist"
-        android:textSize="14sp"
-        android:textColor="@color/white_alpha_60"
-        android:fontFamily="@font/poppins_regular"
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/tvNothingHere" />
+        <TextView
+            android:id="@+id/tvNothingHere"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nothing here"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_semibold"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="to display here"
-        android:textSize="14sp"
-        android:textColor="@color/white_alpha_60"
-        android:fontFamily="@font/poppins_regular"
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/tvAddCurrency" />
+        <TextView
+            android:id="@+id/tvAddCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add currencies to watchlist"
+            android:textSize="14sp"
+            android:textColor="@color/white_alpha_60"
+            android:fontFamily="@font/poppins_regular"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="to keep track of them"
+            android:textSize="14sp"
+            android:textColor="@color/white_alpha_60"
+            android:fontFamily="@font/poppins_regular"/>
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"

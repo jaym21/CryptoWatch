@@ -1,6 +1,7 @@
 package dev.jaym21.cryptowatch.ui.watchlist
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,6 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import dev.jaym21.cryptowatch.R
@@ -49,17 +49,27 @@ class WatchlistOneFragment(private val navController: NavController): Fragment()
 
         watchlistViewModel.allCurrenciesInWatchlist.observe(viewLifecycleOwner, Observer { allWatchlists ->
             var requiredCurrencies = ""
+            Log.d("TAGYOYO", "ALL Watchlists $allWatchlists")
             allWatchlists.forEach {
-                if (it.watchlistNumber == "1") {
+                if (it.watchlist == "Watchlist 1") {
                     if (requiredCurrencies.isEmpty()) {
                         requiredCurrencies = it.symbol
+                        Log.d("TAGYOYO", "FIRST INSIDE IF ${it.symbol} REQCUR $requiredCurrencies")
                     } else {
                         requiredCurrencies += ", ${it.symbol}"
+                        Log.d("TAGYOYO", "${it.symbol} REQCUR $requiredCurrencies")
                     }
                 }
             }
-            if (requiredCurrencies.isNotEmpty())
+            Log.d("TAGYOYO", "OUTSIDE IF REQCUR $requiredCurrencies")
+            if (requiredCurrencies.isNotEmpty()) {
+                binding?.llNoCurrenciesFound?.visibility = View.GONE
+                binding?.rvWatchlistOne?.visibility = View.VISIBLE
                 watchlistViewModel.fetchCurrencies(requiredCurrencies)
+            } else {
+                binding?.llNoCurrenciesFound?.visibility = View.VISIBLE
+                binding?.rvWatchlistOne?.visibility = View.GONE
+            }
         })
 
         watchlistViewModel.requiredCurrencies.observe(viewLifecycleOwner, Observer { response ->
@@ -67,6 +77,7 @@ class WatchlistOneFragment(private val navController: NavController): Fragment()
                 is ApiResponse.Success -> {
                     binding?.progressBar?.visibility = View.GONE
                     currencyAdapter.submitList(response.data)
+                    Log.d("TAGYOYO", "API RESPONSE SUCCESS ${response.data}")
                 }
                 is ApiResponse.Loading -> {
                     binding?.progressBar?.visibility = View.VISIBLE

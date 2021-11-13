@@ -52,7 +52,7 @@ class AddToWatchlistBottomSheetFragment : BottomSheetDialogFragment() {
             val selectedId = binding?.rgWatchlist?.checkedRadioButtonId
             val selectedWatchlist = view.findViewById<RadioButton>(selectedId!!)
             //adding currency to selected watchlist in database
-            watchlistViewModel.addCurrencyToWatchlist(Watchlist(1, currencyId, selectedWatchlist.text.toString()))
+            watchlistViewModel.addCurrencyToWatchlist(Watchlist(0, currencyId, selectedWatchlist.text.toString()))
 //            Snackbar.make(it, "$currencyName added to ${selectedWatchlist.text}", Snackbar.LENGTH_SHORT).show()
             Toast.makeText(requireContext(), "$currencyName added to ${selectedWatchlist.text}", Toast.LENGTH_SHORT).show()
             dismiss()
