@@ -198,6 +198,13 @@ class CurrencyDetailsFragment : Fragment() {
             params.setMargins(0,0,20,0)
             tab.requestLayout()
         }
+
+        //implementing on add to watchlist button click
+        binding?.ivAddToWatchlist?.setOnClickListener {
+            AddToWatchlistBottomSheetFragment().apply {
+                show(parentFragmentManager, AddToWatchlistBottomSheetFragment().TAG)
+            }
+        }
     }
 
     override fun onDestroy() {

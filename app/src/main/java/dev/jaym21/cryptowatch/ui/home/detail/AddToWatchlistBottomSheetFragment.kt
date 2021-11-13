@@ -10,6 +10,7 @@ import dev.jaym21.cryptowatch.databinding.FragmentAddToWatchlistBottomSheetBindi
 class AddToWatchlistBottomSheetFragment : BottomSheetDialogFragment() {
 
     private var binding: FragmentAddToWatchlistBottomSheetBinding? = null
+    val TAG = "AddToWatchlistBottomSheetFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -47,9 +47,9 @@
         android:id="@+id/ivAddToWatchlist"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
         android:src="@drawable/ic_bookmark"
-        app:tint="@color/white"
-        android:layout_alignParentEnd="true" />
+        app:tint="@color/white" />
 
     <LinearLayout
         android:id="@+id/llCurrencyPrice"

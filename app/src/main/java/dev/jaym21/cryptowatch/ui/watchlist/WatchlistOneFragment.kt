@@ -18,10 +18,9 @@ import dev.jaym21.cryptowatch.adapters.ICurrencyRVAdapter
 import dev.jaym21.cryptowatch.databinding.FragmentWatchlistOneBinding
 import dev.jaym21.cryptowatch.utils.ApiResponse
 
-class WatchlistOneFragment : Fragment(), ICurrencyRVAdapter {
+class WatchlistOneFragment(private val navController: NavController): Fragment(), ICurrencyRVAdapter {
 
     private var binding: FragmentWatchlistOneBinding? = null
-    private lateinit var navController: NavController
     lateinit var watchlistViewModel: WatchlistViewModel
     private lateinit var currencyAdapter: CurrencyRVAdapter
 
@@ -36,9 +35,6 @@ class WatchlistOneFragment : Fragment(), ICurrencyRVAdapter {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //initializing navController
-        navController = Navigation.findNavController(view)
 
         //initializing watchlist viewModel
         watchlistViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(requireActivity().application)).get(WatchlistViewModel::class.java)

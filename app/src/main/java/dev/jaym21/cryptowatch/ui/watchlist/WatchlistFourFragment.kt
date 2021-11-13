@@ -5,9 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
 import dev.jaym21.cryptowatch.R
 
-class WatchlistFourFragment : Fragment() {
+class WatchlistFourFragment(private val navController: NavController) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
