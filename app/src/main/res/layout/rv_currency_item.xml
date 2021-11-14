@@ -82,8 +82,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#19FFFFFF"
-        android:layout_below="@id/llPercentChange"
-        android:layout_marginTop="14dp"/>
+        android:layout_below="@id/tvCurrencySymbol"
+        android:layout_marginTop="14dp"
+        android:background="#19FFFFFF" />
 
 </RelativeLayout>

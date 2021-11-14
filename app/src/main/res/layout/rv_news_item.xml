@@ -6,8 +6,7 @@
     tools:background="@color/black_bg"
     android:paddingStart="14dp"
     android:paddingEnd="16dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="20dp"
+    android:paddingTop="20dp"
     android:id="@+id/rlRootNewsItem">
 
     <ImageView
@@ -72,5 +71,12 @@
         android:textColor="@color/white_alpha_70"
         android:textSize="13sp"
         tools:text="Mike Green Alex Gladstein debate Bitcoin's role in the U.S. and beyond by looking at several topics, from government response to taxation.The post Podcast: Bitcoins Role in the War on Cash | Mike Green Alex Gladstein appeared first on Blockworks." />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tvNewsBody"
+        android:layout_marginTop="14dp"
+        android:background="#19FFFFFF" />
 
 </RelativeLayout>
