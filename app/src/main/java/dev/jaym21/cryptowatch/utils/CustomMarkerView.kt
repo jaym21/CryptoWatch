@@ -21,7 +21,7 @@ class CustomMarkerView(context: Context, layoutResource: Int) : MarkerView(conte
         val date = findViewById<TextView>(R.id.tvMarkerDate)
         val value = findViewById<TextView>(R.id.tvMarkerValue)
 
-        value.text = e!!.y.toString()
+        value.text = "₹ ${e!!.y.toString()}"
         date.text = DateConverter.getDateWithMonthAndYear(e.x.toLong())
     }
 

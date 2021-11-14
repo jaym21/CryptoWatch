@@ -20,7 +20,7 @@ class CustomMarkerViewHourly(context: Context, layoutResource: Int) : MarkerView
         val time = findViewById<TextView>(R.id.tvMarkerTime)
         val value = findViewById<TextView>(R.id.tvMarkerValue)
 
-        value.text = e!!.y.toString()
+        value.text = "₹ ${e!!.y.toString()}"
         date.text = DateConverter.getDateWithMonthAndYear(e.x.toLong())
         time.text = DateConverter.getTime(e.x.toLong())
     }
