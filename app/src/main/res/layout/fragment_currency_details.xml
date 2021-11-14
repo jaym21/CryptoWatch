@@ -49,7 +49,8 @@
         android:layout_height="30dp"
         android:layout_alignParentEnd="true"
         android:src="@drawable/ic_bookmark"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        android:layout_marginTop="5dp"/>
 
     <LinearLayout
         android:id="@+id/llCurrencyPrice"

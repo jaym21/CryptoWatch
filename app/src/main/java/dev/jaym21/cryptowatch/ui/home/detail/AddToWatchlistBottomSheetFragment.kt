@@ -36,8 +36,6 @@ class AddToWatchlistBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //TODO: Snackbar not working
-
         //initializing watchlist viewModel
         watchlistViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(requireActivity().application)).get(WatchlistViewModel::class.java)
 
@@ -62,7 +60,6 @@ class AddToWatchlistBottomSheetFragment : BottomSheetDialogFragment() {
                     }
                 }
                 if (isPresent) {
-//                    Snackbar.make(binding?.root!!, "$currencyName is already present in ${selectedWatchlist.text}" ,Snackbar.LENGTH_SHORT).show()
                     Toast.makeText(requireContext(), "$currencyName is already present in ${selectedWatchlist.text}", Toast.LENGTH_SHORT).show()
                     dismiss()
                 } else {
@@ -81,7 +78,6 @@ class AddToWatchlistBottomSheetFragment : BottomSheetDialogFragment() {
                 selectedWatchlist
             )
         )
-//      Snackbar.make(binding?.root!!, "$currencyName added to $selectedWatchlist" ,Snackbar.LENGTH_SHORT).show()
         Toast.makeText(requireContext(), "$currencyName added to $selectedWatchlist", Toast.LENGTH_SHORT).show()
         dismiss()
     }
