@@ -21,6 +21,7 @@ import dev.jaym21.cryptowatch.adapters.CurrencyRVAdapter
 import dev.jaym21.cryptowatch.adapters.ICurrencyRVAdapter
 import dev.jaym21.cryptowatch.databinding.FragmentWatchlistOneBinding
 import dev.jaym21.cryptowatch.model.Watchlist
+import dev.jaym21.cryptowatch.ui.home.detail.CurrencyDetailsFragment
 import dev.jaym21.cryptowatch.utils.ApiResponse
 import dev.jaym21.cryptowatch.utils.SwipeToDeleteCallback
 
@@ -42,7 +43,6 @@ class WatchlistOneFragment(private val navController: NavController): Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //TODO: crash on back press
 
         //initializing watchlist viewModel
         watchlistViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(requireActivity().application)).get(WatchlistViewModel::class.java)
@@ -166,5 +166,10 @@ class WatchlistOneFragment(private val navController: NavController): Fragment()
     override fun onCurrencyClicked(currencyId: String, isChangePositive: Boolean) {
         val bundle = bundleOf("currencyId" to currencyId, "isChangePositive" to isChangePositive)
         navController.navigate(R.id.action_navigation_watchlist_to_currencyDetailsFragment, bundle)
+//        val fragmentManager = requireActivity().supportFragmentManager
+//        val fragmentTransaction = fragmentManager.beginTransaction()
+//        fragmentTransaction.replace(R.id.rlWatchlistRoot, CurrencyDetailsFragment())
+//        fragmentTransaction.addToBackStack(null)
+//        fragmentTransaction.commit()
     }
 }

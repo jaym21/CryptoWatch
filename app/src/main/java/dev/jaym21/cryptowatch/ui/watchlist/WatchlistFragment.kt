@@ -34,7 +34,7 @@ class WatchlistFragment: Fragment() {
         navController = Navigation.findNavController(view)
 
         //initializing viewPager adapter
-        watchlistViewPagerAdapter = WatchlistViewPagerAdapter(parentFragmentManager, lifecycle, navController)
+        watchlistViewPagerAdapter = WatchlistViewPagerAdapter(childFragmentManager, lifecycle, navController)
 
         //setting adapter to viewPager
         binding?.vpWatchlist?.adapter = watchlistViewPagerAdapter
