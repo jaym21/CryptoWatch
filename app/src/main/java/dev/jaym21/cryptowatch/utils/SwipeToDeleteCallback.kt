@@ -13,6 +13,9 @@ abstract class SwipeToDeleteCallback(context: Context): ItemTouchHelper.Callback
     private val background = ColorDrawable()
     private val backgroundColor = ContextCompat.getColor(context, R.color.red)
     private val clearPaint = Paint()
+    private val deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_delete)
+    private val intrinsicWidth = deleteIcon?.intrinsicWidth
+    private val intrinsicHeight = deleteIcon?.intrinsicHeight
 
     init {
         //to clear the background color in case of cancellation
@@ -68,6 +71,17 @@ abstract class SwipeToDeleteCallback(context: Context): ItemTouchHelper.Callback
             (itemView.right + dX).toInt(), itemView.top,
             itemView.right, itemView.bottom)
         background.draw(c)
+
+        val deleteIconMargin = (itemHeight - intrinsicHeight!!) /2
+        val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) /2
+        val deleteIconLeft = itemView.right - deleteIconMargin - intrinsicWidth!!
+        val deleteIconRight = itemView.right - deleteIconMargin
+        val deleteIconBottom = deleteIconTop + intrinsicHeight
+
+        deleteIcon?.bounds = Rect(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
+        deleteIcon?.draw(c)
+
+        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
 
     private fun clearCanvas(canvas: Canvas, left: Float, top: Float, right: Float, bottom: Float) {
