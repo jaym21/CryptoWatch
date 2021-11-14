@@ -57,7 +57,6 @@ class WatchlistTwoFragment(private val navController: NavController) : Fragment(
 
         watchlistViewModel.allCurrenciesInWatchlist.observe(viewLifecycleOwner, Observer { allWatchlists ->
             var requiredCurrencies = ""
-            Log.d("TAGYOYO", "ALL Watchlists $allWatchlists")
             allWatchlists.forEach {
                 if (it.watchlist == "Watchlist 2") {
                     if (requiredCurrencies.isEmpty()) {

@@ -72,12 +72,8 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
                     binding?.progressBar?.visibility = View.GONE
                     isLoading = false
                     currencyAdapter.submitList(response.data)
-                    Log.d("TAGYOYO", "CURRENT PAGE $currentPage")
-                    Log.d("TAGYOYO", "ITEMS DISPLAYED ${itemsDisplayed + 20}")
                     //setting boolean isLastPage according to the current page no
                     isLastPage = itemsDisplayed + 20 >= 1000
-                    Log.d(TAG, "onViewCreated: $totalItems")
-                    Log.d("TAGYOYO", "ISLASTPAGE $isLastPage")
                 }
                 is ApiResponse.Loading -> {
                     binding?.progressBar?.visibility = View.VISIBLE
@@ -137,8 +133,6 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
                 currentPage += 1
                 //makes another request to the api and gets next 20 products
                 viewModel.getCurrencies(currentPage.toString(),false)
-                Log.d("TAGYOYO", "onScrolled: CURRENT PAGE $currentPage")
-                Log.d("TAGYOYO", "onScrolled: ITEMS DISPLAYED $itemsDisplayed")
                 isScrolling = false
             }
         }

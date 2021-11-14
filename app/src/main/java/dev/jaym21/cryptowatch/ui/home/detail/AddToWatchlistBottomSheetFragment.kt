@@ -3,11 +3,13 @@ package dev.jaym21.cryptowatch.ui.home.detail
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
@@ -34,7 +36,6 @@ class AddToWatchlistBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO: handle already present currency getting added to watchlist
         //TODO: Snackbar not working
 
         //initializing watchlist viewModel
@@ -51,12 +52,38 @@ class AddToWatchlistBottomSheetFragment : BottomSheetDialogFragment() {
             //getting the checked button id
             val selectedId = binding?.rgWatchlist?.checkedRadioButtonId
             val selectedWatchlist = view.findViewById<RadioButton>(selectedId!!)
-            //adding currency to selected watchlist in database
-            watchlistViewModel.addCurrencyToWatchlist(Watchlist(0, currencyId, selectedWatchlist.text.toString()))
-//            Snackbar.make(it, "$currencyName added to ${selectedWatchlist.text}", Snackbar.LENGTH_SHORT).show()
-            Toast.makeText(requireContext(), "$currencyName added to ${selectedWatchlist.text}", Toast.LENGTH_SHORT).show()
-            dismiss()
+
+            //checking if already present in database
+            var isPresent = false
+            watchlistViewModel.allCurrenciesInWatchlist.observe(viewLifecycleOwner, Observer { allWatchlists ->
+                allWatchlists.forEach {
+                    if (it.symbol == currencyId && it.watchlist == selectedWatchlist.text.toString()) {
+                        isPresent = true
+                    }
+                }
+                if (isPresent) {
+//                    Snackbar.make(binding?.root!!, "$currencyName is already present in ${selectedWatchlist.text}" ,Snackbar.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "$currencyName is already present in ${selectedWatchlist.text}", Toast.LENGTH_SHORT).show()
+                    dismiss()
+                } else {
+                    addToDatabase(selectedWatchlist.text.toString())
+                }
+            })
         }
+    }
+
+    private fun addToDatabase(selectedWatchlist: String) {
+        //adding currency to selected watchlist in database
+        watchlistViewModel.addCurrencyToWatchlist(
+            Watchlist(
+                0,
+                currencyId,
+                selectedWatchlist
+            )
+        )
+//      Snackbar.make(binding?.root!!, "$currencyName added to $selectedWatchlist" ,Snackbar.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "$currencyName added to $selectedWatchlist", Toast.LENGTH_SHORT).show()
+        dismiss()
     }
 
     override fun onDestroy() {
