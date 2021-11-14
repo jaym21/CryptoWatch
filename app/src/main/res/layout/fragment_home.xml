@@ -17,12 +17,14 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="14dp"/>
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCurrencies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
-        android:layout_below="@id/tvCurrencies"/>
+        android:layout_below="@id/tvCurrencies"
+        android:layout_marginTop="12dp"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

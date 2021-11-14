@@ -31,7 +31,6 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
     private val PAGE_SIZE_QUERY = 20
     private var currentPage = 1
     private var itemsDisplayed = 0
-    private var totalItems : Int? = null
     //pagination
     private var isScrolling: Boolean = false
     private var isLastPage: Boolean = false

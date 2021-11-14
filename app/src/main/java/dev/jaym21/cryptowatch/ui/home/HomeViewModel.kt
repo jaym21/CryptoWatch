@@ -1,6 +1,5 @@
 package dev.jaym21.cryptowatch.ui.home
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

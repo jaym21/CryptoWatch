@@ -18,13 +18,14 @@
         android:id="@+id/tvCurrencyName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:fontFamily="@font/poppins_semibold"
         tools:text="Bitcoin"
-        android:layout_toEndOf="@id/ivCurrencyIcon"
+        android:maxLines="2"
+        android:layout_marginStart="10dp"
         android:layout_toStartOf="@id/tvCurrentValue"
-        android:layout_marginStart="10dp"/>
+        android:layout_toEndOf="@id/ivCurrencyIcon" />
 
     <TextView
         android:id="@+id/tvCurrencySymbol"
@@ -46,7 +47,8 @@
         android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/white"
         android:textSize="15sp"
-        tools:text="\u20B9 32,789" />
+        tools:text="\u20B9 32,789"
+        android:maxLines="2"/>
 
     <LinearLayout
         android:id="@+id/llPercentChange"
