@@ -46,5 +46,15 @@ class HomeViewModel: ViewModel() {
 
     fun getAllCurrencies() = viewModelScope.launch(Dispatchers.IO) {
         //as we are going to make network call so showing loading progress bar
+        allCurrencies.postValue(ApiResponse.Loading())
+
+        //getting response from repo
+        val response = repo.getAllCurrencies()
+
+        if (response != null) {
+            allCurrencies.postValue(ApiResponse.Success(response))
+        } else {
+            allCurrencies.postValue(ApiResponse.Error("Could not retrieve currencies, try again!"))
+        }
     }
 }
