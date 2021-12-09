@@ -18,6 +18,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import dev.jaym21.cryptoapi.models.responses.CurrencyResponse
 import dev.jaym21.cryptowatch.R
 import dev.jaym21.cryptowatch.adapters.CurrencyRVAdapter
 import dev.jaym21.cryptowatch.adapters.ICurrencyRVAdapter
@@ -34,6 +35,7 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
     private val PAGE_SIZE_QUERY = 20
     private var currentPage = 1
     private var itemsDisplayed = 0
+    private var searchedCurrencies = arrayListOf<CurrencyResponse>()
     //pagination
     private var isScrolling: Boolean = false
     private var isLastPage: Boolean = false
@@ -153,7 +155,13 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
             when(response) {
                 is ApiResponse.Success -> {
                     binding?.progressBar?.visibility = View.GONE
-
+                    setUpRecyclerViewNoPagination()
+                    searchedCurrencies.clear()
+                    response.data?.forEach {
+                        if (it.name?.contains(searchedText, true) == true) {
+                            searchedCurrencies.add(it)
+                        }
+                    }
                 }
                 is ApiResponse.Loading -> {
                     binding?.progressBar?.visibility = View.VISIBLE
@@ -175,6 +183,13 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
             adapter = currencyAdapter
             layoutManager = LinearLayoutManager(requireContext())
             addOnScrollListener(paginationScrollListener)
+        }
+    }
+
+    private fun setUpRecyclerViewNoPagination() {
+        binding?.rvCurrencies?.apply {
+            adapter = currencyAdapter
+            layoutManager = LinearLayoutManager(requireContext())
         }
     }
 
