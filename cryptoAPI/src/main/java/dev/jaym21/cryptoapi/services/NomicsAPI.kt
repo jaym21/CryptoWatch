@@ -25,6 +25,8 @@ interface NomicsAPI {
     ): Response<List<CurrencyResponse>>
 
     @GET("currencies/ticker")
+
+    @GET("currencies/ticker")
     suspend fun fetchCurrencies(
         @Query("key")
         key: String = KEY,

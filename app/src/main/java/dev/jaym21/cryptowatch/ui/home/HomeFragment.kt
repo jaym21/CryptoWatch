@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import androidx.core.os.bundleOf
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -67,19 +68,9 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
         viewModel.getCurrencies(currentPage.toString(), true)
 
         //adding text watcher on search edit text
-        binding?.etSearch?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun afterTextChanged(editable: Editable?) {
-
-            }
-        })
+        binding?.etSearch?.doAfterTextChanged {
+            searchForCurrency(it.toString())
+        }
 
         //observing the currencies LiveData to get currencies data for recycler view
         viewModel.currencies.observe(viewLifecycleOwner, Observer { response ->
@@ -152,6 +143,10 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
                 isScrolling = false
             }
         }
+    }
+
+    private fun searchForCurrency(searchedText: String) {
+        viewModel.currencies.
     }
 
     private fun setUpRecyclerView() {
