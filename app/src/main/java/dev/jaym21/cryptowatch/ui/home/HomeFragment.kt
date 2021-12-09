@@ -162,6 +162,7 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
                             searchedCurrencies.add(it)
                         }
                     }
+                    currencyAdapter.submitList(searchedCurrencies)
                 }
                 is ApiResponse.Loading -> {
                     binding?.progressBar?.visibility = View.VISIBLE

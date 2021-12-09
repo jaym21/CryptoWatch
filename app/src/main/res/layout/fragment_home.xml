@@ -35,13 +35,18 @@
         android:layout_marginBottom="16dp"
         android:padding="10dp"/>
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCurrencies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/etSearch"
         android:overScrollMode="never" />
+
+    <fragment
+        android:id="@+id/fragmentSearchResult"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/etSearch"
 
     <ProgressBar
         android:id="@+id/progressBar"
