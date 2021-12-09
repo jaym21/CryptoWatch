@@ -146,7 +146,10 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
     }
 
     private fun searchForCurrency(searchedText: String) {
-        viewModel.currencies.
+        //making request to get all currencies
+        viewModel.getAllCurrencies()
+
+        viewModel.allCurrencies.
     }
 
     private fun setUpRecyclerView() {
