@@ -149,7 +149,25 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
         //making request to get all currencies
         viewModel.getAllCurrencies()
 
-        viewModel.allCurrencies.
+        viewModel.allCurrencies.observe(viewLifecycleOwner, Observer { response ->
+            when(response) {
+                is ApiResponse.Success -> {
+                    binding?.progressBar?.visibility = View.GONE
+
+                }
+                is ApiResponse.Loading -> {
+                    binding?.progressBar?.visibility = View.VISIBLE
+                }
+                is ApiResponse.Error -> {
+                    binding?.progressBar?.visibility = View.GONE
+                    Snackbar.make(
+                        binding?.root!!,
+                        "Could retrieve currencies, restart app!",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        })
     }
 
     private fun setUpRecyclerView() {
