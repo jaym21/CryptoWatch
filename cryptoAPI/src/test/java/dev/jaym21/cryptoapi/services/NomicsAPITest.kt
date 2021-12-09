@@ -8,7 +8,7 @@ import org.junit.Test
 
 class NomicsAPITest {
 
-    val api = NomicsClient.api
+    private val api = NomicsClient.api
 
     @Test
     fun `Get all cryptocurrencies`() = runBlocking {
@@ -24,6 +24,7 @@ class NomicsAPITest {
 
     @Test
     fun `Get all currencies`() = runBlocking {
-
+        val response = api.getAllCurrencies(KEY)
+        assertNotNull(response.body())
     }
 }
