@@ -15,6 +15,7 @@ class HomeViewModel: ViewModel() {
 
     //live data for currency response
     val currencies: MutableLiveData<ApiResponse<List<CurrencyResponse>>> = MutableLiveData()
+    val allCurrencies: MutableLiveData<ApiResponse<List<CurrencyResponse>>> = MutableLiveData()
     var allCurrenciesDisplayed: MutableList<CurrencyResponse>? = null
 
     fun getCurrencies(pageNo: String, isNew: Boolean) = viewModelScope.launch(Dispatchers.IO) {
@@ -41,5 +42,9 @@ class HomeViewModel: ViewModel() {
         }else {
             currencies.postValue(ApiResponse.Error("Could not retrieve currencies, try again!"))
         }
+    }
+
+    fun getAllCurrencies() = viewModelScope.launch(Dispatchers.IO) {
+        //as we are going to make network call so showing loading progress bar
     }
 }
