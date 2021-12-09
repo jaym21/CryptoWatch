@@ -22,4 +22,8 @@ class NomicsRepository {
         val response = api.getCurrencyDetails(KEY, currencyId)
         return response.body()
     }
+
+    suspend fun getAllCurrencies(): List<CurrencyResponse>? {
+
+    }
 }
