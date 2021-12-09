@@ -26,10 +26,14 @@
         android:hint="Search for currency"
         android:textColorHint="@color/white"
         android:fontFamily="@font/poppins_regular"
-        android:drawableStart="sear"
+        android:drawableStart="@drawable/ic_search"
+        android:drawableTint="@color/white"
+        android:background="@drawable/search_edittext_bg"
         android:layout_below="@id/tvCurrencies"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"/>
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:padding="10dp"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
