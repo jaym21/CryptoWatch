@@ -71,7 +71,15 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
 
         //adding text watcher on search edit text
         binding?.etSearch?.doAfterTextChanged {
-            searchForCurrency(it.toString())
+            Log.d("TAGYOYO", "$it")
+            val searchCurrencyFragment = SearchCurrencyFragment()
+            val bundle = Bundle()
+            bundle.putString("searchedText", it.toString())
+            searchCurrencyFragment.arguments = bundle
+            binding?.fragmentSearchResult?.visibility = View.VISIBLE
+            val fragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragmentSearchResult, searchCurrencyFragment)
+            fragmentTransaction.commit()
         }
 
         //observing the currencies LiveData to get currencies data for recycler view
@@ -147,37 +155,37 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
         }
     }
 
-    private fun searchForCurrency(searchedText: String) {
-        //making request to get all currencies
-        viewModel.getAllCurrencies()
-
-        viewModel.allCurrencies.observe(viewLifecycleOwner, Observer { response ->
-            when(response) {
-                is ApiResponse.Success -> {
-                    binding?.progressBar?.visibility = View.GONE
-                    setUpRecyclerViewNoPagination()
-                    searchedCurrencies.clear()
-                    response.data?.forEach {
-                        if (it.name?.contains(searchedText, true) == true) {
-                            searchedCurrencies.add(it)
-                        }
-                    }
-                    currencyAdapter.submitList(searchedCurrencies)
-                }
-                is ApiResponse.Loading -> {
-                    binding?.progressBar?.visibility = View.VISIBLE
-                }
-                is ApiResponse.Error -> {
-                    binding?.progressBar?.visibility = View.GONE
-                    Snackbar.make(
-                        binding?.root!!,
-                        "Could retrieve currencies, restart app!",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        })
-    }
+//    private fun searchForCurrency(searchedText: String) {
+//        //making request to get all currencies
+//        viewModel.getAllCurrencies()
+//
+//        viewModel.allCurrencies.observe(viewLifecycleOwner, Observer { response ->
+//            when(response) {
+//                is ApiResponse.Success -> {
+//                    binding?.progressBar?.visibility = View.GONE
+//                    setUpRecyclerViewNoPagination()
+//                    searchedCurrencies.clear()
+//                    response.data?.forEach {
+//                        if (it.name?.contains(searchedText, true) == true) {
+//                            searchedCurrencies.add(it)
+//                        }
+//                    }
+//                    currencyAdapter.submitList(searchedCurrencies)
+//                }
+//                is ApiResponse.Loading -> {
+//                    binding?.progressBar?.visibility = View.VISIBLE
+//                }
+//                is ApiResponse.Error -> {
+//                    binding?.progressBar?.visibility = View.GONE
+//                    Snackbar.make(
+//                        binding?.root!!,
+//                        "Could retrieve currencies, restart app!",
+//                        Snackbar.LENGTH_SHORT
+//                    ).show()
+//                }
+//            }
+//        })
+//    }
 
     private fun setUpRecyclerView() {
         binding?.rvCurrencies?.apply {

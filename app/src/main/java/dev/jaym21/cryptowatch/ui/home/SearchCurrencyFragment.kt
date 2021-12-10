@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -45,43 +46,48 @@ class SearchCurrencyFragment : Fragment(), ICurrencyRVAdapter {
         //initializing navController
         navController = Navigation.findNavController(view)
 
-        //initializing viewModel
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        if (searchedText != null) {
 
-        //initializing adapter
-        currencyAdapter = CurrencyRVAdapter(this)
+            //initializing viewModel
+            viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        //initializing recyclerView
-        setUpRecyclerView()
+            //initializing adapter
+            currencyAdapter = CurrencyRVAdapter(this)
 
-        //making request to get all currencies
-        viewModel.getAllCurrencies()
+            //initializing recyclerView
+            setUpRecyclerView()
 
-        viewModel.allCurrencies.observe(viewLifecycleOwner, Observer { response ->
-            when(response) {
-                is ApiResponse.Success -> {
-                    binding?.progressBar?.visibility = View.GONE
-                    searchedCurrencies.clear()
-                    response.data?.forEach {
-                        if (it.name?.contains(searchedText, true) == true) {
-                            searchedCurrencies.add(it)
+            //making request to get all currencies
+            viewModel.getAllCurrencies()
+
+            viewModel.allCurrencies.observe(viewLifecycleOwner, Observer { response ->
+                when (response) {
+                    is ApiResponse.Success -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        searchedCurrencies.clear()
+                        response.data?.forEach {
+                            if (it.name?.contains(searchedText.toString(), true) == true) {
+                                searchedCurrencies.add(it)
+                            }
                         }
+                        currencyAdapter.submitList(searchedCurrencies)
                     }
-                    currencyAdapter.submitList(searchedCurrencies)
+                    is ApiResponse.Loading -> {
+                        binding?.progressBar?.visibility = View.VISIBLE
+                    }
+                    is ApiResponse.Error -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        Snackbar.make(
+                            binding?.root!!,
+                            "Could retrieve currencies, restart app!",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-                is ApiResponse.Loading -> {
-                    binding?.progressBar?.visibility = View.VISIBLE
-                }
-                is ApiResponse.Error -> {
-                    binding?.progressBar?.visibility = View.GONE
-                    Snackbar.make(
-                        binding?.root!!,
-                        "Could retrieve currencies, restart app!",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        })
+            })
+        } else {
+
+        }
     }
 
     private fun setUpRecyclerView() {
@@ -97,6 +103,7 @@ class SearchCurrencyFragment : Fragment(), ICurrencyRVAdapter {
     }
 
     override fun onCurrencyClicked(currencyId: String, isChangePositive: Boolean) {
-
+        val bundle = bundleOf("currencyId" to currencyId, "isChangePositive" to isChangePositive)
+        navController.navigate(R.id.action_navigation_home_to_currencyDetailsFragment, bundle)
     }
 }

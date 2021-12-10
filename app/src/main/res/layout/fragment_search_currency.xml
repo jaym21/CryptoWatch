@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.SearchCurrencyFragment">
+    tools:context=".ui.home.SearchCurrencyFragment"
+    android:background="@color/black_bg">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearchedCurrencies"
