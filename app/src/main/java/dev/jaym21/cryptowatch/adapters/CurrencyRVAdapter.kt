@@ -42,10 +42,19 @@ class CurrencyRVAdapter(private val listener: ICurrencyRVAdapter): ListAdapter<C
         holder.binding.tvCurrentValue.text = "₹ ${currentItem.price}"
 
         val length = currentItem.logoUrl!!.length
-        if (currentItem.logoUrl!!.substring(length - 3) == "svg"){
-            SVGLoader.fetchSvg(holder.binding.root.context, currentItem.logoUrl!!, holder.binding.ivCurrencyIcon)
-        }else {
-            Glide.with(holder.binding.root.context).load(currentItem.logoUrl).transform(RoundedCorners(100)) .into(holder.binding.ivCurrencyIcon)
+        if (length != 0) {
+            if (currentItem.logoUrl!!.substring(length - 3) == "svg") {
+                SVGLoader.fetchSvg(
+                    holder.binding.root.context,
+                    currentItem.logoUrl!!,
+                    holder.binding.ivCurrencyIcon
+                )
+            } else {
+                Glide.with(holder.binding.root.context).load(currentItem.logoUrl)
+                    .transform(RoundedCorners(100)).into(holder.binding.ivCurrencyIcon)
+            }
+        } else {
+
         }
 
         if (currentItem.oneDay != null) {
