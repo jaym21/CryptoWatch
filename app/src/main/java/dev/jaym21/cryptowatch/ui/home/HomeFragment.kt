@@ -72,16 +72,20 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
         Log.d("TAGYOYO", "onViewCreated: CALLED")
 
         //adding text watcher on search edit text
-        binding?.etSearch?.doAfterTextChanged {
-            Log.d("TAGYOYO", "INSIDE DO AFTER TEXT CHANGED $it")
-            val searchCurrencyFragment = SearchCurrencyFragment()
-            val bundle = Bundle()
-            bundle.putString("searchedText", it.toString())
-            searchCurrencyFragment.arguments = bundle
-            binding?.fragmentSearchResult?.visibility = View.VISIBLE
-            val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragmentSearchResult, searchCurrencyFragment)
-            fragmentTransaction.commit()
+        binding?.ivSearch?.setOnClickListener {
+            if (!binding?.etSearch?.text.isNullOrEmpty()) {
+                Log.d("TAGYOYO", "INSIDE DO AFTER TEXT CHANGED")
+                val searchCurrencyFragment = SearchCurrencyFragment()
+                val bundle = Bundle()
+                bundle.putString("searchedText", binding?.etSearch?.text.toString())
+                searchCurrencyFragment.arguments = bundle
+                binding?.fragmentSearchResult?.visibility = View.VISIBLE
+                val fragmentTransaction = childFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.fragmentSearchResult, searchCurrencyFragment)
+                fragmentTransaction.commit()
+            } else {
+                Snackbar.make(binding?.root!!, "Please enter currency to be searched", Snackbar.LENGTH_SHORT).show()
+            }
         }
 
         //observing the currencies LiveData to get currencies data for recycler view

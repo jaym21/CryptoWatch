@@ -31,7 +31,9 @@ interface NomicsAPI {
         @Query("status")
         status: String = "active",
         @Query("sort")
-        sort: String = "rank"
+        sort: String = "rank",
+        @Query("convert")
+        convert: String = "INR",
     ): Response<List<CurrencyResponse>>
 
     @GET("currencies/ticker")

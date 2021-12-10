@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.HomeFragment"
     tools:background="@color/black_bg">
 
@@ -21,19 +22,29 @@
         android:id="@+id/etSearch"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        android:hint="Search for currency"
-        android:textColorHint="@color/white"
-        android:fontFamily="@font/poppins_regular"
-        android:drawableStart="@drawable/ic_search"
-        android:drawableTint="@color/white"
-        android:background="@drawable/search_edittext_bg"
         android:layout_below="@id/tvCurrencies"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="16dp"
-        android:padding="10dp"/>
+        android:layout_toStartOf="@id/ivSearch"
+        android:background="@drawable/search_edittext_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Search for currency"
+        android:inputType="text|textNoSuggestions"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/ivSearch"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/tvCurrencies"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_search"
+        app:tint="@color/white"
+        android:layout_marginEnd="10dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCurrencies"
