@@ -69,9 +69,11 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
         currentPage = 1
         viewModel.getCurrencies(currentPage.toString(), true)
 
+        Log.d("TAGYOYO", "onViewCreated: CALLED")
+
         //adding text watcher on search edit text
         binding?.etSearch?.doAfterTextChanged {
-            Log.d("TAGYOYO", "$it")
+            Log.d("TAGYOYO", "INSIDE DO AFTER TEXT CHANGED $it")
             val searchCurrencyFragment = SearchCurrencyFragment()
             val bundle = Bundle()
             bundle.putString("searchedText", it.toString())
@@ -84,6 +86,7 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
 
         //observing the currencies LiveData to get currencies data for recycler view
         viewModel.currencies.observe(viewLifecycleOwner, Observer { response ->
+            Log.d("TAGYOYO", "CURRENCIES OBSERVE")
             when (response) {
                 is ApiResponse.Success -> {
                     binding?.progressBar?.visibility = View.GONE
@@ -105,6 +108,16 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
                 }
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("TAGYOYO", "RESUME CALLED")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("TAGYOYO", "PAUSE CALLED")
     }
 
     //implementing pagination

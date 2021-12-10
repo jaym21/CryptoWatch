@@ -1,6 +1,7 @@
 package dev.jaym21.cryptowatch.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,6 +41,8 @@ class SearchCurrencyFragment : Fragment(), ICurrencyRVAdapter {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.d("TAGYOYO", "SEARCH ONVIEWCREATED CALLED")
+
         //getting searched text from home fragment
         searchedText = arguments?.getString("searchedText")
 
@@ -47,6 +50,8 @@ class SearchCurrencyFragment : Fragment(), ICurrencyRVAdapter {
         navController = Navigation.findNavController(view)
 
         if (searchedText != null) {
+
+            Log.d("TAGYOYO", "SEARCHED TEXT $searchedText")
 
             //initializing viewModel
             viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
