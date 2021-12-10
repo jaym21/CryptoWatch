@@ -54,7 +54,6 @@ class CurrencyRVAdapter(private val listener: ICurrencyRVAdapter): ListAdapter<C
                     .transform(RoundedCorners(100)).into(holder.binding.ivCurrencyIcon)
             }
         } else {
-
         }
 
         if (currentItem.oneDay != null) {
