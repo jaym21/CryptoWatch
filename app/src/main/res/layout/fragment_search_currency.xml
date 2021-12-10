@@ -19,4 +19,15 @@
         android:layout_gravity="center"
         android:visibility="gone"/>
 
+    <TextView
+        android:id="@+id/tvNoCurrenciesFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No currencies found"
+        android:textSize="13sp"
+        android:textColor="@color/white_alpha_85"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
 </FrameLayout>

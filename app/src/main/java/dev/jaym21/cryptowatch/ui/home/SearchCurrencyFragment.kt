@@ -41,8 +41,6 @@ class SearchCurrencyFragment : Fragment(), ICurrencyRVAdapter {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("TAGYOYO", "SEARCH ONVIEWCREATED CALLED")
-
         //getting searched text from home fragment
         searchedText = arguments?.getString("searchedText")
 
@@ -50,8 +48,6 @@ class SearchCurrencyFragment : Fragment(), ICurrencyRVAdapter {
         navController = Navigation.findNavController(view)
 
         if (searchedText != null) {
-
-            Log.d("TAGYOYO", "SEARCHED TEXT $searchedText")
 
             //initializing viewModel
             viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
@@ -75,7 +71,12 @@ class SearchCurrencyFragment : Fragment(), ICurrencyRVAdapter {
                                 searchedCurrencies.add(it)
                             }
                         }
-                        currencyAdapter.submitList(searchedCurrencies)
+                        if (searchedCurrencies.isNullOrEmpty()){
+                            binding?.tvNoCurrenciesFound?.visibility = View.VISIBLE
+                        } else {
+                            binding?.tvNoCurrenciesFound?.visibility = View.GONE
+                            currencyAdapter.submitList(searchedCurrencies)
+                        }
                     }
                     is ApiResponse.Loading -> {
                         binding?.progressBar?.visibility = View.VISIBLE
@@ -90,8 +91,6 @@ class SearchCurrencyFragment : Fragment(), ICurrencyRVAdapter {
                     }
                 }
             })
-        } else {
-
         }
     }
 

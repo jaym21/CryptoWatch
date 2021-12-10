@@ -11,12 +11,12 @@
         android:id="@+id/tvCurrencies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/currencies"
-        android:textSize="28sp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/poppins_bold"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="14dp"/>
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/currencies"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
 
     <EditText
         android:id="@+id/etSearch"
@@ -34,7 +34,7 @@
         android:inputType="text|textNoSuggestions"
         android:padding="10dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/white_alpha_70"
         android:textSize="12sp" />
 
     <ImageView
