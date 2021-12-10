@@ -1,5 +1,7 @@
 package dev.jaym21.cryptowatch.ui.home
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.AbsListView
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -68,6 +71,7 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
         //adding text watcher on search edit text
         binding?.ivSearch?.setOnClickListener {
             if (!binding?.etSearch?.text.isNullOrEmpty()) {
+                hideKeyboard()
                 val searchCurrencyFragment = SearchCurrencyFragment()
                 val bundle = Bundle()
                 bundle.putString("searchedText", binding?.etSearch?.text.toString())
@@ -113,6 +117,7 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
                     val searchCurrencyFragment = SearchCurrencyFragment()
                     childFragmentManager.beginTransaction().remove(searchCurrencyFragment).commit()
                     binding?.fragmentSearchResult?.visibility = View.GONE
+                    hideKeyboard()
                 }
             }
 
@@ -174,6 +179,16 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
             addOnScrollListener(paginationScrollListener)
         }
     }
+
+    fun Fragment.hideKeyboard() {
+        view?.let { activity?.hideKeyboard(it) }
+    }
+
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()
