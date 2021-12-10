@@ -54,6 +54,7 @@ class CurrencyRVAdapter(private val listener: ICurrencyRVAdapter): ListAdapter<C
                     .transform(RoundedCorners(100)).into(holder.binding.ivCurrencyIcon)
             }
         } else {
+            Glide.with(holder.binding.root.context).load(R.drawable.ic_android).into(holder.binding.ivCurrencyIcon)
         }
 
         if (currentItem.oneDay != null) {
