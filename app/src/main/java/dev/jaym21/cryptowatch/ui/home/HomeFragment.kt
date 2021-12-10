@@ -3,14 +3,12 @@ package dev.jaym21.cryptowatch.ui.home
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import androidx.core.os.bundleOf
-import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -18,7 +16,6 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import dev.jaym21.cryptoapi.models.responses.CurrencyResponse
 import dev.jaym21.cryptowatch.R
 import dev.jaym21.cryptowatch.adapters.CurrencyRVAdapter
 import dev.jaym21.cryptowatch.adapters.ICurrencyRVAdapter
@@ -68,12 +65,9 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
         currentPage = 1
         viewModel.getCurrencies(currentPage.toString(), true)
 
-        Log.d("TAGYOYO", "onViewCreated: CALLED")
-
         //adding text watcher on search edit text
         binding?.ivSearch?.setOnClickListener {
             if (!binding?.etSearch?.text.isNullOrEmpty()) {
-                Log.d("TAGYOYO", "INSIDE DO AFTER TEXT CHANGED")
                 val searchCurrencyFragment = SearchCurrencyFragment()
                 val bundle = Bundle()
                 bundle.putString("searchedText", binding?.etSearch?.text.toString())
@@ -89,7 +83,6 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
 
         //observing the currencies LiveData to get currencies data for recycler view
         viewModel.currencies.observe(viewLifecycleOwner, Observer { response ->
-            Log.d("TAGYOYO", "CURRENCIES OBSERVE")
             when (response) {
                 is ApiResponse.Success -> {
                     binding?.progressBar?.visibility = View.GONE
@@ -113,9 +106,7 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
         })
 
         binding?.etSearch?.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (text?.length == 0) {
@@ -125,10 +116,7 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
                 }
             }
 
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-
+            override fun afterTextChanged(p0: Editable?) {}
         })
     }
 
@@ -170,7 +158,6 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
 
             //creating a boolean to know if to paginate or not
             val shouldPaginate = isNotAtLastPageAndNotLoading && isAtLastPage && isTotalMoreThanVisible && notAtBeginning && isScrolling
-            Log.d(TAG, "onScrolled: $shouldPaginate")
             if (shouldPaginate) {
                 currentPage += 1
                 //makes another request to the api and gets next 20 products
@@ -185,13 +172,6 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
             adapter = currencyAdapter
             layoutManager = LinearLayoutManager(requireContext())
             addOnScrollListener(paginationScrollListener)
-        }
-    }
-
-    private fun setUpRecyclerViewNoPagination() {
-        binding?.rvCurrencies?.apply {
-            adapter = currencyAdapter
-            layoutManager = LinearLayoutManager(requireContext())
         }
     }
 

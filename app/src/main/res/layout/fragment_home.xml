@@ -42,9 +42,10 @@
         android:layout_height="30dp"
         android:layout_below="@id/tvCurrencies"
         android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
         android:src="@drawable/ic_search"
         app:tint="@color/white"
-        android:layout_marginEnd="10dp"/>
+        android:layout_marginTop="3dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCurrencies"
