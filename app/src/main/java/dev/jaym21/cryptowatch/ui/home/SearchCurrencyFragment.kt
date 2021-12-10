@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import dev.jaym21.cryptowatch.R
 import dev.jaym21.cryptowatch.adapters.CurrencyRVAdapter
 import dev.jaym21.cryptowatch.adapters.ICurrencyRVAdapter
@@ -40,11 +41,15 @@ class SearchCurrencyFragment : Fragment(), ICurrencyRVAdapter {
 
         //initializing adapter
         currencyAdapter = CurrencyRVAdapter(this)
+
+        //initializing recyclerView
+        setUpRecyclerView()
     }
 
     private fun setUpRecyclerView() {
         binding?.rvSearchedCurrencies?.apply {
-            adapter =
+            adapter = currencyAdapter
+            layoutManager = LinearLayoutManager(requireContext())
         }
     }
 
