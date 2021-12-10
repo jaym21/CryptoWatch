@@ -26,6 +26,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
         android:layout_toStartOf="@id/ivSearch"
         android:background="@drawable/search_edittext_bg"
         android:fontFamily="@font/poppins_regular"
@@ -45,7 +46,7 @@
         android:layout_marginEnd="10dp"
         android:src="@drawable/ic_search"
         app:tint="@color/white"
-        android:layout_marginTop="3dp"/>
+        android:layout_marginTop="13dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCurrencies"
