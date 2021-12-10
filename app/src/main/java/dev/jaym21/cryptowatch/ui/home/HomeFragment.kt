@@ -35,7 +35,6 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
     private val PAGE_SIZE_QUERY = 20
     private var currentPage = 1
     private var itemsDisplayed = 0
-    private var searchedCurrencies = arrayListOf<CurrencyResponse>()
     //pagination
     private var isScrolling: Boolean = false
     private var isLastPage: Boolean = false
@@ -112,16 +111,25 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
                 }
             }
         })
-    }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("TAGYOYO", "RESUME CALLED")
-    }
+        binding?.etSearch?.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-    override fun onPause() {
-        super.onPause()
-        Log.d("TAGYOYO", "PAUSE CALLED")
+            }
+
+            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (text?.length == 0) {
+                    val searchCurrencyFragment = SearchCurrencyFragment()
+                    childFragmentManager.beginTransaction().remove(searchCurrencyFragment).commit()
+                    binding?.fragmentSearchResult?.visibility = View.GONE
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
     }
 
     //implementing pagination
@@ -171,38 +179,6 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
             }
         }
     }
-
-//    private fun searchForCurrency(searchedText: String) {
-//        //making request to get all currencies
-//        viewModel.getAllCurrencies()
-//
-//        viewModel.allCurrencies.observe(viewLifecycleOwner, Observer { response ->
-//            when(response) {
-//                is ApiResponse.Success -> {
-//                    binding?.progressBar?.visibility = View.GONE
-//                    setUpRecyclerViewNoPagination()
-//                    searchedCurrencies.clear()
-//                    response.data?.forEach {
-//                        if (it.name?.contains(searchedText, true) == true) {
-//                            searchedCurrencies.add(it)
-//                        }
-//                    }
-//                    currencyAdapter.submitList(searchedCurrencies)
-//                }
-//                is ApiResponse.Loading -> {
-//                    binding?.progressBar?.visibility = View.VISIBLE
-//                }
-//                is ApiResponse.Error -> {
-//                    binding?.progressBar?.visibility = View.GONE
-//                    Snackbar.make(
-//                        binding?.root!!,
-//                        "Could retrieve currencies, restart app!",
-//                        Snackbar.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
-//        })
-//    }
 
     private fun setUpRecyclerView() {
         binding?.rvCurrencies?.apply {
