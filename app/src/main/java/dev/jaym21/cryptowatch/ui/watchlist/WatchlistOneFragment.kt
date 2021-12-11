@@ -2,7 +2,6 @@ package dev.jaym21.cryptowatch.ui.watchlist
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +20,6 @@ import dev.jaym21.cryptowatch.adapters.CurrencyRVAdapter
 import dev.jaym21.cryptowatch.adapters.ICurrencyRVAdapter
 import dev.jaym21.cryptowatch.databinding.FragmentWatchlistOneBinding
 import dev.jaym21.cryptowatch.model.Watchlist
-import dev.jaym21.cryptowatch.ui.home.detail.CurrencyDetailsFragment
 import dev.jaym21.cryptowatch.utils.ApiResponse
 import dev.jaym21.cryptowatch.utils.SwipeToDeleteCallback
 
@@ -58,7 +56,6 @@ class WatchlistOneFragment(private val navController: NavController): Fragment()
 
         watchlistViewModel.allCurrenciesInWatchlist.observe(viewLifecycleOwner, Observer { allWatchlists ->
             var requiredCurrencies = ""
-            Log.d("TAGYOYO", "ALL WATCHLIST ITEMS $allWatchlists")
             allWatchlists.forEach {
                 if (it.watchlist == "Watchlist 1") {
                     if (requiredCurrencies.isEmpty()) {

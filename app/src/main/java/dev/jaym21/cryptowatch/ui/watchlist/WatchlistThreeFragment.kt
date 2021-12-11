@@ -2,7 +2,6 @@ package dev.jaym21.cryptowatch.ui.watchlist
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -56,7 +55,6 @@ class WatchlistThreeFragment(private val navController: NavController) : Fragmen
 
         watchlistViewModel.allCurrenciesInWatchlist.observe(viewLifecycleOwner, Observer { allWatchlists ->
             var requiredCurrencies = ""
-            Log.d("TAGYOYO", "ALL Watchlists $allWatchlists")
             allWatchlists.forEach {
                 if (it.watchlist == "Watchlist 3") {
                     if (requiredCurrencies.isEmpty()) {

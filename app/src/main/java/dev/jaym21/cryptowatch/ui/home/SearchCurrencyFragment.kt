@@ -38,6 +38,8 @@ class SearchCurrencyFragment : Fragment(), ICurrencyRVAdapter {
         return binding?.root
     }
 
+    //TODO: Use childFragmentManager to make navigation currency details fragment to saveBackStack & restoreBackStack instead of navigation map navController
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
