@@ -2,6 +2,7 @@ package dev.jaym21.cryptowatch.adapters
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
@@ -57,65 +58,95 @@ class CurrencyRVAdapter(private val listener: ICurrencyRVAdapter): ListAdapter<C
             Glide.with(holder.binding.root.context).load(R.drawable.ic_android).into(holder.binding.ivCurrencyIcon)
         }
 
-        if (currentItem.oneDay != null) {
+        if (currentItem.oneDay == null && currentItem.sevenDay == null){
+            holder.binding.llPercentChange.visibility = View.GONE
+        } else {
+            if (currentItem.oneDay != null) {
+                holder.binding.llPercentChange.visibility = View.VISIBLE
 
-            if (currentItem.oneDay!!.priceChangePct!!.toDouble() >= 0) {
-                holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct!! + " %"
+                if (currentItem.oneDay?.priceChangePct?.toDouble()!! >= 0) {
+                    holder.binding.tvPercentChange.text =
+                        currentItem.oneDay!!.priceChangePct!! + " %"
 
-                Glide.with(holder.binding.root.context).load(R.drawable.ic_trending_up).into(holder.binding.ivChangeIcon)
-                holder.binding.ivChangeIcon.setColorFilter(ContextCompat.getColor(holder.binding.root.context, R.color.green))
-                holder.binding.tvPercentChange.setTextColor(
-                    ContextCompat.getColor(
-                        holder.binding.root.context,
-                        R.color.green
+                    Glide.with(holder.binding.root.context).load(R.drawable.ic_trending_up)
+                        .into(holder.binding.ivChangeIcon)
+                    holder.binding.ivChangeIcon.setColorFilter(
+                        ContextCompat.getColor(
+                            holder.binding.root.context,
+                            R.color.green
+                        )
                     )
-                )
-            } else {
-                holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct!!.substring(1) + " %"
-
-                Glide.with(holder.binding.root.context).load(R.drawable.ic_trending_down).into(holder.binding.ivChangeIcon)
-                holder.binding.ivChangeIcon.setColorFilter(ContextCompat.getColor(holder.binding.root.context, R.color.red))
-                holder.binding.tvPercentChange.setTextColor(
-                    ContextCompat.getColor(
-                        holder.binding.root.context,
-                        R.color.red
+                    holder.binding.tvPercentChange.setTextColor(
+                        ContextCompat.getColor(
+                            holder.binding.root.context,
+                            R.color.green
+                        )
                     )
-                )
-            }
+                } else {
+                    holder.binding.tvPercentChange.text =
+                        currentItem.oneDay?.priceChangePct?.substring(1) + " %"
 
-        } else if (currentItem.sevenDay != null) {
-            holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct
-
-            if (currentItem.oneDay!!.priceChangePct!!.toDouble() >= 0) {
-                holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct!! + " %"
-
-                Glide.with(holder.binding.root.context).load(R.drawable.ic_trending_up).into(holder.binding.ivChangeIcon)
-                holder.binding.ivChangeIcon.setColorFilter(ContextCompat.getColor(holder.binding.root.context, R.color.green))
-                holder.binding.tvPercentChange.setTextColor(
-                    ContextCompat.getColor(
-                        holder.binding.root.context,
-                        R.color.green
+                    Glide.with(holder.binding.root.context).load(R.drawable.ic_trending_down)
+                        .into(holder.binding.ivChangeIcon)
+                    holder.binding.ivChangeIcon.setColorFilter(
+                        ContextCompat.getColor(
+                            holder.binding.root.context,
+                            R.color.red
+                        )
                     )
-                )
-            } else {
-                holder.binding.tvPercentChange.text = currentItem.oneDay!!.priceChangePct!!.substring(1) + " %"
-
-                Glide.with(holder.binding.root.context).load(R.drawable.ic_trending_down).into(holder.binding.ivChangeIcon)
-                holder.binding.ivChangeIcon.setColorFilter(ContextCompat.getColor(holder.binding.root.context, R.color.red))
-                holder.binding.tvPercentChange.setTextColor(
-                    ContextCompat.getColor(
-                        holder.binding.root.context,
-                        R.color.red
+                    holder.binding.tvPercentChange.setTextColor(
+                        ContextCompat.getColor(
+                            holder.binding.root.context,
+                            R.color.red
+                        )
                     )
-                )
+                }
+
+            } else if (currentItem.sevenDay != null && currentItem.oneDay == null) {
+
+                if (currentItem.sevenDay?.priceChangePct?.toDouble()!! >= 0) {
+                    holder.binding.tvPercentChange.text = currentItem.sevenDay?.priceChangePct + " %"
+
+                    Glide.with(holder.binding.root.context).load(R.drawable.ic_trending_up)
+                        .into(holder.binding.ivChangeIcon)
+                    holder.binding.ivChangeIcon.setColorFilter(
+                        ContextCompat.getColor(
+                            holder.binding.root.context,
+                            R.color.green
+                        )
+                    )
+                    holder.binding.tvPercentChange.setTextColor(
+                        ContextCompat.getColor(
+                            holder.binding.root.context,
+                            R.color.green
+                        )
+                    )
+                } else {
+                    holder.binding.tvPercentChange.text = currentItem.sevenDay?.priceChangePct?.substring(1) + " %"
+
+                    Glide.with(holder.binding.root.context).load(R.drawable.ic_trending_down)
+                        .into(holder.binding.ivChangeIcon)
+                    holder.binding.ivChangeIcon.setColorFilter(
+                        ContextCompat.getColor(
+                            holder.binding.root.context,
+                            R.color.red
+                        )
+                    )
+                    holder.binding.tvPercentChange.setTextColor(
+                        ContextCompat.getColor(
+                            holder.binding.root.context,
+                            R.color.red
+                        )
+                    )
+                }
             }
         }
-        var isChangePositive: Boolean = true
+        var isChangePositive = true
 
         if (currentItem.oneDay != null) {
-            isChangePositive = currentItem.oneDay!!.priceChangePct!!.toDouble() >= 0
+            isChangePositive = currentItem.oneDay?.priceChangePct?.toDouble()!! >= 0
         }else if (currentItem.sevenDay != null) {
-            isChangePositive = currentItem.sevenDay!!.priceChangePct!!.toDouble() >= 0
+            isChangePositive = currentItem.sevenDay?.priceChangePct?.toDouble()!! >= 0
         }
 
         holder.binding.rlCurrencyRoot.setOnClickListener {

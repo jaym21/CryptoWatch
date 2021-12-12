@@ -71,11 +71,11 @@
             android:id="@+id/tvPercentChange"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="16.2%"
-            android:textSize="13sp"
+            android:layout_gravity="center"
             android:fontFamily="@font/poppins_regular"
             android:textColor="@color/green"
-            android:layout_gravity="center"/>
+            android:textSize="13sp"
+            tools:text="16.2%" />
 
     </LinearLayout>
 

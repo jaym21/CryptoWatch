@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -66,6 +67,7 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
 
         //calling function to get currencies
         currentPage = 1
+        itemsDisplayed = 0
         viewModel.getCurrencies(currentPage.toString(), true)
 
         //adding text watcher on search edit text
@@ -89,9 +91,12 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
         viewModel.currencies.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is ApiResponse.Success -> {
+                    Log.d("TAGYOYO", "${response.data}")
                     binding?.progressBar?.visibility = View.GONE
                     isLoading = false
                     currencyAdapter.submitList(response.data)
+                    //increasing no of items displayed by 20
+                    itemsDisplayed += 20
                     //setting boolean isLastPage according to the current page no
                     isLastPage = itemsDisplayed + 20 >= 1000
                 }
