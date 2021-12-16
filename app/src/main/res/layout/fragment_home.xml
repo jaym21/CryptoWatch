@@ -24,9 +24,9 @@
         android:layout_height="40dp"
         android:layout_below="@id/tvCurrencies"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop="10dp"
         android:layout_toStartOf="@id/ivSearch"
         android:background="@drawable/search_edittext_bg"
         android:fontFamily="@font/poppins_regular"
@@ -35,7 +35,7 @@
         android:padding="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white_alpha_70"
-        android:textSize="12sp" />
+        android:textSize="13sp" />
 
     <ImageView
         android:id="@+id/ivSearch"
