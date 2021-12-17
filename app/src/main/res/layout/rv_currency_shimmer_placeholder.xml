@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingStart="12dp"
+    android:paddingBottom="14dp"
     android:paddingEnd="12dp"
     android:paddingTop="14dp"
     tools:background="@color/black_bg">
@@ -82,12 +83,5 @@
             tools:text="16.2%" />
 
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        tools:layout_below="@id/tvCurrencySymbol"
-        android:layout_marginTop="14dp"
-        android:background="#19FFFFFF" />
 
 </RelativeLayout>
