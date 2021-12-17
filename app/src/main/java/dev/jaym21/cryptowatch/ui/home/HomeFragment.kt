@@ -91,8 +91,9 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
         viewModel.currencies.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
                 is ApiResponse.Success -> {
-                    Log.d("TAGYOYO", "${response.data}")
-                    binding?.progressBar?.visibility = View.GONE
+                    binding?.shimmerLayoutCurrency?.stopShimmer()
+                    binding?.shimmerLayoutCurrency?.visibility = View.GONE
+                    binding?.rvCurrencies?.visibility = View.VISIBLE
                     isLoading = false
                     currencyAdapter.submitList(response.data)
                     //increasing no of items displayed by 20
@@ -101,10 +102,11 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
                     isLastPage = itemsDisplayed + 20 >= 1000
                 }
                 is ApiResponse.Loading -> {
-                    binding?.progressBar?.visibility = View.VISIBLE
+                    binding?.shimmerLayoutCurrency?.startShimmer()
                 }
                 is ApiResponse.Error -> {
                     binding?.progressBar?.visibility = View.GONE
+                    binding?.shimmerLayoutCurrency?.visibility = View.GONE
                     Snackbar.make(
                         view,
                         "Could retrieve currencies, restart app!",
