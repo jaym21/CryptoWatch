@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import dev.jaym21.cryptoapi.models.entities.NewsData
+import dev.jaym21.cryptowatch.R
 import dev.jaym21.cryptowatch.databinding.RvNewsItemBinding
 import dev.jaym21.cryptowatch.utils.DateConverter
 
@@ -36,7 +38,14 @@ class NewsRVAdapter(private val listener: INewsRVAdapter): ListAdapter<NewsData,
         holder.binding.tvNewsTitle.text = currentItem.title
         holder.binding.tvNewsBody.text = currentItem.body
         holder.binding.tvSourceName.text = currentItem.sourceInfo?.name
-        Glide.with(holder.binding.root.context).load(currentItem.sourceInfo?.img).into(holder.binding.ivSourceImage)
+
+        if (currentItem.sourceInfo?.img.isNullOrEmpty()) {
+            Glide.with(holder.binding.root.context).load(currentItem.sourceInfo?.img)
+                .into(holder.binding.ivSourceImage)
+        } else {
+            Glide.with(holder.binding.root.context).load(R.drawable.ic_android).into(holder.binding.ivSourceImage)
+        }
+
         holder.binding.tvNewsTime.text = DateConverter.getTimeAgo(currentItem.publishedOn!!.toLong())
 
         holder.binding.rlRootNewsItem.setOnClickListener {
