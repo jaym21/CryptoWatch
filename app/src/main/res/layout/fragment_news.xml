@@ -18,7 +18,7 @@
         android:layout_marginStart="14dp"/>
 
     <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmerLayoutCurrency"
+        android:id="@+id/shimmerLayoutNews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvNews">
