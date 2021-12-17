@@ -39,7 +39,7 @@ class NewsRVAdapter(private val listener: INewsRVAdapter): ListAdapter<NewsData,
         holder.binding.tvNewsBody.text = currentItem.body
         holder.binding.tvSourceName.text = currentItem.sourceInfo?.name
 
-        if (currentItem.sourceInfo?.img.isNullOrEmpty()) {
+        if (!currentItem.sourceInfo?.img.isNullOrEmpty()) {
             Glide.with(holder.binding.root.context).load(currentItem.sourceInfo?.img)
                 .into(holder.binding.ivSourceImage)
         } else {
