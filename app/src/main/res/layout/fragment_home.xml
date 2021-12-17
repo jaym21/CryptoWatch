@@ -48,12 +48,57 @@
         app:tint="@color/white"
         android:layout_marginTop="13dp"/>
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLayoutCurrency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etSearch">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+
+            <include layout="@layout/rv_currency_shimmer_placeholder" />
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCurrencies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/etSearch"
-        android:overScrollMode="never" />
+        android:overScrollMode="never"
+        android:visibility="gone"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentSearchResult"
