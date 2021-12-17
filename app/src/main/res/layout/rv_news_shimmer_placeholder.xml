@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:background="@color/black_bg"
+    android:paddingStart="14dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
+
+    <ImageView
+        android:id="@+id/ivSourceImage"
+        android:layout_width="30sp"
+        android:layout_height="30sp"
+        tools:src="@drawable/ic_launcher_foreground"
+        android:background="@color/shimmer_layout"/>
+
+    <LinearLayout
+        android:id="@+id/llSource"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_toEndOf="@id/ivSourceImage"
+        android:background="@color/shimmer_layout">
+
+        <TextView
+            android:id="@+id/tvSourceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_weight="3"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:text="Bitcoin Magazine" />
+
+        <TextView
+            android:id="@+id/tvNewsTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            tools:text="1 hour ago"
+            android:textSize="12sp"
+            android:textColor="@color/white_alpha_85"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_gravity="center"
+            android:gravity="end"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvNewsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Bitcoin Price Might Slips Below $60k! Traders Can Expect Buying Opportunity Soon!"
+        android:textSize="14sp"
+        android:textColor="@color/white_alpha_85"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_below="@id/llSource"
+        android:layout_marginTop="16dp"
+        android:background="@color/shimmer_layout"/>
+
+    <TextView
+        android:id="@+id/tvNewsBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvNewsTitle"
+        android:layout_marginTop="8dp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:textColor="@color/white_alpha_70"
+        android:textSize="13sp"
+        tools:text="Mike Green Alex Gladstein debate Bitcoin's role in the U.S. and beyond by looking at several topics, from government response to taxation.The post Podcast: Bitcoins Role in the War on Cash | Mike Green Alex Gladstein appeared first on Blockworks."
+        android:background="@color/shimmer_layout" />
+
+</RelativeLayout>
