@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:paddingTop="14dp"
+    tools:background="@color/black_bg">
+
+    <ImageView
+        android:id="@+id/ivCurrencyIcon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@color/shimmer_layout"/>
+
+    <TextView
+        android:id="@+id/tvCurrencyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_toStartOf="@id/tvCurrentValue"
+        android:layout_toEndOf="@id/ivCurrencyIcon"
+        android:fontFamily="@font/poppins_semibold"
+        android:maxLines="2"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        tools:text="Bitcoin"
+        android:background="@color/shimmer_layout" />
+
+    <TextView
+        android:id="@+id/tvCurrencySymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvCurrencyName"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/ivCurrencyIcon"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/white_alpha_60"
+        android:textSize="13sp"
+        tools:text="BTC"
+        android:background="@color/shimmer_layout" />
+
+    <TextView
+        android:id="@+id/tvCurrentValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@color/shimmer_layout"
+        android:fontFamily="@font/poppins_semibold"
+        android:maxLines="2"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        tools:text="\u20B9 32,789" />
+
+    <LinearLayout
+        android:id="@+id/llPercentChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/tvCurrentValue"
+        android:layout_alignParentEnd="true"
+        android:background="@color/shimmer_layout">
+
+        <ImageView
+            android:id="@+id/ivChangeIcon"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            tools:src="@drawable/ic_trending_up"
+            tools:tint="@color/green"
+            android:layout_gravity="center"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
+            android:id="@+id/tvPercentChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/green"
+            android:textSize="13sp"
+            tools:text="16.2%" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        tools:layout_below="@id/tvCurrencySymbol"
+        android:layout_marginTop="14dp"
+        android:background="#19FFFFFF" />
+
+</RelativeLayout>
