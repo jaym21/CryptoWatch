@@ -102,10 +102,11 @@ class HomeFragment : Fragment(), ICurrencyRVAdapter {
                     isLastPage = itemsDisplayed + 20 >= 1000
                 }
                 is ApiResponse.Loading -> {
+                    binding?.shimmerLayoutCurrency?.visibility = View.VISIBLE
                     binding?.shimmerLayoutCurrency?.startShimmer()
                 }
                 is ApiResponse.Error -> {
-                    binding?.progressBar?.visibility = View.GONE
+                    binding?.shimmerLayoutCurrency?.stopShimmer()
                     binding?.shimmerLayoutCurrency?.visibility = View.GONE
                     Snackbar.make(
                         view,

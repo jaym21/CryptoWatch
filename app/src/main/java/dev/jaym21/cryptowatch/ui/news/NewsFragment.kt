@@ -51,14 +51,18 @@ class NewsFragment : Fragment(), INewsRVAdapter {
         viewModel.news.observe(viewLifecycleOwner, Observer { response ->
             when(response) {
                 is ApiResponse.Success -> {
-                    binding?.progressBar?.visibility = View.GONE
+                    binding?.shimmerLayoutNews?.stopShimmer()
+                    binding?.shimmerLayoutNews?.visibility = View.GONE
+                    binding?.rvNews?.visibility = View.VISIBLE
                     newsAdapter.submitList(response.data)
                 }
                 is ApiResponse.Loading -> {
-                    binding?.progressBar?.visibility = View.VISIBLE
+                    binding?.shimmerLayoutNews?.visibility = View.VISIBLE
+                    binding?.shimmerLayoutNews?.startShimmer()
                 }
                 is ApiResponse.Error -> {
-                    binding?.progressBar?.visibility = View.GONE
+                    binding?.shimmerLayoutNews?.stopShimmer()
+                    binding?.shimmerLayoutNews?.visibility = View.GONE
                     Snackbar.make(view, "Could retrieve news, restart app!", Snackbar.LENGTH_SHORT).show()
                 }
             }
