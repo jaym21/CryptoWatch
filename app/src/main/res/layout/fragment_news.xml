@@ -17,12 +17,48 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="14dp"/>
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLayoutCurrency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvNews">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/rv_news_shimmer_placeholder" />
+
+            <include layout="@layout/rv_news_shimmer_placeholder" />
+
+            <include layout="@layout/rv_news_shimmer_placeholder" />
+
+            <include layout="@layout/rv_news_shimmer_placeholder" />
+
+            <include layout="@layout/rv_news_shimmer_placeholder" />
+
+            <include layout="@layout/rv_news_shimmer_placeholder" />
+
+            <include layout="@layout/rv_news_shimmer_placeholder" />
+
+            <include layout="@layout/rv_news_shimmer_placeholder" />
+
+            <include layout="@layout/rv_news_shimmer_placeholder" />
+
+            <include layout="@layout/rv_news_shimmer_placeholder" />
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNews"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
-        android:layout_below="@id/tvNews"/>
+        android:layout_below="@id/tvNews"
+        android:visibility="gone"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
